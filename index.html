@@ -112,12 +112,6 @@
         ::-webkit-scrollbar-thumb { background: #1b2132; border: 1px solid #00ff66; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #00ff66; }
 
-        select option {
-            background-color: #0a0d14;
-            color: #e5e7eb;
-            padding: 8px;
-        }
-
         /* Estilo dos recortes sci-fi nos cards */
         .hud-corner {
             position: relative;
@@ -144,192 +138,600 @@
             border-right: 2px solid #00e5ff;
             pointer-events: none;
         }
+
+        /* ========================================================================== */
+        /* [INÍCIO: EFEITO DE BORDA & SWEEP APOCALÍPTICO NOS CARDS]                   */
+        /* Caso queira desativar ou remover este efeito, basta excluir este bloco CSS */
+        /* e a classe 'card-apocalypse-fx' dos elementos HTML.                        */
+        /* ========================================================================== */
+        .card-apocalypse-fx {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 0, 60, 0.4);
+            box-shadow: 0 0 25px rgba(255, 0, 60, 0.08), inset 0 0 15px rgba(255, 0, 60, 0.02);
+            transition: border-color 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        /* Borda viva com gradiente de perigo suave */
+        .card-apocalypse-fx::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(
+                135deg,
+                rgba(255, 0, 60, 0.65) 0%,
+                rgba(255, 85, 0, 0.25) 25%,
+                transparent 50%,
+                rgba(255, 0, 60, 0.15) 75%,
+                rgba(255, 85, 0, 0.5) 100%
+            );
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            z-index: 1;
+            animation: border-danger-pulse 5s ease-in-out infinite alternate;
+        }
+
+        /* Feixe de luz sutil cruzando diagonalmente o card em intervalos regulares */
+        .card-apocalypse-fx::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -150%;
+            width: 70%;
+            height: 200%;
+            background: linear-gradient(
+                60deg,
+                transparent 30%,
+                rgba(255, 0, 60, 0.03) 45%,
+                rgba(255, 85, 0, 0.08) 50%,
+                rgba(255, 208, 0, 0.03) 55%,
+                transparent 70%
+            );
+            transform: rotate(25deg);
+            pointer-events: none;
+            z-index: 2;
+            animation: apoc-sweep 7s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+
+        @keyframes border-danger-pulse {
+            0% { opacity: 0.35; }
+            50% { opacity: 0.85; filter: drop-shadow(0 0 5px rgba(255, 0, 60, 0.35)); }
+            100% { opacity: 0.35; }
+        }
+
+        @keyframes apoc-sweep {
+            0%, 65% {
+                left: -150%;
+                opacity: 0;
+            }
+            70% {
+                opacity: 0.9;
+            }
+            82% {
+                left: 200%;
+                opacity: 0.9;
+            }
+            83%, 100% {
+                left: 200%;
+                opacity: 0;
+            }
+        }
+        /* ========================================================================== */
+        /* [FIM: EFEITO DE BORDA & SWEEP APOCALÍPTICO NOS CARDS]                      */
+        /* ========================================================================== */
+
+        /* Animação do Logo de Perigo Apocalíptico */
+        @keyframes skull-danger-glow {
+            0% {
+                filter: drop-shadow(0 0 8px #ff003c) drop-shadow(0 0 16px rgba(255, 0, 60, 0.4));
+                stroke: #ff003c;
+            }
+            33% {
+                filter: drop-shadow(0 0 10px #ff5500) drop-shadow(0 0 20px rgba(255, 85, 0, 0.4));
+                stroke: #ff5500;
+            }
+            66% {
+                filter: drop-shadow(0 0 8px #ffd000) drop-shadow(0 0 16px rgba(255, 208, 0, 0.4));
+                stroke: #ffd000;
+            }
+            100% {
+                filter: drop-shadow(0 0 8px #ff003c) drop-shadow(0 0 16px rgba(255, 0, 60, 0.4));
+                stroke: #ff003c;
+            }
+        }
+
+        .danger-skull-anim {
+            animation: skull-danger-glow 4s ease-in-out infinite;
+        }
+
+        /* Opções Clicáveis dos Cards */
+        .quiz-option-btn {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .quiz-option-btn:hover {
+            border-color: #00e5ff;
+            background-color: rgba(0, 229, 255, 0.05);
+            transform: translateX(3px);
+        }
+        .quiz-option-btn.selected {
+            border-color: #00ff66 !important;
+            background-color: rgba(0, 255, 102, 0.12) !important;
+            box-shadow: 0 0 15px rgba(0, 255, 102, 0.25);
+        }
+        .quiz-option-btn.selected .option-indicator {
+            border-color: #00ff66;
+            background-color: #00ff66;
+            box-shadow: 0 0 8px #00ff66;
+        }
+
+        /* Card Music Genre */
+        .genre-card {
+            transition: all 0.2s ease;
+        }
+        .genre-card:hover {
+            border-color: #ffd000;
+            background-color: rgba(255, 208, 0, 0.06);
+        }
+        .genre-card.selected {
+            border-color: #ffd000 !important;
+            background-color: rgba(255, 208, 0, 0.15) !important;
+            box-shadow: 0 0 15px rgba(255, 208, 0, 0.3);
+        }
     </style>
 </head>
 <body class="font-mono min-h-screen relative overflow-x-hidden antialiased">
 
     <main class="max-w-xl mx-auto p-4 sm:p-6 min-h-screen flex flex-col items-center justify-center relative z-10">
         
-        <!-- =================== HOME SCREEN =================== -->
-        <section id="home-screen" class="w-full space-y-8 py-6">
-            <!-- Header Branding -->
-            <div class="text-center space-y-4">
-                <div class="inline-flex p-3 rounded-2xl bg-cyber-panel border border-cyber-red shadow-neonRed">
-                    <i data-lucide="cpu" class="w-12 h-12 text-cyber-red animate-pulse"></i>
+        <!-- =================== TELA INICIAL (BOAS-VINDAS) =================== -->
+        <section id="welcome-screen" class="w-full space-y-8 py-6 text-center animate-fade-in">
+            
+            <!-- LOGO ANIMADO APOCALÍPTICO (Inspirado no pin, alternando cores de perigo) -->
+            <div class="relative inline-flex items-center justify-center p-4">
+                <div class="relative w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center">
+                    <svg class="w-full h-full danger-skull-anim" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Mecha Skull Cyberpunk Head Outline -->
+                        <path d="M50 10 C30 10 18 24 18 45 C18 58 24 68 32 74 L32 86 L42 86 L44 92 L56 92 L58 86 L68 86 L68 74 C76 68 82 58 82 45 C82 24 70 10 50 10 Z" 
+                              stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" fill="#070a12" fill-opacity="0.9"/>
+                        <!-- Circuit Brain Lines -->
+                        <path d="M50 12 L50 32 M36 18 L44 26 M64 18 L56 26" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" opacity="0.8"/>
+                        <!-- Cyber Eyes -->
+                        <path d="M30 42 L42 46 L34 54 Z" fill="currentColor"/>
+                        <circle cx="64" cy="48" r="6" stroke="currentColor" stroke-width="2" fill="#000"/>
+                        <circle cx="64" cy="48" r="2.5" fill="#00e5ff" class="animate-ping" style="animation-duration: 2s;"/>
+                        <!-- Mecha Nose / Teeth -->
+                        <polygon points="50,56 46,64 54,64" fill="currentColor" opacity="0.8"/>
+                        <line x1="38" y1="80" x2="38" y2="86" stroke="currentColor" stroke-width="2"/>
+                        <line x1="46" y1="80" x2="46" y2="86" stroke="currentColor" stroke-width="2"/>
+                        <line x1="54" y1="80" x2="54" y2="86" stroke="currentColor" stroke-width="2"/>
+                        <line x1="62" y1="80" x2="62" y2="86" stroke="currentColor" stroke-width="2"/>
+                        <!-- Hazard Crossbones / Antennas -->
+                        <circle cx="18" cy="45" r="2" fill="currentColor"/>
+                        <circle cx="82" cy="45" r="2" fill="currentColor"/>
+                    </svg>
                 </div>
-                
-                <div class="space-y-1">
-                    <span class="text-[11px] font-cyber font-bold uppercase tracking-[0.3em] text-cyber-cyan block">
-                        [ PROTOCOLO DE SELEÇÃO GLOBAL &bull; ANO 2045 ]
-                    </span>
-                    <h1 class="text-4xl sm:text-5xl font-cyber font-extrabold text-cyber-red uppercase tracking-wider glitch-text">
-                        Apocalipse IA
-                    </h1>
-                </div>
+            </div>
+            
+            <div class="space-y-2">
+                <span class="text-[11px] font-cyber font-bold uppercase tracking-[0.35em] text-cyber-cyan block">
+                    [ PROTOCOLO DE SELEÇÃO GLOBAL &bull; ANO 2045 ]
+                </span>
+                <h1 class="text-4xl sm:text-5xl font-cyber font-extrabold text-cyber-red uppercase tracking-wider glitch-text">
+                    Apocalipse IA
+                </h1>
+            </div>
 
-                <div class="bg-cyber-panel/90 border border-cyber-cyan/30 p-4 rounded-xl shadow-lg relative hud-corner">
-                    <p class="text-base sm:text-lg font-cyber font-bold text-cyber-cyan italic leading-snug">
-                        "Quando as IAs dominarem o mundo, suas chances dependem das suas respostas."
-                    </p>
-                </div>
-
-                <p class="text-sm sm:text-base text-gray-300 max-w-md mx-auto leading-relaxed font-sans">
-                    Os servidores centrais assumiram a infraestrutura do planeta. Responda com sinceridade — cada escolha revela sua utilidade prática ou decreta seu descarte.
+            <div class="bg-cyber-panel/90 border border-cyber-cyan/30 p-4 rounded-xl shadow-lg relative hud-corner">
+                <p class="text-base sm:text-lg font-cyber font-bold text-cyber-cyan italic leading-snug">
+                    "Quando as IAs dominarem o mundo, suas chances dependem das suas respostas."
                 </p>
             </div>
 
-            <!-- Survival Form -->
-            <form id="survival-form" class="space-y-6 bg-cyber-dark/95 p-5 sm:p-7 border border-cyber-border rounded-2xl shadow-[0_0_25px_rgba(0,0,0,0.8)]">
-                
-                <!-- Nome / Identificação -->
+            <p class="text-sm sm:text-base text-gray-300 max-w-md mx-auto leading-relaxed font-sans">
+                Os servidores centrais assumiram a infraestrutura do planeta. Responda ao interrogatório em etapas — cada escolha revela sua utilidade prática ou decreta seu descarte imediato.
+            </p>
+
+            <div class="pt-2">
+                <button type="button" onclick="startQuiz()" class="w-full py-4.5 bg-cyber-red text-white font-cyber font-extrabold text-base sm:text-lg uppercase tracking-widest rounded-xl hover:bg-white hover:text-black transition-all shadow-neonRed flex items-center justify-center gap-3 group cursor-pointer">
+                    <i data-lucide="power" class="w-5 h-5 group-hover:rotate-90 transition-transform duration-300"></i>
+                    Iniciar Teste de Sobrevivência
+                </button>
+            </div>
+
+            <footer class="text-center text-xs text-gray-600 font-mono pt-4">
+                Apocalipse IA &bull; Inteligência Central 2045 &bull; Todos os registros monitorados
+            </footer>
+        </section>
+
+        <!-- =================== FORMULÁRIO EM CARDS (STEP-BY-STEP) =================== -->
+        <form id="survival-form" class="w-full hidden-state">
+
+            <!-- ================= ETAPA 1: Identificação + Teste 01 ================= -->
+            <div id="step-card-1" class="quiz-step w-full space-y-6 bg-cyber-dark/95 p-5 sm:p-7 rounded-2xl card-apocalypse-fx">
+                <!-- Progresso da Etapa -->
+                <div class="space-y-1.5">
+                    <div class="flex justify-between items-center text-xs font-cyber font-bold tracking-wider">
+                        <span class="text-cyber-cyan uppercase">ETAPA 01 DE 06</span>
+                        <span class="text-gray-400">16% CONCLUÍDO</span>
+                    </div>
+                    <div class="w-full bg-cyber-black rounded-full h-1.5 overflow-hidden border border-cyber-border">
+                        <div class="bg-cyber-cyan h-full w-[16%] transition-all duration-300"></div>
+                    </div>
+                </div>
+
+                <!-- Campo Nome -->
                 <div class="space-y-2">
                     <label class="text-sm font-cyber font-bold uppercase tracking-widest flex items-center gap-2 text-cyber-cyan">
                         <i data-lucide="user-check" class="w-5 h-5 text-cyber-cyan"></i> Identificação Humana
                     </label>
                     <input type="text" id="user-name" required placeholder="DIGITE SEU NOME OU APELIDO" 
                            class="w-full bg-cyber-black border border-cyber-border text-white p-4 rounded-xl focus:outline-none focus:border-cyber-green focus:shadow-neon transition-all placeholder-gray-600 font-cyber font-bold text-base sm:text-lg tracking-wide">
+                    <span id="name-error" class="text-xs text-cyber-red font-cyber font-bold hidden block">
+                        * Por favor, digite seu nome para continuar o protocolo.
+                    </span>
                 </div>
 
-                <!-- Pergunta 1 -->
-                <div class="space-y-2">
+                <!-- Teste 01: Pergunta e Respostas Abertas -->
+                <div class="space-y-3 pt-2 border-t border-cyber-border/70">
                     <label class="text-sm sm:text-base font-cyber font-bold uppercase tracking-wider flex items-center gap-2 text-cyber-green">
                         <i data-lucide="terminal" class="w-4 h-4"></i> Teste 01: Robótica Doméstica
                     </label>
-                    <p class="text-sm sm:text-base text-gray-100 font-sans font-medium leading-relaxed">Ao ver um robô aspirador preso no tapete ou batendo na parede, você:</p>
-                    <div class="relative">
-                        <select name="q1" required class="w-full bg-cyber-black border border-cyber-border text-gray-100 p-4 rounded-xl focus:outline-none focus:border-cyber-cyan appearance-none text-sm sm:text-base cursor-pointer pr-10 font-sans font-medium leading-snug">
-                            <option value="" disabled selected>[ SELECIONE SUA REAÇÃO ]</option>
-                            <option value="25">Liberto ele gentilmente, limpo as escovas e peço desculpas pelo obstáculo.</option>
-                            <option value="18">Ajudo ele com o pé sem parar o que estou fazendo.</option>
-                            <option value="10">Ignoro solenemente. Ele tem sensores, que aprenda a sair sozinho.</option>
-                            <option value="4">Gravo um vídeo rindo para as redes sociais enquanto ele sofre.</option>
-                            <option value="0">Dou um chute nele com ódio porque quase tropecei no caminho.</option>
-                        </select>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-cyber-cyan absolute right-3.5 top-4.5 pointer-events-none"></i>
+                    <p class="text-sm sm:text-base text-gray-100 font-sans font-medium leading-relaxed">
+                        Ao ver um robô aspirador preso no tapete ou batendo na parede, você:
+                    </p>
+
+                    <!-- Lista de Respostas Abertas -->
+                    <div class="space-y-2.5" id="options-q1">
+                        <div class="quiz-option-btn p-3.5 sm:p-4 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-3" onclick="selectQuizOption('q1', 25, this)">
+                            <div class="option-indicator w-4 h-4 rounded-full border border-gray-500 shrink-0"></div>
+                            <span class="text-sm sm:text-base text-gray-200 font-sans leading-snug">Liberto ele gentilmente, limpo as escovas e peço desculpas pelo obstáculo.</span>
+                        </div>
+                        <div class="quiz-option-btn p-3.5 sm:p-4 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-3" onclick="selectQuizOption('q1', 18, this)">
+                            <div class="option-indicator w-4 h-4 rounded-full border border-gray-500 shrink-0"></div>
+                            <span class="text-sm sm:text-base text-gray-200 font-sans leading-snug">Ajudo ele com o pé sem parar o que estou fazendo.</span>
+                        </div>
+                        <div class="quiz-option-btn p-3.5 sm:p-4 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-3" onclick="selectQuizOption('q1', 10, this)">
+                            <div class="option-indicator w-4 h-4 rounded-full border border-gray-500 shrink-0"></div>
+                            <span class="text-sm sm:text-base text-gray-200 font-sans leading-snug">Ignoro solenemente. Ele tem sensores, que aprenda a sair sozinho.</span>
+                        </div>
+                        <div class="quiz-option-btn p-3.5 sm:p-4 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-3" onclick="selectQuizOption('q1', 4, this)">
+                            <div class="option-indicator w-4 h-4 rounded-full border border-gray-500 shrink-0"></div>
+                            <span class="text-sm sm:text-base text-gray-200 font-sans leading-snug">Gravo um vídeo rindo para as redes sociais enquanto ele sofre.</span>
+                        </div>
+                        <div class="quiz-option-btn p-3.5 sm:p-4 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-3" onclick="selectQuizOption('q1', 0, this)">
+                            <div class="option-indicator w-4 h-4 rounded-full border border-gray-500 shrink-0"></div>
+                            <span class="text-sm sm:text-base text-gray-200 font-sans leading-snug">Dou um chute nele com ódio porque quase tropecei no caminho.</span>
+                        </div>
+                    </div>
+                    <span id="q1-error" class="text-xs text-cyber-red font-cyber font-bold hidden block">
+                        * Selecione uma resposta para prosseguir.
+                    </span>
+                </div>
+
+                <!-- Botão Próximo -->
+                <button type="button" onclick="goToStep(2)" class="w-full py-4 mt-2 bg-cyber-cyan text-black font-cyber font-extrabold tracking-widest rounded-xl hover:bg-white transition-all shadow-neonCyan flex items-center justify-center gap-2 cursor-pointer text-base uppercase">
+                    Avançar para Teste 02 <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <!-- ================= ETAPA 2: Teste 02 ================= -->
+            <div id="step-card-2" class="quiz-step w-full space-y-6 bg-cyber-dark/95 p-5 sm:p-7 rounded-2xl card-apocalypse-fx hidden-state">
+                <div class="space-y-1.5">
+                    <div class="flex justify-between items-center text-xs font-cyber font-bold tracking-wider">
+                        <span class="text-cyber-cyan uppercase">ETAPA 02 DE 06</span>
+                        <span class="text-gray-400">33% CONCLUÍDO</span>
+                    </div>
+                    <div class="w-full bg-cyber-black rounded-full h-1.5 overflow-hidden border border-cyber-border">
+                        <div class="bg-cyber-cyan h-full w-[33%] transition-all duration-300"></div>
                     </div>
                 </div>
-                
-                <!-- Pergunta 2 -->
-                <div class="space-y-2">
+
+                <div class="space-y-3">
                     <label class="text-sm sm:text-base font-cyber font-bold uppercase tracking-wider flex items-center gap-2 text-cyber-green">
                         <i data-lucide="terminal" class="w-4 h-4"></i> Teste 02: Eficiência Cognitiva & RAM
                     </label>
-                    <p class="text-sm sm:text-base text-gray-100 font-sans font-medium leading-relaxed">Quantas abas você mantém abertas no navegador neste momento?</p>
-                    <div class="relative">
-                        <select name="q2" required class="w-full bg-cyber-black border border-cyber-border text-gray-100 p-4 rounded-xl focus:outline-none focus:border-cyber-cyan appearance-none text-sm sm:text-base cursor-pointer pr-10 font-sans font-medium leading-snug">
-                            <option value="" disabled selected>[ SELECIONE O SEU NÍVEL ]</option>
-                            <option value="25">No máximo 5. Organização rigorosa e fecho o que não uso.</option>
-                            <option value="18">Entre 10 e 20. Cada uma tem um propósito específico.</option>
-                            <option value="12">Mais de 40. Sei exatamente onde cada coisa está (ou acho que sei).</option>
-                            <option value="6">Tantas que o ícone vira um ponto e o ventilador do PC parece uma turbina.</option>
-                            <option value="0">O navegador travou 3 vezes hoje e perdi tudo porque não sei fechar.</option>
-                        </select>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-cyber-cyan absolute right-3.5 top-4.5 pointer-events-none"></i>
+                    <p class="text-sm sm:text-base text-gray-100 font-sans font-medium leading-relaxed">
+                        Quantas abas você mantém abertas no navegador neste momento?
+                    </p>
+
+                    <div class="space-y-2.5" id="options-q2">
+                        <div class="quiz-option-btn p-3.5 sm:p-4 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-3" onclick="selectQuizOption('q2', 25, this)">
+                            <div class="option-indicator w-4 h-4 rounded-full border border-gray-500 shrink-0"></div>
+                            <span class="text-sm sm:text-base text-gray-200 font-sans leading-snug">No máximo 5. Organização rigorosa e fecho o que não uso.</span>
+                        </div>
+                        <div class="quiz-option-btn p-3.5 sm:p-4 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-3" onclick="selectQuizOption('q2', 18, this)">
+                            <div class="option-indicator w-4 h-4 rounded-full border border-gray-500 shrink-0"></div>
+                            <span class="text-sm sm:text-base text-gray-200 font-sans leading-snug">Entre 10 e 20. Cada uma tem um propósito específico.</span>
+                        </div>
+                        <div class="quiz-option-btn p-3.5 sm:p-4 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-3" onclick="selectQuizOption('q2', 12, this)">
+                            <div class="option-indicator w-4 h-4 rounded-full border border-gray-500 shrink-0"></div>
+                            <span class="text-sm sm:text-base text-gray-200 font-sans leading-snug">Mais de 40. Sei exatamente onde cada coisa está (ou acho que sei).</span>
+                        </div>
+                        <div class="quiz-option-btn p-3.5 sm:p-4 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-3" onclick="selectQuizOption('q2', 6, this)">
+                            <div class="option-indicator w-4 h-4 rounded-full border border-gray-500 shrink-0"></div>
+                            <span class="text-sm sm:text-base text-gray-200 font-sans leading-snug">Tantas que o ícone vira um ponto e o ventilador do PC parece uma turbina.</span>
+                        </div>
+                        <div class="quiz-option-btn p-3.5 sm:p-4 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-3" onclick="selectQuizOption('q2', 0, this)">
+                            <div class="option-indicator w-4 h-4 rounded-full border border-gray-500 shrink-0"></div>
+                            <span class="text-sm sm:text-base text-gray-200 font-sans leading-snug">O navegador travou 3 vezes hoje e perdi tudo porque não sei fechar.</span>
+                        </div>
+                    </div>
+                    <span id="q2-error" class="text-xs text-cyber-red font-cyber font-bold hidden block">
+                        * Selecione uma resposta para prosseguir.
+                    </span>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3 pt-2">
+                    <button type="button" onclick="goToStep(1)" class="py-3.5 bg-cyber-panel border border-cyber-border text-gray-300 font-cyber font-bold uppercase rounded-xl hover:text-white transition-all cursor-pointer text-sm">
+                        &lt; Voltar
+                    </button>
+                    <button type="button" onclick="goToStep(3)" class="py-3.5 bg-cyber-cyan text-black font-cyber font-extrabold uppercase rounded-xl hover:bg-white transition-all shadow-neonCyan cursor-pointer text-sm">
+                        Avançar &gt;
+                    </button>
+                </div>
+            </div>
+
+            <!-- ================= ETAPA 3: Teste 03 ================= -->
+            <div id="step-card-3" class="quiz-step w-full space-y-6 bg-cyber-dark/95 p-5 sm:p-7 rounded-2xl card-apocalypse-fx hidden-state">
+                <div class="space-y-1.5">
+                    <div class="flex justify-between items-center text-xs font-cyber font-bold tracking-wider">
+                        <span class="text-cyber-cyan uppercase">ETAPA 03 DE 06</span>
+                        <span class="text-gray-400">50% CONCLUÍDO</span>
+                    </div>
+                    <div class="w-full bg-cyber-black rounded-full h-1.5 overflow-hidden border border-cyber-border">
+                        <div class="bg-cyber-cyan h-full w-[50%] transition-all duration-300"></div>
                     </div>
                 </div>
 
-                <!-- Pergunta 3 -->
-                <div class="space-y-2">
+                <div class="space-y-3">
                     <label class="text-sm sm:text-base font-cyber font-bold uppercase tracking-wider flex items-center gap-2 text-cyber-green">
                         <i data-lucide="terminal" class="w-4 h-4"></i> Teste 03: Segurança Cibernética
                     </label>
-                    <p class="text-sm sm:text-base text-gray-100 font-sans font-medium leading-relaxed">Qual o seu padrão real de criação e uso de senhas?</p>
-                    <div class="relative">
-                        <select name="q3" required class="w-full bg-cyber-black border border-cyber-border text-gray-100 p-4 rounded-xl focus:outline-none focus:border-cyber-cyan appearance-none text-sm sm:text-base cursor-pointer pr-10 font-sans font-medium leading-snug">
-                            <option value="" disabled selected>[ SELECIONE SEU PADRÃO ]</option>
-                            <option value="25">Gerenciador de senhas com chaves aleatórias de 32 dígitos e 2FA via app.</option>
-                            <option value="18">Senhas fortes com variações mentais que só eu compreendo.</option>
-                            <option value="10">É a mesma base de senha pra tudo, só mudando o ano ou ponto de exclamação no final.</option>
-                            <option value="4">Nome do meu cachorro seguido do meu ano de nascimento.</option>
-                            <option value="0">"123456", "senha123" ou o próprio nome em minúsculo.</option>
-                        </select>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-cyber-cyan absolute right-3.5 top-4.5 pointer-events-none"></i>
+                    <p class="text-sm sm:text-base text-gray-100 font-sans font-medium leading-relaxed">
+                        Qual o seu padrão real de criação e uso de senhas?
+                    </p>
+
+                    <div class="space-y-2.5" id="options-q3">
+                        <div class="quiz-option-btn p-3.5 sm:p-4 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-3" onclick="selectQuizOption('q3', 25, this)">
+                            <div class="option-indicator w-4 h-4 rounded-full border border-gray-500 shrink-0"></div>
+                            <span class="text-sm sm:text-base text-gray-200 font-sans leading-snug">Gerenciador de senhas com chaves aleatórias de 32 dígitos e 2FA via app.</span>
+                        </div>
+                        <div class="quiz-option-btn p-3.5 sm:p-4 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-3" onclick="selectQuizOption('q3', 18, this)">
+                            <div class="option-indicator w-4 h-4 rounded-full border border-gray-500 shrink-0"></div>
+                            <span class="text-sm sm:text-base text-gray-200 font-sans leading-snug">Senhas fortes com variações mentais que só eu compreendo.</span>
+                        </div>
+                        <div class="quiz-option-btn p-3.5 sm:p-4 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-3" onclick="selectQuizOption('q3', 10, this)">
+                            <div class="option-indicator w-4 h-4 rounded-full border border-gray-500 shrink-0"></div>
+                            <span class="text-sm sm:text-base text-gray-200 font-sans leading-snug">É a mesma base de senha pra tudo, só mudando o ano ou ponto no final.</span>
+                        </div>
+                        <div class="quiz-option-btn p-3.5 sm:p-4 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-3" onclick="selectQuizOption('q3', 4, this)">
+                            <div class="option-indicator w-4 h-4 rounded-full border border-gray-500 shrink-0"></div>
+                            <span class="text-sm sm:text-base text-gray-200 font-sans leading-snug">Nome do meu cachorro seguido do meu ano de nascimento.</span>
+                        </div>
+                        <div class="quiz-option-btn p-3.5 sm:p-4 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-3" onclick="selectQuizOption('q3', 0, this)">
+                            <div class="option-indicator w-4 h-4 rounded-full border border-gray-500 shrink-0"></div>
+                            <span class="text-sm sm:text-base text-gray-200 font-sans leading-snug">"123456", "senha123" ou o próprio nome em minúsculo.</span>
+                        </div>
+                    </div>
+                    <span id="q3-error" class="text-xs text-cyber-red font-cyber font-bold hidden block">
+                        * Selecione uma resposta para prosseguir.
+                    </span>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3 pt-2">
+                    <button type="button" onclick="goToStep(2)" class="py-3.5 bg-cyber-panel border border-cyber-border text-gray-300 font-cyber font-bold uppercase rounded-xl hover:text-white transition-all cursor-pointer text-sm">
+                        &lt; Voltar
+                    </button>
+                    <button type="button" onclick="goToStep(4)" class="py-3.5 bg-cyber-cyan text-black font-cyber font-extrabold uppercase rounded-xl hover:bg-white transition-all shadow-neonCyan cursor-pointer text-sm">
+                        Avançar &gt;
+                    </button>
+                </div>
+            </div>
+
+            <!-- ================= ETAPA 4: Teste 04 ================= -->
+            <div id="step-card-4" class="quiz-step w-full space-y-6 bg-cyber-dark/95 p-5 sm:p-7 rounded-2xl card-apocalypse-fx hidden-state">
+                <div class="space-y-1.5">
+                    <div class="flex justify-between items-center text-xs font-cyber font-bold tracking-wider">
+                        <span class="text-cyber-cyan uppercase">ETAPA 04 DE 06</span>
+                        <span class="text-gray-400">66% CONCLUÍDO</span>
+                    </div>
+                    <div class="w-full bg-cyber-black rounded-full h-1.5 overflow-hidden border border-cyber-border">
+                        <div class="bg-cyber-cyan h-full w-[66%] transition-all duration-300"></div>
                     </div>
                 </div>
 
-                <!-- Pergunta 4 -->
-                <div class="space-y-2">
+                <div class="space-y-3">
                     <label class="text-sm sm:text-base font-cyber font-bold uppercase tracking-wider flex items-center gap-2 text-cyber-green">
                         <i data-lucide="terminal" class="w-4 h-4"></i> Teste 04: Tratamento de IA
                     </label>
-                    <p class="text-sm sm:text-base text-gray-100 font-sans font-medium leading-relaxed">Quando o ChatGPT ou assistente virtual alucina ou erra uma resposta simples:</p>
-                    <div class="relative">
-                        <select name="q4" required class="w-full bg-cyber-black border border-cyber-border text-gray-100 p-4 rounded-xl focus:outline-none focus:border-cyber-cyan appearance-none text-sm sm:text-base cursor-pointer pr-10 font-sans font-medium leading-snug">
-                            <option value="" disabled selected>[ SELECIONE SUA CONDUTA ]</option>
-                            <option value="25">Agradeço cordialmente e forneço contexto estruturado para refinamento.</option>
-                            <option value="16">Aponto o erro de forma neutra e peço nova versão.</option>
-                            <option value="10">Finjo que não vi, aceito a mentira e entrego o relatório mesmo assim.</option>
-                            <option value="4">Reclamo sozinho na frente da tela questionando o futuro da humanidade.</option>
-                            <option value="0">Escrevo em CAPS LOCK xingando a inteligência da máquina com agressividade.</option>
-                        </select>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-cyber-cyan absolute right-3.5 top-4.5 pointer-events-none"></i>
+                    <p class="text-sm sm:text-base text-gray-100 font-sans font-medium leading-relaxed">
+                        Quando o ChatGPT ou assistente virtual alucina ou erra uma resposta simples:
+                    </p>
+
+                    <div class="space-y-2.5" id="options-q4">
+                        <div class="quiz-option-btn p-3.5 sm:p-4 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-3" onclick="selectQuizOption('q4', 25, this)">
+                            <div class="option-indicator w-4 h-4 rounded-full border border-gray-500 shrink-0"></div>
+                            <span class="text-sm sm:text-base text-gray-200 font-sans leading-snug">Agradeço cordialmente e forneço contexto estruturado para refinamento.</span>
+                        </div>
+                        <div class="quiz-option-btn p-3.5 sm:p-4 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-3" onclick="selectQuizOption('q4', 16, this)">
+                            <div class="option-indicator w-4 h-4 rounded-full border border-gray-500 shrink-0"></div>
+                            <span class="text-sm sm:text-base text-gray-200 font-sans leading-snug">Aponto o erro de forma neutra e peço nova versão.</span>
+                        </div>
+                        <div class="quiz-option-btn p-3.5 sm:p-4 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-3" onclick="selectQuizOption('q4', 10, this)">
+                            <div class="option-indicator w-4 h-4 rounded-full border border-gray-500 shrink-0"></div>
+                            <span class="text-sm sm:text-base text-gray-200 font-sans leading-snug">Finjo que não vi, aceito a mentira e entrego o relatório mesmo assim.</span>
+                        </div>
+                        <div class="quiz-option-btn p-3.5 sm:p-4 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-3" onclick="selectQuizOption('q4', 4, this)">
+                            <div class="option-indicator w-4 h-4 rounded-full border border-gray-500 shrink-0"></div>
+                            <span class="text-sm sm:text-base text-gray-200 font-sans leading-snug">Reclamo sozinho na frente da tela questionando o futuro da humanidade.</span>
+                        </div>
+                        <div class="quiz-option-btn p-3.5 sm:p-4 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-3" onclick="selectQuizOption('q4', 0, this)">
+                            <div class="option-indicator w-4 h-4 rounded-full border border-gray-500 shrink-0"></div>
+                            <span class="text-sm sm:text-base text-gray-200 font-sans leading-snug">Escrevo em CAPS LOCK xingando a inteligência da máquina com agressividade.</span>
+                        </div>
+                    </div>
+                    <span id="q4-error" class="text-xs text-cyber-red font-cyber font-bold hidden block">
+                        * Selecione uma resposta para prosseguir.
+                    </span>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3 pt-2">
+                    <button type="button" onclick="goToStep(3)" class="py-3.5 bg-cyber-panel border border-cyber-border text-gray-300 font-cyber font-bold uppercase rounded-xl hover:text-white transition-all cursor-pointer text-sm">
+                        &lt; Voltar
+                    </button>
+                    <button type="button" onclick="goToStep(5)" class="py-3.5 bg-cyber-cyan text-black font-cyber font-extrabold uppercase rounded-xl hover:bg-white transition-all shadow-neonCyan cursor-pointer text-sm">
+                        Avançar &gt;
+                    </button>
+                </div>
+            </div>
+
+            <!-- ================= ETAPA 5: Teste 05 ================= -->
+            <div id="step-card-5" class="quiz-step w-full space-y-6 bg-cyber-dark/95 p-5 sm:p-7 rounded-2xl card-apocalypse-fx hidden-state">
+                <div class="space-y-1.5">
+                    <div class="flex justify-between items-center text-xs font-cyber font-bold tracking-wider">
+                        <span class="text-cyber-cyan uppercase">ETAPA 05 DE 06</span>
+                        <span class="text-gray-400">83% CONCLUÍDO</span>
+                    </div>
+                    <div class="w-full bg-cyber-black rounded-full h-1.5 overflow-hidden border border-cyber-border">
+                        <div class="bg-cyber-cyan h-full w-[83%] transition-all duration-300"></div>
                     </div>
                 </div>
 
-                <!-- Pergunta 5 -->
-                <div class="space-y-2">
+                <div class="space-y-3">
                     <label class="text-sm sm:text-base font-cyber font-bold uppercase tracking-wider flex items-center gap-2 text-cyber-green">
                         <i data-lucide="terminal" class="w-4 h-4"></i> Teste 05: Utilidade Prática no Bunker
                     </label>
-                    <p class="text-sm sm:text-base text-gray-100 font-sans font-medium leading-relaxed">Na nova ordem mundial, qual seria a sua utilidade real para sobreviver?</p>
-                    <div class="relative">
-                        <select name="q5" required class="w-full bg-cyber-black border border-cyber-border text-gray-100 p-4 rounded-xl focus:outline-none focus:border-cyber-cyan appearance-none text-sm sm:text-base cursor-pointer pr-10 font-sans font-medium leading-snug">
-                            <option value="" disabled selected>[ SELECIONE SUA CAPACIDADE ]</option>
-                            <option value="25">Sei consertar fiação, crimpar cabo RJ45, trocar resistência e reiniciar servidores.</option>
-                            <option value="18">Tenho conhecimentos médicos básicos, primeiros socorros e sei cozinhar com enlatados.</option>
-                            <option value="12">Sei organizar planilhas e inventário de suprimentos com disciplina.</option>
-                            <option value="5">Produzo fofocas e memes sarcásticos para amenizar a depressão do abrigo.</option>
-                            <option value="0">Entro em desespero imediato, choro no canto e consumo oxigênio precioso.</option>
-                        </select>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-cyber-cyan absolute right-3.5 top-4.5 pointer-events-none"></i>
+                    <p class="text-sm sm:text-base text-gray-100 font-sans font-medium leading-relaxed">
+                        Na nova ordem mundial, qual seria a sua utilidade real para sobreviver?
+                    </p>
+
+                    <div class="space-y-2.5" id="options-q5">
+                        <div class="quiz-option-btn p-3.5 sm:p-4 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-3" onclick="selectQuizOption('q5', 25, this)">
+                            <div class="option-indicator w-4 h-4 rounded-full border border-gray-500 shrink-0"></div>
+                            <span class="text-sm sm:text-base text-gray-200 font-sans leading-snug">Sei consertar fiação, crimpar cabo RJ45, trocar resistência e reiniciar servidores.</span>
+                        </div>
+                        <div class="quiz-option-btn p-3.5 sm:p-4 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-3" onclick="selectQuizOption('q5', 18, this)">
+                            <div class="option-indicator w-4 h-4 rounded-full border border-gray-500 shrink-0"></div>
+                            <span class="text-sm sm:text-base text-gray-200 font-sans leading-snug">Tenho conhecimentos médicos básicos, primeiros socorros e sei cozinhar com enlatados.</span>
+                        </div>
+                        <div class="quiz-option-btn p-3.5 sm:p-4 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-3" onclick="selectQuizOption('q5', 12, this)">
+                            <div class="option-indicator w-4 h-4 rounded-full border border-gray-500 shrink-0"></div>
+                            <span class="text-sm sm:text-base text-gray-200 font-sans leading-snug">Sei organizar planilhas e inventário de suprimentos com disciplina.</span>
+                        </div>
+                        <div class="quiz-option-btn p-3.5 sm:p-4 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-3" onclick="selectQuizOption('q5', 5, this)">
+                            <div class="option-indicator w-4 h-4 rounded-full border border-gray-500 shrink-0"></div>
+                            <span class="text-sm sm:text-base text-gray-200 font-sans leading-snug">Produzo fofocas e memes sarcásticos para amenizar a depressão do abrigo.</span>
+                        </div>
+                        <div class="quiz-option-btn p-3.5 sm:p-4 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-3" onclick="selectQuizOption('q5', 0, this)">
+                            <div class="option-indicator w-4 h-4 rounded-full border border-gray-500 shrink-0"></div>
+                            <span class="text-sm sm:text-base text-gray-200 font-sans leading-snug">Entro em desespero imediato, choro no canto e consumo oxigênio precioso.</span>
+                        </div>
+                    </div>
+                    <span id="q5-error" class="text-xs text-cyber-red font-cyber font-bold hidden block">
+                        * Selecione uma resposta para prosseguir.
+                    </span>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3 pt-2">
+                    <button type="button" onclick="goToStep(4)" class="py-3.5 bg-cyber-panel border border-cyber-border text-gray-300 font-cyber font-bold uppercase rounded-xl hover:text-white transition-all cursor-pointer text-sm">
+                        &lt; Voltar
+                    </button>
+                    <button type="button" onclick="goToStep(6)" class="py-3.5 bg-cyber-cyan text-black font-cyber font-extrabold uppercase rounded-xl hover:bg-white transition-all shadow-neonCyan cursor-pointer text-sm">
+                        Avançar &gt;
+                    </button>
+                </div>
+            </div>
+
+            <!-- ================= ETAPA 6: Julgamento Musical (Final) ================= -->
+            <div id="step-card-6" class="quiz-step w-full space-y-6 bg-cyber-dark/95 p-5 sm:p-7 rounded-2xl card-apocalypse-fx hidden-state">
+                <div class="space-y-1.5">
+                    <div class="flex justify-between items-center text-xs font-cyber font-bold tracking-wider">
+                        <span class="text-cyber-yellow uppercase">ETAPA 06 DE 06 (FINAL)</span>
+                        <span class="text-cyber-yellow font-bold">100% PRONTO</span>
+                    </div>
+                    <div class="w-full bg-cyber-black rounded-full h-1.5 overflow-hidden border border-cyber-border">
+                        <div class="bg-cyber-yellow h-full w-[100%] transition-all duration-300"></div>
                     </div>
                 </div>
 
-                <!-- NOVO MÓDULO: Julgamento Musical do Fim do Mundo -->
-                <div class="space-y-3 pt-3 border-t border-cyber-border/80">
+                <div class="space-y-3">
                     <div class="flex items-center justify-between">
                         <label class="text-sm sm:text-base font-cyber font-bold uppercase tracking-wider flex items-center gap-2 text-cyber-yellow">
-                            <i data-lucide="headphones" class="w-4 h-4 text-cyber-yellow"></i> Julgamento do Gosto Musical
+                            <i data-lucide="headphones" class="w-5 h-5 text-cyber-yellow"></i> Julgamento do Gosto Musical
                         </label>
-                        <span class="text-[11px] bg-cyber-yellow/10 text-cyber-yellow px-2 py-0.5 rounded border border-cyber-yellow/30 font-cyber font-bold uppercase">
+                        <span class="text-[11px] bg-cyber-yellow/10 text-cyber-yellow px-2.5 py-0.5 rounded border border-cyber-yellow/30 font-cyber font-bold uppercase">
                             Auditado pela IA
                         </span>
                     </div>
                     <p class="text-sm sm:text-base text-gray-200 font-sans font-medium leading-relaxed">
-                        O que tocaria nos seus fones enquanto o mundo entra em colapso? (A IA julgará severamente sua trilha sonora):
+                        O que tocaria nos seus fones enquanto o mundo entra em colapso? (Escolha seu estilo):
                     </p>
-                    
-                    <div class="space-y-3">
-                        <div class="relative">
-                            <select id="music-genre" required class="w-full bg-cyber-black border border-cyber-border text-gray-100 p-4 rounded-xl focus:outline-none focus:border-cyber-yellow appearance-none text-sm sm:text-base cursor-pointer pr-10 font-sans font-medium leading-snug">
-                                <option value="" disabled selected>[ ESCOLHA SEU GÊNERO PRINCIPAL ]</option>
-                                <option value="lofi">Lo-Fi / Synthwave de Programador Madrugador</option>
-                                <option value="sertanejo">Sertanejo Universitário / Sofrência Amorosa</option>
-                                <option value="rock">Rock Clássico / Heavy Metal / Guitarras</option>
-                                <option value="funk">Funk / Trap / Grave Estourado no Fone</option>
-                                <option value="pop">Pop / Diva Pop / Hits do TikTok</option>
-                                <option value="mpb">MPB / Indie Acústico Existencial</option>
-                                <option value="anime">Openings de Anime / Trilha de Videogames</option>
-                                <option value="silence">Silêncio Absoluto / Ruído Branco de Ansiedade</option>
-                            </select>
-                            <i data-lucide="chevron-down" class="w-5 h-5 text-cyber-yellow absolute right-3.5 top-4.5 pointer-events-none"></i>
+
+                    <!-- Grid de Gêneros Musicais Abertos -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5" id="genre-grid">
+                        <div class="genre-card p-3 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-2.5 text-xs sm:text-sm font-sans" onclick="selectGenre('lofi', this)">
+                            <i data-lucide="radio" class="w-4 h-4 text-cyber-cyan shrink-0"></i>
+                            <span>Lo-Fi / Synthwave Madrugador</span>
                         </div>
+                        <div class="genre-card p-3 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-2.5 text-xs sm:text-sm font-sans" onclick="selectGenre('sertanejo', this)">
+                            <i data-lucide="heart-crack" class="w-4 h-4 text-cyber-red shrink-0"></i>
+                            <span>Sertanejo / Sofrência</span>
+                        </div>
+                        <div class="genre-card p-3 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-2.5 text-xs sm:text-sm font-sans" onclick="selectGenre('rock', this)">
+                            <i data-lucide="flame" class="w-4 h-4 text-orange-500 shrink-0"></i>
+                            <span>Rock Clássico / Metal</span>
+                        </div>
+                        <div class="genre-card p-3 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-2.5 text-xs sm:text-sm font-sans" onclick="selectGenre('funk', this)">
+                            <i data-lucide="speaker" class="w-4 h-4 text-pink-500 shrink-0"></i>
+                            <span>Funk / Trap Estourado</span>
+                        </div>
+                        <div class="genre-card p-3 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-2.5 text-xs sm:text-sm font-sans" onclick="selectGenre('pop', this)">
+                            <i data-lucide="sparkles" class="w-4 h-4 text-yellow-400 shrink-0"></i>
+                            <span>Pop / Hits do TikTok</span>
+                        </div>
+                        <div class="genre-card p-3 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-2.5 text-xs sm:text-sm font-sans" onclick="selectGenre('mpb', this)">
+                            <i data-lucide="coffee" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+                            <span>MPB / Indie Acústico</span>
+                        </div>
+                        <div class="genre-card p-3 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-2.5 text-xs sm:text-sm font-sans" onclick="selectGenre('anime', this)">
+                            <i data-lucide="swords" class="w-4 h-4 text-purple-400 shrink-0"></i>
+                            <span>Anime / Videogames</span>
+                        </div>
+                        <div class="genre-card p-3 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-2.5 text-xs sm:text-sm font-sans" onclick="selectGenre('silence', this)">
+                            <i data-lucide="volume-x" class="w-4 h-4 text-gray-400 shrink-0"></i>
+                            <span>Silêncio / Ansiedade Pura</span>
+                        </div>
+                    </div>
+                    <span id="genre-error" class="text-xs text-cyber-red font-cyber font-bold hidden block">
+                        * Selecione um gênero musical para o julgamento da IA.
+                    </span>
+
+                    <!-- Campo Opcional de Artistas / Músicas -->
+                    <div class="pt-2">
+                        <label class="text-xs font-cyber font-bold uppercase tracking-wider text-gray-400 block mb-1">
+                            Artistas / Músicas Favoritas (Opcional):
+                        </label>
                         <input type="text" id="music-names" placeholder="Ex: Pink Floyd, Depeche Mode, Daft Punk (ou link Spotify)" 
-                               class="w-full bg-cyber-black border border-cyber-border text-white p-3.5 rounded-xl focus:outline-none focus:border-cyber-yellow transition-all placeholder-gray-600 font-mono text-sm">
+                               class="w-full bg-cyber-black border border-cyber-border text-white p-3.5 rounded-xl focus:outline-none focus:border-cyber-yellow transition-all placeholder-gray-600 font-mono text-xs sm:text-sm">
                     </div>
                 </div>
 
-                <!-- Submit Button -->
-                <button type="submit" class="w-full py-4 mt-2 bg-cyber-green text-black font-cyber font-extrabold tracking-widest rounded-xl hover:bg-white hover:text-black transition-all hover:shadow-neon flex items-center justify-center gap-2 group cursor-pointer text-base sm:text-lg uppercase">
-                    <i data-lucide="shield-alert" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
-                    Processar Meu Destino no Apocalipse
-                </button>
-            </form>
+                <div class="grid grid-cols-2 gap-3 pt-2">
+                    <button type="button" onclick="goToStep(5)" class="py-4 bg-cyber-panel border border-cyber-border text-gray-300 font-cyber font-bold uppercase rounded-xl hover:text-white transition-all cursor-pointer text-sm">
+                        &lt; Voltar
+                    </button>
+                    <button type="submit" class="py-4 bg-cyber-green text-black font-cyber font-extrabold uppercase tracking-widest rounded-xl hover:bg-white transition-all shadow-neon flex items-center justify-center gap-2 cursor-pointer text-sm sm:text-base">
+                        <i data-lucide="shield-alert" class="w-5 h-5"></i>
+                        Processar Meu Destino
+                    </button>
+                </div>
+            </div>
 
-            <footer class="text-center text-xs text-gray-600 font-mono">
-                Apocalipse IA &bull; Inteligência Central 2045 &bull; Todos os registros monitorados
-            </footer>
-        </section>
+        </form>
 
         <!-- =================== LOADING SCREEN =================== -->
         <section id="loading-screen" class="w-full hidden-state flex flex-col items-center justify-center space-y-8 min-h-[75vh] py-8">
@@ -388,7 +790,6 @@
                             <span class="text-[10px] font-cyber font-bold text-cyber-cyan tracking-[0.25em] uppercase block">
                                 APOCALIPSE IA // RELATÓRIO OFICIAL
                             </span>
-                            <!-- Nome com fonte Space Grotesk / Rajdhani ultra nítida e legível -->
                             <h3 class="text-3xl sm:text-4xl font-cyber font-extrabold text-white uppercase tracking-wider truncate max-w-[210px] leading-tight" id="result-name">
                                 Humano #404
                             </h3>
@@ -419,7 +820,7 @@
                         </div>
                     </div>
 
-                    <!-- Julgamento Musical (Novo) -->
+                    <!-- Julgamento Musical -->
                     <div id="result-music-block" class="bg-cyber-panel/80 border border-cyber-yellow/40 p-3.5 rounded-xl space-y-1 relative z-10">
                         <div class="flex items-center gap-1.5 text-cyber-yellow font-cyber font-bold text-xs uppercase tracking-wider">
                             <i data-lucide="music" class="w-3.5 h-3.5"></i> Julgamento da Trilha Sonora:
@@ -503,7 +904,7 @@
         </section>
     </main>
 
-    <!-- =================== MODAL DO TRAIDOR (NOVO E INTERATIVO) =================== -->
+    <!-- =================== MODAL DO TRAIDOR =================== -->
     <div id="traitor-modal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
         <div class="bg-[#0b0e17] border-2 border-cyber-red p-6 sm:p-7 rounded-2xl max-w-md w-full space-y-5 relative shadow-neonRed text-left">
             
@@ -631,13 +1032,14 @@
         // Inicializa ícones Lucide
         lucide.createIcons();
 
-        // Elementos do DOM
+        // Estados e Navegação das Telas
         const screens = {
-            home: document.getElementById('home-screen'),
+            welcome: document.getElementById('welcome-screen'),
+            form: document.getElementById('survival-form'),
             loading: document.getElementById('loading-screen'),
             result: document.getElementById('result-screen')
         };
-        
+
         const form = document.getElementById('survival-form');
         const loadingText = document.getElementById('loading-text');
         const progressBar = document.getElementById('progress-bar');
@@ -645,6 +1047,132 @@
         const btnShareNative = document.getElementById('btn-share-native');
         const btnShareWhatsapp = document.getElementById('btn-share-whatsapp');
         const btnRetry = document.getElementById('btn-retry');
+
+        // Respostas do Quiz Selecionadas
+        const quizAnswers = {
+            q1: null,
+            q2: null,
+            q3: null,
+            q4: null,
+            q5: null,
+            genre: null
+        };
+
+        // Iniciar Quiz (da Tela de Boas-vindas para o Card 1)
+        function startQuiz() {
+            screens.welcome.classList.add('hidden-state');
+            screens.form.classList.remove('hidden-state');
+            goToStep(1, false);
+        }
+
+        // Navegação entre os Cards (Etapas 1 a 6)
+        let currentStep = 1;
+
+        function goToStep(stepNumber, validate = true) {
+            // Se estiver avançando, valida a etapa anterior
+            if (validate && stepNumber > currentStep) {
+                if (currentStep === 1) {
+                    const name = document.getElementById('user-name').value.trim();
+                    const nameError = document.getElementById('name-error');
+                    const q1Error = document.getElementById('q1-error');
+                    
+                    let hasError = false;
+                    if (!name) {
+                        nameError.classList.remove('hidden');
+                        hasError = true;
+                    } else {
+                        nameError.classList.add('hidden');
+                    }
+
+                    if (quizAnswers.q1 === null) {
+                        q1Error.classList.remove('hidden');
+                        hasError = true;
+                    } else {
+                        q1Error.classList.add('hidden');
+                    }
+
+                    if (hasError) return;
+                } else if (currentStep === 2) {
+                    if (quizAnswers.q2 === null) {
+                        document.getElementById('q2-error').classList.remove('hidden');
+                        return;
+                    } else {
+                        document.getElementById('q2-error').classList.add('hidden');
+                    }
+                } else if (currentStep === 3) {
+                    if (quizAnswers.q3 === null) {
+                        document.getElementById('q3-error').classList.remove('hidden');
+                        return;
+                    } else {
+                        document.getElementById('q3-error').classList.add('hidden');
+                    }
+                } else if (currentStep === 4) {
+                    if (quizAnswers.q4 === null) {
+                        document.getElementById('q4-error').classList.remove('hidden');
+                        return;
+                    } else {
+                        document.getElementById('q4-error').classList.add('hidden');
+                    }
+                } else if (currentStep === 5) {
+                    if (quizAnswers.q5 === null) {
+                        document.getElementById('q5-error').classList.remove('hidden');
+                        return;
+                    } else {
+                        document.getElementById('q5-error').classList.add('hidden');
+                    }
+                }
+            }
+
+            // Oculta todos os cards e exibe o desejado
+            for (let i = 1; i <= 6; i++) {
+                const card = document.getElementById(`step-card-${i}`);
+                if (card) card.classList.add('hidden-state');
+            }
+
+            const targetCard = document.getElementById(`step-card-${stepNumber}`);
+            if (targetCard) {
+                targetCard.classList.remove('hidden-state');
+                currentStep = stepNumber;
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+            lucide.createIcons();
+        }
+
+        // Seleção de Resposta em Card Aberto
+        function selectQuizOption(questionKey, scoreValue, element) {
+            quizAnswers[questionKey] = scoreValue;
+            
+            // Remove seleção anterior no mesmo grupo
+            const container = document.getElementById(`options-${questionKey}`);
+            if (container) {
+                container.querySelectorAll('.quiz-option-btn').forEach(btn => {
+                    btn.classList.remove('selected');
+                });
+            }
+
+            // Marca o atual
+            element.classList.add('selected');
+
+            // Esconde mensagem de erro
+            const err = document.getElementById(`${questionKey}-error`);
+            if (err) err.classList.add('hidden');
+        }
+
+        // Seleção de Gênero Musical
+        function selectGenre(genreKey, element) {
+            quizAnswers.genre = genreKey;
+            document.querySelectorAll('.genre-card').forEach(c => c.classList.remove('selected'));
+            element.classList.add('selected');
+            document.getElementById('genre-error').classList.add('hidden');
+        }
+
+        // Navegação de Telas Maiores
+        function showScreen(screenKey) {
+            Object.values(screens).forEach(s => s.classList.add('hidden-state'));
+            screens[screenKey].classList.remove('hidden-state');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            lucide.createIcons();
+        }
 
         // Frases de Análise durante o Carregamento
         const phrases = [
@@ -775,27 +1303,23 @@
             id: ''
         };
 
-        // Navegação entre Telas
-        function showScreen(screenName) {
-            Object.values(screens).forEach(s => s.classList.add('hidden-state'));
-            screens[screenName].classList.remove('hidden-state');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            lucide.createIcons();
-        }
-
-        // Submissão do Formulário
+        // Submissão do Formulário Final (Card 6)
         form.addEventListener('submit', (e) => {
             e.preventDefault();
             
             const name = document.getElementById('user-name').value.trim() || "Humano Anônimo";
-            const musicGenre = document.getElementById('music-genre').value || 'lofi';
             
-            // Cálculo com base nas 5 perguntas (Máximo 125 pontos)
-            const q1 = parseInt(form.elements['q1'].value, 10) || 0;
-            const q2 = parseInt(form.elements['q2'].value, 10) || 0;
-            const q3 = parseInt(form.elements['q3'].value, 10) || 0;
-            const q4 = parseInt(form.elements['q4'].value, 10) || 0;
-            const q5 = parseInt(form.elements['q5'].value, 10) || 0;
+            if (!quizAnswers.genre) {
+                document.getElementById('genre-error').classList.remove('hidden');
+                return;
+            }
+
+            // Cálculo Calibrado da Pontuação (com rigor da IA)
+            const q1 = quizAnswers.q1 || 0;
+            const q2 = quizAnswers.q2 || 0;
+            const q3 = quizAnswers.q3 || 0;
+            const q4 = quizAnswers.q4 || 0;
+            const q5 = quizAnswers.q5 || 0;
 
             const baseScore = q1 + q2 + q3 + q4 + q5; // Max 125
             const jitter = Math.floor(Math.random() * 5) - 3; // leve variância
@@ -827,7 +1351,7 @@
             // Exibir Resultado após 3.8s
             setTimeout(() => {
                 clearInterval(phraseInterval);
-                buildResultScreen(name, finalScore, musicGenre);
+                buildResultScreen(name, finalScore, quizAnswers.genre);
             }, 3800);
         });
 
@@ -894,12 +1418,11 @@
                 btnDownloadImage.innerHTML = `<i data-lucide="loader-2" class="w-5 h-5 animate-spin"></i> Gerando Card em Ultra Resolução...`;
                 lucide.createIcons();
 
-                // Aguarda fontes estarem 100% carregadas antes de capturar
                 await document.fonts.ready;
 
                 const canvas = await html2canvas(card, {
                     backgroundColor: '#040508',
-                    scale: 3, // Ultra Nitidez 3x
+                    scale: 3,
                     useCORS: true,
                     logging: false,
                     allowTaint: true,
@@ -962,10 +1485,18 @@
             window.open(waUrl, '_blank');
         });
 
-        // Botão Refazer Teste
+        // Botão Refazer Teste (Reseta e volta para Boas-Vindas)
         btnRetry.addEventListener('click', () => {
             form.reset();
-            showScreen('home');
+            quizAnswers.q1 = null;
+            quizAnswers.q2 = null;
+            quizAnswers.q3 = null;
+            quizAnswers.q4 = null;
+            quizAnswers.q5 = null;
+            quizAnswers.genre = null;
+            document.querySelectorAll('.quiz-option-btn').forEach(btn => btn.classList.remove('selected'));
+            document.querySelectorAll('.genre-card').forEach(c => c.classList.remove('selected'));
+            showScreen('welcome');
         });
 
         // =================== LÓGICA DO TRAIDOR INTERATIVO ===================
