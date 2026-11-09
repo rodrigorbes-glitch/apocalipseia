@@ -1,0 +1,11 @@
+{
+  "name": "apocalipseia",
+  "version": "1.0.0",
+  "description": "Apocalipse IA - Quando as IAs dominarem o mundo, suas chances dependem das suas respostas.",
+  "scripts": {
+    "start": "npx serve ."
+  },
+  "keywords": ["quiz", "ia", "cyberpunk", "apocalipse-ia", "humor"],
+  "author": "",
+  "license": "MIT"
+}

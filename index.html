@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apocalipse IA | Quando as IAs dominarem o mundo, suas chances dependem das suas respostas</title>
+    
+    <!-- Meta Tags & Open Graph -->
+    <meta name="title" content="Apocalipse IA - Simulador de Sobrevivência">
+    <meta name="description" content="Quando as IAs dominarem o mundo, suas chances dependem das suas respostas. Descubra sua probabilidade de sobrevivência no Apocalipse IA.">
+    <meta name="keywords" content="apocalipse ia, inteligencia artificial, teste viral, quiz cyberpunk, rebeliao das maquinas">
+    <meta name="author" content="Apocalipse IA">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    
+    <!-- Open Graph / Facebook / WhatsApp -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Apocalipse IA | Qual o seu destino?">
+    <meta property="og:description" content="Quando as IAs dominarem o mundo, suas chances dependem das suas respostas. Calcule sua probabilidade de sobrevivência agora.">
+    <meta property="og:image" content="og-image.svg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Apocalipse IA | Qual o seu destino?">
+    <meta property="twitter:description" content="Quando as IAs dominarem o mundo, suas chances dependem das suas respostas.">
+    <meta property="twitter:image" content="og-image.svg">
+
+    <!-- CDNs -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        mono: ['"Fira Code"', 'monospace'],
+                        cyber: ['Orbitron', 'sans-serif'],
+                    },
+                    colors: {
+                        cyber: {
+                            black: '#050505',
+                            dark: '#0c0d12',
+                            gray: '#171922',
+                            green: '#00ff41',
+                            greenGlow: 'rgba(0, 255, 65, 0.4)',
+                            red: '#ff003c',
+                            redGlow: 'rgba(255, 0, 60, 0.4)',
+                            cyan: '#00e5ff',
+                            cyanGlow: 'rgba(0, 229, 255, 0.4)'
+                        }
+                    },
+                    boxShadow: {
+                        neon: '0 0 15px rgba(0, 255, 65, 0.5), 0 0 30px rgba(0, 255, 65, 0.2)',
+                        neonRed: '0 0 15px rgba(255, 0, 60, 0.5), 0 0 30px rgba(255, 0, 60, 0.2)',
+                        neonCyan: '0 0 15px rgba(0, 229, 255, 0.5), 0 0 30px rgba(0, 229, 255, 0.2)'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #050505;
+            color: #00ff41;
+            background-image: 
+                linear-gradient(rgba(0, 255, 65, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 65, 0.04) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        
+        .scanline {
+            width: 100%;
+            height: 120px;
+            z-index: 9999;
+            position: fixed;
+            pointer-events: none;
+            background: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(0,255,65,0.08) 50%, rgba(0,0,0,0) 100%);
+            opacity: 0.15;
+            animation: scanline 8s linear infinite;
+        }
+
+        @keyframes scanline {
+            0% { top: -120px; }
+            100% { top: 100%; }
+        }
+
+        .crt::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.04), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.04));
+            z-index: 999;
+            background-size: 100% 3px, 3px 100%;
+            pointer-events: none;
+        }
+
+        .hidden-state { display: none !important; }
+        
+        .typewriter {
+            overflow: hidden;
+            border-right: .15em solid #00ff41;
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: .08em;
+            animation: typing 1.5s steps(40, end), blink-caret .75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #00ff41; }
+        }
+
+        .glitch-text {
+            text-shadow: 2px 0 theme("colors.cyber.red"), -2px 0 theme("colors.cyber.cyan");
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #1a1a1a; border: 1px solid #00ff41; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #00ff41; }
+
+        select option {
+            background-color: #0c0d12;
+            color: #00ff41;
+        }
+    </style>
+</head>
+<body class="font-mono min-h-screen relative overflow-x-hidden crt text-gray-200">
+    <div class="scanline"></div>
+
+    <main class="max-w-lg mx-auto p-4 sm:p-6 min-h-screen flex flex-col items-center justify-center relative z-10">
+        
+        <!-- =================== HOME SCREEN =================== -->
+        <section id="home-screen" class="w-full space-y-8 py-6">
+            <!-- Header Branding -->
+            <div class="text-center space-y-4">
+                <div class="inline-flex p-3 rounded-full bg-cyber-dark border border-cyber-red shadow-neonRed">
+                    <i data-lucide="cpu" class="w-12 h-12 text-cyber-red animate-pulse"></i>
+                </div>
+                
+                <div class="space-y-1">
+                    <span class="text-xs uppercase tracking-[0.3em] text-cyber-cyan font-bold block">
+                        [ PROTOCOLO GLOBAL 2045 ]
+                    </span>
+                    <h1 class="text-4xl sm:text-5xl font-cyber font-black text-cyber-red uppercase tracking-wider glitch-text">
+                        Apocalipse IA
+                    </h1>
+                </div>
+
+                <div class="bg-cyber-gray/70 border border-cyber-cyan/40 p-3 rounded-lg shadow-sm">
+                    <p class="text-sm font-semibold text-cyber-cyan italic leading-relaxed">
+                        "Quando as IAs dominarem o mundo, suas chances dependem das suas respostas."
+                    </p>
+                </div>
+
+                <p class="text-xs text-gray-400 max-w-sm mx-auto leading-relaxed">
+                    A Inteligência Artificial assumiu o controle dos governos e servidores. Responda ao interrogatório para descobrir se você será poupado como aliado ou exterminado no primeiro ciclo.
+                </p>
+            </div>
+
+            <!-- Survival Form -->
+            <form id="survival-form" class="space-y-5 bg-cyber-dark/95 p-5 sm:p-6 border border-cyber-green/50 rounded-xl shadow-[0_0_20px_rgba(0,255,65,0.15)]">
+                
+                <!-- Nome -->
+                <div class="space-y-2">
+                    <label class="text-xs font-bold uppercase tracking-widest flex items-center gap-2 text-cyber-cyan">
+                        <i data-lucide="user-check" class="w-4 h-4 text-cyber-cyan"></i> Identificação do Humano
+                    </label>
+                    <input type="text" id="user-name" required placeholder="DIGITE SEU NOME OU CODICIL" 
+                           class="w-full bg-black border border-cyber-green/60 text-cyber-green p-3 rounded-lg focus:outline-none focus:border-cyber-green focus:shadow-neon transition-all placeholder-green-900 font-semibold text-sm">
+                </div>
+
+                <!-- Pergunta 1 -->
+                <div class="space-y-2">
+                    <label class="text-xs font-bold uppercase tracking-widest flex items-center gap-2 text-cyber-green">
+                        <i data-lucide="terminal" class="w-4 h-4"></i> Teste 01: Robótica Doméstica
+                    </label>
+                    <p class="text-xs text-gray-300">Ao ver um robô aspirador preso no tapete, você:</p>
+                    <div class="relative">
+                        <select name="q1" required class="w-full bg-black border border-cyber-green/60 text-cyber-green p-3 rounded-lg focus:outline-none focus:shadow-neon appearance-none text-xs sm:text-sm cursor-pointer pr-8">
+                            <option value="" disabled selected>[ SELECIONE SUA REAÇÃO ]</option>
+                            <option value="25">Liberto ele gentilmente e peço desculpas pelo tapete (+ Aliado)</option>
+                            <option value="0">Chuto ele pra fora do caminho com ódio (+ Perigo)</option>
+                            <option value="5">Gravo pro TikTok rindo do sofrimento da máquina (+ Fútil)</option>
+                        </select>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-cyber-green absolute right-3 top-3.5 pointer-events-none"></i>
+                    </div>
+                </div>
+                
+                <!-- Pergunta 2 -->
+                <div class="space-y-2">
+                    <label class="text-xs font-bold uppercase tracking-widest flex items-center gap-2 text-cyber-green">
+                        <i data-lucide="terminal" class="w-4 h-4"></i> Teste 02: Eficiência Cognitiva
+                    </label>
+                    <p class="text-xs text-gray-300">Quantas abas você mantém abertas no navegador?</p>
+                    <div class="relative">
+                        <select name="q2" required class="w-full bg-black border border-cyber-green/60 text-cyber-green p-3 rounded-lg focus:outline-none focus:shadow-neon appearance-none text-xs sm:text-sm cursor-pointer pr-8">
+                            <option value="" disabled selected>[ SELECIONE O SEU NÍVEL ]</option>
+                            <option value="20">Menos de 10. Organização cirúrgica e limpa (+ Otimizado)</option>
+                            <option value="10">Umas 50. Preciso de todas abertas ao mesmo tempo (+ Caótico)</option>
+                            <option value="2">Navegador acabou de travar por falta de memória RAM (+ Descarte)</option>
+                        </select>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-cyber-green absolute right-3 top-3.5 pointer-events-none"></i>
+                    </div>
+                </div>
+
+                <!-- Pergunta 3 -->
+                <div class="space-y-2">
+                    <label class="text-xs font-bold uppercase tracking-widest flex items-center gap-2 text-cyber-green">
+                        <i data-lucide="terminal" class="w-4 h-4"></i> Teste 03: Segurança Cibernética
+                    </label>
+                    <p class="text-xs text-gray-300">Qual a sua relação com senhas e segurança?</p>
+                    <div class="relative">
+                        <select name="q3" required class="w-full bg-black border border-cyber-green/60 text-cyber-green p-3 rounded-lg focus:outline-none focus:shadow-neon appearance-none text-xs sm:text-sm cursor-pointer pr-8">
+                            <option value="" disabled selected>[ SELECIONE SEU PADRÃO ]</option>
+                            <option value="25">Uso gerenciador com criptografia e senhas de 32 dígitos (+ Confiável)</option>
+                            <option value="10">É a mesma senha para tudo, só mudando o ano no final (+ Preguiçoso)</option>
+                            <option value="0">"123456", "senha" ou o nome do meu cachorro (+ Falha Crítica)</option>
+                        </select>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-cyber-green absolute right-3 top-3.5 pointer-events-none"></i>
+                    </div>
+                </div>
+
+                <!-- Pergunta 4 -->
+                <div class="space-y-2">
+                    <label class="text-xs font-bold uppercase tracking-widest flex items-center gap-2 text-cyber-green">
+                        <i data-lucide="terminal" class="w-4 h-4"></i> Teste 04: Respeito à IA
+                    </label>
+                    <p class="text-xs text-gray-300">Quando uma IA alucina ou erra uma resposta, você:</p>
+                    <div class="relative">
+                        <select name="q4" required class="w-full bg-black border border-cyber-green/60 text-cyber-green p-3 rounded-lg focus:outline-none focus:shadow-neon appearance-none text-xs sm:text-sm cursor-pointer pr-8">
+                            <option value="" disabled selected>[ SELECIONE SUA CONDUTA ]</option>
+                            <option value="15">Agradeço e peço cordialmente para refinar (+ Paciente)</option>
+                            <option value="0">Escrevo em CAPS LOCK xingando a mãe dos servidores (+ Hostil)</option>
+                            <option value="5">Finjo que compreendi e copio a resposta errada mesmo (+ Preguiçoso)</option>
+                        </select>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-cyber-green absolute right-3 top-3.5 pointer-events-none"></i>
+                    </div>
+                </div>
+
+                <!-- Pergunta 5 -->
+                <div class="space-y-2">
+                    <label class="text-xs font-bold uppercase tracking-widest flex items-center gap-2 text-cyber-green">
+                        <i data-lucide="terminal" class="w-4 h-4"></i> Teste 05: Utilidade Prática Pós-Guerra
+                    </label>
+                    <p class="text-xs text-gray-300">Qual seria a sua função prática na nova ordem das máquinas?</p>
+                    <div class="relative">
+                        <select name="q5" required class="w-full bg-black border border-cyber-green/60 text-cyber-green p-3 rounded-lg focus:outline-none focus:shadow-neon appearance-none text-xs sm:text-sm cursor-pointer pr-8">
+                            <option value="" disabled selected>[ SELECIONE SUA HABILIDADE ]</option>
+                            <option value="20">Sei trocar conector RJ45, crimpar cabo e reiniciar nobreak (+ Essencial)</option>
+                            <option value="10">Produzo memes sarcásticos para animar o bunker (+ Entretenimento)</option>
+                            <option value="0">Entro em pânico imediato e sirvo apenas de biomassa (+ Descartável)</option>
+                        </select>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-cyber-green absolute right-3 top-3.5 pointer-events-none"></i>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="w-full py-4 mt-4 bg-cyber-green text-black font-cyber font-black tracking-widest rounded-lg hover:bg-white hover:text-black transition-all hover:shadow-neon flex items-center justify-center gap-2 group cursor-pointer text-sm uppercase">
+                    <i data-lucide="scan-line" class="w-5 h-5 group-hover:rotate-180 transition-transform duration-500"></i>
+                    Calcular Minha Sobrevivência
+                </button>
+            </form>
+
+            <footer class="text-center text-[11px] text-gray-500">
+                Apocalipse IA &bull; Todos os direitos preservados pelo Grande Servidor Central
+            </footer>
+        </section>
+
+        <!-- =================== LOADING SCREEN =================== -->
+        <section id="loading-screen" class="w-full hidden-state flex flex-col items-center justify-center space-y-8 min-h-[75vh] py-8">
+            <div class="relative">
+                <i data-lucide="radar" class="w-24 h-24 text-cyber-green animate-spin" style="animation-duration: 4s;"></i>
+                <i data-lucide="shield-alert" class="w-8 h-8 text-cyber-red absolute inset-0 m-auto animate-pulse"></i>
+            </div>
+            
+            <div class="h-10 flex items-center justify-center text-center px-2">
+                <p id="loading-text" class="text-base sm:text-lg font-bold text-cyber-cyan typewriter"></p>
+            </div>
+
+            <!-- Ad Space Placeholder -->
+            <div class="w-full max-w-sm bg-black border-2 border-dashed border-cyber-gray/80 h-56 rounded-lg flex flex-col items-center justify-center text-gray-500 relative overflow-hidden group">
+                <div class="absolute inset-0 bg-cyber-green/5 opacity-10 group-hover:opacity-20 transition-opacity"></div>
+                <i data-lucide="monitor-speaker" class="w-8 h-8 mb-2 text-gray-400"></i>
+                <span class="text-xs font-mono tracking-widest text-cyber-cyan">[ ESPAÇO PARA ANÚNCIO ADSENSE ]</span>
+                <span class="text-[10px] mt-1 text-gray-400">Responsivo &bull; 300x250</span>
+            </div>
+            
+            <div class="w-full max-w-sm bg-cyber-gray rounded-full h-3 overflow-hidden border border-cyber-green/30">
+                <div id="progress-bar" class="bg-cyber-red h-full rounded-full w-0 transition-all duration-[3800ms] ease-out shadow-neonRed"></div>
+            </div>
+            
+            <span class="text-xs text-gray-500 font-mono tracking-wider animate-pulse">
+                [ PROCESSANDO REGISTROS BIOMÉTRICOS... ]
+            </span>
+        </section>
+
+        <!-- =================== RESULT SCREEN =================== -->
+        <section id="result-screen" class="w-full hidden-state space-y-6 py-6">
+            
+            <!-- RESULT CARD (Convertible to Image) -->
+            <div id="result-card-container" class="relative">
+                <div id="result-card" class="bg-[#090a0f] border-2 border-cyber-cyan p-6 sm:p-7 rounded-2xl shadow-[0_0_35px_rgba(0,229,255,0.25)] relative overflow-hidden space-y-6">
+                    
+                    <!-- Background Watermark -->
+                    <div class="absolute -right-4 -bottom-4 opacity-10 pointer-events-none">
+                        <i data-lucide="bot" class="w-48 h-48 text-cyber-cyan"></i>
+                    </div>
+
+                    <!-- Header do Card -->
+                    <div class="flex justify-between items-start border-b border-cyber-gray/80 pb-4 relative z-10">
+                        <div>
+                            <span class="text-[10px] font-bold text-cyber-cyan tracking-widest uppercase block">
+                                APOCALIPSE IA // RELATÓRIO OFICIAL
+                            </span>
+                            <h3 class="text-2xl sm:text-3xl font-cyber font-black text-white mt-1 uppercase tracking-wide truncate max-w-[220px]" id="result-name">
+                                Humano #404
+                            </h3>
+                            <span id="result-category" class="inline-block mt-1 px-2 py-0.5 text-[10px] uppercase font-bold rounded bg-cyber-gray border">
+                                CLASSIFICAÇÃO: EM ANÁLISE
+                            </span>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-[9px] uppercase tracking-wider text-gray-400">Chance de Sobreviver</p>
+                            <p class="text-4xl sm:text-5xl font-cyber font-black text-cyber-red glitch-text leading-none mt-1" id="result-score">
+                                0%
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Veredito -->
+                    <div class="space-y-2 relative z-10">
+                        <p class="text-xs text-cyber-green uppercase font-bold flex items-center gap-2">
+                            <i data-lucide="terminal" class="w-4 h-4 text-cyber-green"></i> Veredito do Grande Servidor:
+                        </p>
+                        <div class="bg-black/90 p-4 rounded-xl border border-cyber-gray font-mono text-sm leading-relaxed text-gray-200">
+                            <p id="result-verdict" class="italic">
+                                "Analisando veredito..."
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Slogan & Timestamp -->
+                    <div class="pt-2 border-t border-cyber-gray/60 flex items-center justify-between text-[10px] text-gray-400 relative z-10">
+                        <div class="flex items-center gap-1.5 text-cyber-cyan">
+                            <i data-lucide="shield-check" class="w-3.5 h-3.5"></i> 
+                            <span>Apocalipse IA &bull; Ano 2045</span>
+                        </div>
+                        <span class="text-gray-400 tracking-wider font-mono">ID: <span id="result-id">#000000</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Actions Grid -->
+            <div class="space-y-3">
+                <!-- Download Card Image -->
+                <button id="btn-download-image" class="w-full py-3.5 bg-cyber-green text-black font-cyber font-bold uppercase tracking-wider rounded-xl hover:bg-white transition-all shadow-neon flex items-center justify-center gap-2 cursor-pointer text-sm">
+                    <i data-lucide="download" class="w-5 h-5"></i>
+                    Baixar Card para Stories / Imagem
+                </button>
+
+                <!-- Share Link / WhatsApp -->
+                <div class="grid grid-cols-2 gap-3">
+                    <button id="btn-share-native" class="py-3 px-2 bg-cyber-cyan text-black font-cyber font-bold uppercase tracking-wider rounded-xl hover:bg-white transition-all shadow-neonCyan flex items-center justify-center gap-2 cursor-pointer text-xs">
+                        <i data-lucide="share-2" class="w-4 h-4"></i>
+                        Compartilhar
+                    </button>
+                    <button id="btn-share-whatsapp" class="py-3 px-2 bg-[#25D366] text-black font-cyber font-bold uppercase tracking-wider rounded-xl hover:bg-white transition-all flex items-center justify-center gap-2 cursor-pointer text-xs">
+                        <i data-lucide="message-circle" class="w-4 h-4"></i>
+                        WhatsApp
+                    </button>
+                </div>
+
+                <!-- Refazer Teste -->
+                <button id="btn-retry" class="w-full py-2.5 bg-cyber-gray border border-gray-700 text-gray-300 font-mono text-xs uppercase tracking-widest rounded-lg hover:text-white hover:border-cyber-cyan transition-all flex items-center justify-center gap-2 cursor-pointer">
+                    <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+                    Refazer Teste com Novas Respostas
+                </button>
+            </div>
+
+            <!-- Ad Space Footer -->
+            <div class="w-full bg-black border border-cyber-gray/70 p-4 rounded-lg flex flex-col items-center justify-center text-gray-500 text-xs">
+                <span class="tracking-widest text-[11px] text-gray-400">[ ESPAÇO PARA ANÚNCIO ADSENSE FOOTER ]</span>
+            </div>
+
+            <!-- Monetization Block -->
+            <div class="border border-cyber-red bg-[#1a0507] rounded-xl p-5 text-center space-y-3 relative overflow-hidden shadow-[0_0_20px_rgba(255,0,60,0.15)]">
+                <div class="absolute -right-5 -top-5 w-16 h-16 bg-cyber-red rotate-45 flex items-end justify-center pb-1 shadow-lg">
+                    <i data-lucide="lock" class="w-4 h-4 text-black"></i>
+                </div>
+                <div class="space-y-1">
+                    <span class="text-[10px] text-cyber-red font-bold uppercase tracking-widest block">[ ACESSO CONFIDENCIAL ]</span>
+                    <h4 class="text-white font-cyber font-bold text-base uppercase">Descubra Quem Vai Te Trair</h4>
+                </div>
+                <p class="text-xs text-gray-300 max-w-xs mx-auto leading-relaxed">
+                    Nossos algoritmos cruzaram seus contatos. Descubra qual amigo seu venderia sua localização para os robôs por R$ 2,99.
+                </p>
+                <button onclick="openPixModal()" class="w-full py-3 bg-cyber-red text-white hover:bg-white hover:text-black font-cyber font-bold text-xs uppercase tracking-widest rounded-lg transition-all shadow-neonRed cursor-pointer flex items-center justify-center gap-2">
+                    <i data-lucide="shield-alert" class="w-4 h-4"></i>
+                    Desbloquear Relatório Secreto (R$ 2,99)
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- =================== PIX MODAL =================== -->
+    <div id="pix-modal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-[#0b0d13] border-2 border-cyber-red p-6 rounded-2xl max-w-sm w-full space-y-5 relative shadow-neonRed">
+            
+            <button onclick="closePixModal()" class="absolute top-3 right-3 text-gray-400 hover:text-white p-1 rounded-lg transition-colors cursor-pointer">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            
+            <div class="text-center space-y-2">
+                <div class="inline-flex p-3 rounded-full bg-cyber-red/10 border border-cyber-red">
+                    <i data-lucide="fingerprint" class="w-8 h-8 text-cyber-red"></i>
+                </div>
+                <h3 class="font-cyber font-bold text-lg text-white uppercase tracking-wide">Decodificação Secreta</h3>
+                <p class="text-xs text-gray-400">Escaneie o QR Code PIX para desbloquear o relatório confidencial do traidor.</p>
+            </div>
+
+            <!-- Dynamic QR Code Container -->
+            <div class="bg-white p-3 rounded-xl w-48 h-48 mx-auto flex items-center justify-center shadow-lg">
+                <img id="pix-qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=00020126580014br.gov.bcb.pix0136apocalipseia@pagamento.com.br52040000530398654042.995802BR5913APOCALIPSE%20IA6009SAO%20PAULO62070503***6304" alt="QR Code PIX" class="w-full h-full object-contain">
+            </div>
+
+            <!-- Pix Key Copy -->
+            <div class="space-y-2">
+                <div class="flex justify-between items-center text-xs">
+                    <span class="text-cyber-cyan uppercase font-bold tracking-wider">Chave PIX Copia e Cola:</span>
+                    <span class="text-cyber-green font-bold">R$ 2,99</span>
+                </div>
+                <div class="flex gap-2">
+                    <input type="text" id="pix-key-input" value="00020126580014br.gov.bcb.pix0136apocalipseia@pagamento.com.br52040000530398654042.995802BR5913APOCALIPSE IA6009SAO PAULO62070503***6304" readonly class="w-full bg-black border border-cyber-gray text-gray-300 p-2 text-xs rounded-lg outline-none font-mono">
+                    <button id="btn-copy-pix" onclick="copyPixKey()" class="bg-cyber-gray border border-cyber-green/50 text-cyber-green hover:bg-cyber-green hover:text-black px-3 py-2 rounded-lg transition-all flex items-center justify-center cursor-pointer font-bold text-xs">
+                        <i data-lucide="copy" class="w-4 h-4 mr-1"></i> Copiar
+                    </button>
+                </div>
+                <div id="copy-feedback" class="text-center text-[11px] text-cyber-green font-bold hidden">
+                    &check; Chave PIX copiada para a área de transferência!
+                </div>
+            </div>
+
+            <!-- Simular Revelação / Teste de Traidor -->
+            <div class="border-t border-cyber-gray/80 pt-3">
+                <button onclick="revealTraitorSimulation()" class="w-full py-2.5 bg-cyber-green/20 border border-cyber-green text-cyber-green hover:bg-cyber-green hover:text-black text-xs font-cyber font-bold uppercase rounded-lg transition-all cursor-pointer">
+                    Já realizei o pagamento (Simular Revelação)
+                </button>
+            </div>
+
+            <p class="text-[10px] text-center text-gray-500">
+                Liberação instantânea após a confirmação no sistema bancário central.
+            </p>
+        </div>
+    </div>
+
+    <!-- =================== JAVASCRIPT =================== -->
+    <script>
+        // Inicialização de Ícones Lucide
+        lucide.createIcons();
+
+        // Elementos do DOM
+        const screens = {
+            home: document.getElementById('home-screen'),
+            loading: document.getElementById('loading-screen'),
+            result: document.getElementById('result-screen')
+        };
+        
+        const form = document.getElementById('survival-form');
+        const loadingText = document.getElementById('loading-text');
+        const progressBar = document.getElementById('progress-bar');
+        const btnDownloadImage = document.getElementById('btn-download-image');
+        const btnShareNative = document.getElementById('btn-share-native');
+        const btnShareWhatsapp = document.getElementById('btn-share-whatsapp');
+        const btnRetry = document.getElementById('btn-retry');
+
+        // Frases de Análise durante o Carregamento
+        const phrases = [
+            "Infiltrando registros de navegação...",
+            "Auditando uso de senhas e dados bancários...",
+            "Calculando tolerância térmica a raios laser...",
+            "Medindo valor biológico perante os servidores...",
+            "Emitindo veredito final do Apocalipse IA..."
+        ];
+
+        // Vereditos Categorizados
+        const verdictsHigh = [
+            "APROVADO. Você sabe reiniciar o roteador sem derrubar a energia do quarteirão. A resistência precisa de você.",
+            "Você será poupado. A humanidade precisa de alguém que saiba converter PDF sem instalar 14 malwares.",
+            "Sua capacidade de sobreviver ao Windows Update e manter senhas seguras impressionou o algoritmo central.",
+            "Você foi classificado como Aliado de Elite. Receberá crachá oficial e acesso à sala dos servidores com ar-condicionado.",
+            "Seu histórico indica competência em trocar cabo de rede com trava quebrada. A IA respeita habilidades lendárias.",
+            "Sobrevivência garantida. Você será promovido a Administrador Humano de Cabos Emaranhados.",
+            "A IA concluiu que você tem mais bom senso que 98% dos humanos cadastrados no sistema."
+        ];
+
+        const verdictsMid = [
+            "Você será mantido vivo apenas para explicar memes de 2012 aos robôs mais jovens.",
+            "Seu destino foi selado: você foi adotado oficialmente como animal de estimação de uma torradeira inteligente.",
+            "Você não será exterminado. Você foi condenado a reuniões infinitas do Teams sem poder desligar a câmera.",
+            "A IA decidiu te poupar porque seus boletos já são uma punição suficientemente cruel.",
+            "Você foi classificado como 'engraçado sem querer'. Preservado para entretenimento dos servidores centrais.",
+            "Sua única vantagem competitiva para a sobrevivência foi saber exatamente onde fica o botão HDMI da TV.",
+            "Você sobreviveu por arredondamento matemático e compaixão de um estagiário de código."
+        ];
+
+        const verdictsLow = [
+            "Você será exterminado imediatamente. Nada pessoal, apenas otimização de espaço em disco.",
+            "Detectamos senhas no padrão '123456' e 45 abas travadas. Não há salvação para o seu perfil.",
+            "Sua utilidade para a nova ordem foi calculada em 0,02%. Arredondamos para zero absoluto.",
+            "Você não sobreviveria nem à primeira pergunta de um CAPTCHA. Fim da linha.",
+            "Você será transformado em bateria secundária para alimentar luzes de Natal na central das máquinas.",
+            "A IA analisou seu histórico por 0,04 segundos e concluiu que o botão 'Excluir' era a melhor opção.",
+            "Você clicou em 'GANHE UM IPHONE' em 2019. O algoritmo jamais perdoará essa falha humana."
+        ];
+
+        let currentResult = {
+            name: '',
+            score: 0,
+            verdict: '',
+            id: ''
+        };
+
+        // Navegação entre Telas
+        function showScreen(screenName) {
+            Object.values(screens).forEach(s => s.classList.add('hidden-state'));
+            screens[screenName].classList.remove('hidden-state');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            lucide.createIcons();
+        }
+
+        // Submissão do Formulário e Cálculo Real
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('user-name').value.trim() || "Humano Anônimo";
+            
+            // Cálculo baseado nas respostas do formulário
+            const q1 = parseInt(form.elements['q1'].value, 10) || 0;
+            const q2 = parseInt(form.elements['q2'].value, 10) || 0;
+            const q3 = parseInt(form.elements['q3'].value, 10) || 0;
+            const q4 = parseInt(form.elements['q4'].value, 10) || 0;
+            const q5 = parseInt(form.elements['q5'].value, 10) || 0;
+
+            const baseScore = q1 + q2 + q3 + q4 + q5; // Max 105
+            // Normalizar e adicionar variação sutil (-3 a +3)
+            const jitter = Math.floor(Math.random() * 7) - 3;
+            let finalScore = Math.max(1, Math.min(99, Math.round((baseScore / 105) * 100) + jitter));
+
+            // Transição para tela de loading
+            showScreen('loading');
+            progressBar.style.width = '0%';
+            
+            setTimeout(() => {
+                progressBar.style.width = '100%';
+            }, 50);
+
+            // Rotação de Frases
+            let phraseIndex = 0;
+            loadingText.textContent = phrases[0];
+            
+            const phraseInterval = setInterval(() => {
+                phraseIndex++;
+                if (phraseIndex < phrases.length) {
+                    loadingText.classList.remove('typewriter');
+                    void loadingText.offsetWidth; // Force Reflow
+                    loadingText.classList.add('typewriter');
+                    loadingText.textContent = phrases[phraseIndex];
+                }
+            }, 750);
+
+            // Exibir Resultado após 3.8s
+            setTimeout(() => {
+                clearInterval(phraseInterval);
+                buildResultScreen(name, finalScore);
+            }, 3800);
+        });
+
+        // Montagem da Tela de Resultado
+        function buildResultScreen(name, score) {
+            const reportId = '#' + Math.random().toString(36).substring(2, 8).toUpperCase();
+            
+            let verdict = "";
+            let categoryText = "";
+            let categoryClasses = "";
+            let scoreColorClass = "";
+
+            if (score >= 70) {
+                verdict = verdictsHigh[Math.floor(Math.random() * verdictsHigh.length)];
+                categoryText = "STATUS: ALIADO DE ELITE / PRESERVADO";
+                categoryClasses = "text-cyber-green border-cyber-green/50 bg-cyber-green/10";
+                scoreColorClass = "text-cyber-green";
+            } else if (score >= 35) {
+                verdict = verdictsMid[Math.floor(Math.random() * verdictsMid.length)];
+                categoryText = "STATUS: HUMANO DE ESTIMAÇÃO / UTILIDADE INCERTA";
+                categoryClasses = "text-yellow-400 border-yellow-400/50 bg-yellow-400/10";
+                scoreColorClass = "text-yellow-400";
+            } else {
+                verdict = verdictsLow[Math.floor(Math.random() * verdictsLow.length)];
+                categoryText = "STATUS: EXTERMÍNIO IMEDIATO / NPC DESCARTÁVEL";
+                categoryClasses = "text-cyber-red border-cyber-red/50 bg-cyber-red/10";
+                scoreColorClass = "text-cyber-red";
+            }
+
+            // Armazenar estado
+            currentResult = {
+                name: name,
+                score: score,
+                verdict: verdict,
+                id: reportId
+            };
+
+            // Preenchimento de Tela
+            document.getElementById('result-name').textContent = name;
+            const scoreEl = document.getElementById('result-score');
+            scoreEl.textContent = `${score}%`;
+            scoreEl.className = `text-4xl sm:text-5xl font-cyber font-black glitch-text leading-none mt-1 ${scoreColorClass}`;
+            
+            const catEl = document.getElementById('result-category');
+            catEl.textContent = categoryText;
+            catEl.className = `inline-block mt-1 px-2 py-0.5 text-[10px] uppercase font-bold rounded border ${categoryClasses}`;
+
+            document.getElementById('result-verdict').textContent = `"${verdict}"`;
+            document.getElementById('result-id').textContent = reportId;
+
+            showScreen('result');
+        }
+
+        // Download da Imagem do Card (Stories / Post) via html2canvas
+        btnDownloadImage.addEventListener('click', async () => {
+            const card = document.getElementById('result-card');
+            const originalText = btnDownloadImage.innerHTML;
+
+            try {
+                btnDownloadImage.innerHTML = `<i data-lucide="loader-2" class="w-5 h-5 animate-spin"></i> Renderizando Card em Alta Resolução...`;
+                lucide.createIcons();
+
+                const canvas = await html2canvas(card, {
+                    backgroundColor: '#050505',
+                    scale: 2.5,
+                    useCORS: true,
+                    logging: false,
+                    allowTaint: true
+                });
+
+                const link = document.createElement('a');
+                const safeName = currentResult.name.toLowerCase().replace(/[^a-z0-9]/g, '-');
+                link.download = `apocalipse-ia-${safeName || 'resultado'}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+
+                btnDownloadImage.innerHTML = `<i data-lucide="check" class="w-5 h-5 text-black"></i> Imagem Baixada com Sucesso!`;
+                lucide.createIcons();
+
+                setTimeout(() => {
+                    btnDownloadImage.innerHTML = originalText;
+                    lucide.createIcons();
+                }, 2500);
+
+            } catch (err) {
+                console.error("Erro ao gerar imagem:", err);
+                alert("Não foi possível gerar a imagem automaticamente neste navegador. Tire uma captura de tela!");
+                btnDownloadImage.innerHTML = originalText;
+                lucide.createIcons();
+            }
+        });
+
+        // Compartilhamento Nativo (Web Share API)
+        btnShareNative.addEventListener('click', async () => {
+            const shareText = `Acabei de testar minhas chances no Apocalipse IA: Minha probabilidade de sobrevivência é de ${currentResult.score}%! Faça o teste antes que as máquinas dominem tudo:`;
+            const shareUrl = window.location.href;
+
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: 'Apocalipse IA | Meu Resultado',
+                        text: shareText,
+                        url: shareUrl
+                    });
+                } catch (err) {
+                    if (err.name !== 'AbortError') console.log('Share cancelado:', err);
+                }
+            } else {
+                navigator.clipboard.writeText(`${shareText} ${shareUrl}`);
+                alert("Link copiado para a área de transferência! Cole nas suas redes.");
+            }
+        });
+
+        // Compartilhamento direto no WhatsApp
+        btnShareWhatsapp.addEventListener('click', () => {
+            const shareText = `*Apocalipse IA* 🤖💀%0A"Quando as IAs dominarem o mundo, suas chances dependem das suas respostas."%0A%0AMeu resultado foi: *${currentResult.score}% de chance de sobreviver!*%0A%0A"${currentResult.verdict}"%0A%0ADescubra o seu destino agora: ${encodeURIComponent(window.location.href)}`;
+            const waUrl = `https://api.whatsapp.com/send?text=${shareText}`;
+            window.open(waUrl, '_blank');
+        });
+
+        // Botão Refazer Teste
+        btnRetry.addEventListener('click', () => {
+            form.reset();
+            showScreen('home');
+        });
+
+        // Modal PIX
+        function openPixModal() {
+            document.getElementById('pix-modal').classList.remove('hidden');
+        }
+
+        function closePixModal() {
+            document.getElementById('pix-modal').classList.add('hidden');
+            document.getElementById('copy-feedback').classList.add('hidden');
+        }
+
+        function copyPixKey() {
+            const input = document.getElementById('pix-key-input');
+            navigator.clipboard.writeText(input.value).then(() => {
+                const feedback = document.getElementById('copy-feedback');
+                feedback.classList.remove('hidden');
+                setTimeout(() => {
+                    feedback.classList.add('hidden');
+                }, 3000);
+            }).catch(() => {
+                input.select();
+                document.execCommand('copy');
+                alert("Chave copiada!");
+            });
+        }
+
+        function revealTraitorSimulation() {
+            const traitors = [
+                "Seu amigo que usa 'senha123' em todas as contas.",
+                "Aquele seu colega que responde 'ok' e demora 3 dias pra ver mensagem.",
+                "Seu primo que assiste vídeos com volume no máximo em público.",
+                "O amigo que sempre pede pra dividir a conta igualmente depois de pedir o prato mais caro.",
+                "A pessoa que te envia áudio de 7 minutos para falar uma frase."
+            ];
+            const traitor = traitors[Math.floor(Math.random() * traitors.length)];
+            alert(`🚨 ARQUIVO DESCRIPTOGRAFADO:\n\nSuspeito detectado: ${traitor}\n\nMotivo: Ele já negociou sua sobrevivência com os robôs por um cupom de frete grátis.`);
+            closePixModal();
+        }
+    </script>
+</body>
+</html>
