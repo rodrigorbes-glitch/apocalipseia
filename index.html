@@ -324,9 +324,6 @@
                     <i data-lucide="shield-alert" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
                     Processar Meu Destino no Apocalipse
                 </button>
-                    <i data-lucide="shield-alert" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
-                    Processar Meu Destino no Apocalipse
-                </button>
             </form>
 
             <footer class="text-center text-xs text-gray-600 font-mono">
@@ -801,8 +798,9 @@
             const q5 = parseInt(form.elements['q5'].value, 10) || 0;
 
             const baseScore = q1 + q2 + q3 + q4 + q5; // Max 125
-            const jitter = Math.floor(Math.random() * 5) - 2; // variação sutil
-            let finalScore = Math.max(1, Math.min(99, Math.round((baseScore / 125) * 100) + jitter));
+            const jitter = Math.floor(Math.random() * 5) - 3; // leve variância
+            // Rigor das máquinas: exige respostas impecáveis para atingir a faixa de sobrevivência
+            let finalScore = Math.max(1, Math.min(99, Math.round(((baseScore * 0.94) / 125) * 100) + jitter));
 
             // Transição para tela de loading
             showScreen('loading');
@@ -842,7 +840,7 @@
             let categoryClasses = "";
             let scoreColorClass = "";
 
-            if (score >= 70) {
+            if (score >= 78) {
                 verdict = verdictsHigh[Math.floor(Math.random() * verdictsHigh.length)];
                 categoryText = "STATUS: ALIADO DE ELITE / PRESERVADO";
                 categoryClasses = "text-cyber-green border-cyber-green/50 bg-cyber-green/10";
