@@ -224,28 +224,28 @@
         /* [FIM: EFEITO DE BORDA & SWEEP APOCALÍPTICO NOS CARDS]                      */
         /* ========================================================================== */
 
-        /* Animação do Logo de Perigo Apocalíptico */
-        @keyframes skull-danger-glow {
+        /* Animação do Núcleo Cósmico de Energia Apocalíptico (Respiração e Expansão Suave) */
+        @keyframes core-pulse-breathing {
             0% {
-                filter: drop-shadow(0 0 8px #ff003c) drop-shadow(0 0 16px rgba(255, 0, 60, 0.4));
-                stroke: #ff003c;
+                transform: scale(0.93) rotate(0deg);
+                filter: drop-shadow(0 0 15px rgba(255, 0, 60, 0.6)) drop-shadow(0 0 35px rgba(255, 0, 60, 0.3));
+                opacity: 0.92;
             }
-            33% {
-                filter: drop-shadow(0 0 10px #ff5500) drop-shadow(0 0 20px rgba(255, 85, 0, 0.4));
-                stroke: #ff5500;
-            }
-            66% {
-                filter: drop-shadow(0 0 8px #ffd000) drop-shadow(0 0 16px rgba(255, 208, 0, 0.4));
-                stroke: #ffd000;
+            50% {
+                transform: scale(1.07) rotate(4deg);
+                filter: drop-shadow(0 0 30px rgba(255, 0, 60, 0.95)) drop-shadow(0 0 65px rgba(255, 85, 0, 0.55)) drop-shadow(0 0 90px rgba(255, 0, 60, 0.35));
+                opacity: 1;
             }
             100% {
-                filter: drop-shadow(0 0 8px #ff003c) drop-shadow(0 0 16px rgba(255, 0, 60, 0.4));
-                stroke: #ff003c;
+                transform: scale(0.93) rotate(0deg);
+                filter: drop-shadow(0 0 15px rgba(255, 0, 60, 0.6)) drop-shadow(0 0 35px rgba(255, 0, 60, 0.3));
+                opacity: 0.92;
             }
         }
 
-        .danger-skull-anim {
-            animation: skull-danger-glow 4s ease-in-out infinite;
+        .core-energy-anim {
+            animation: core-pulse-breathing 4.8s ease-in-out infinite;
+            will-change: transform, filter;
         }
 
         /* Opções Clicáveis dos Cards */
@@ -290,29 +290,14 @@
         <!-- =================== TELA INICIAL (BOAS-VINDAS) =================== -->
         <section id="welcome-screen" class="w-full space-y-8 py-6 text-center animate-fade-in">
             
-            <!-- LOGO ANIMADO APOCALÍPTICO (Inspirado no pin, alternando cores de perigo) -->
-            <div class="relative inline-flex items-center justify-center p-4">
-                <div class="relative w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center">
-                    <svg class="w-full h-full danger-skull-anim" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Mecha Skull Cyberpunk Head Outline -->
-                        <path d="M50 10 C30 10 18 24 18 45 C18 58 24 68 32 74 L32 86 L42 86 L44 92 L56 92 L58 86 L68 86 L68 74 C76 68 82 58 82 45 C82 24 70 10 50 10 Z" 
-                              stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" fill="#070a12" fill-opacity="0.9"/>
-                        <!-- Circuit Brain Lines -->
-                        <path d="M50 12 L50 32 M36 18 L44 26 M64 18 L56 26" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" opacity="0.8"/>
-                        <!-- Cyber Eyes -->
-                        <path d="M30 42 L42 46 L34 54 Z" fill="currentColor"/>
-                        <circle cx="64" cy="48" r="6" stroke="currentColor" stroke-width="2" fill="#000"/>
-                        <circle cx="64" cy="48" r="2.5" fill="#00e5ff" class="animate-ping" style="animation-duration: 2s;"/>
-                        <!-- Mecha Nose / Teeth -->
-                        <polygon points="50,56 46,64 54,64" fill="currentColor" opacity="0.8"/>
-                        <line x1="38" y1="80" x2="38" y2="86" stroke="currentColor" stroke-width="2"/>
-                        <line x1="46" y1="80" x2="46" y2="86" stroke="currentColor" stroke-width="2"/>
-                        <line x1="54" y1="80" x2="54" y2="86" stroke="currentColor" stroke-width="2"/>
-                        <line x1="62" y1="80" x2="62" y2="86" stroke="currentColor" stroke-width="2"/>
-                        <!-- Hazard Crossbones / Antennas -->
-                        <circle cx="18" cy="45" r="2" fill="currentColor"/>
-                        <circle cx="82" cy="45" r="2" fill="currentColor"/>
-                    </svg>
+            <!-- NÚCLEO DE ENERGIA APOCALÍPTICO (Expansão e Redução Suave / Singularidade de IA) -->
+            <div class="relative inline-flex items-center justify-center p-2 my-2">
+                <!-- Aura de Plasma Difusa ao Redor -->
+                <div class="absolute inset-0 rounded-full bg-cyber-red/25 blur-3xl animate-pulse pointer-events-none"></div>
+                
+                <div class="relative w-36 h-36 sm:w-44 sm:h-44 rounded-full overflow-hidden flex items-center justify-center shadow-[0_0_40px_rgba(255,0,60,0.55)] border border-cyber-red/50 bg-black">
+                    <img src="logo-core.jpg" alt="Núcleo de Singularidade IA" 
+                         class="w-full h-full object-cover rounded-full core-energy-anim pointer-events-none select-none">
                 </div>
             </div>
             
