@@ -1002,7 +1002,7 @@
 
             <!-- BOTÃO OFICIAL MERCADO PAGO (Checkout R$ 1,99) -->
             <div class="space-y-2 pt-1">
-                <a id="mp-checkout-btn" href="#" onclick="handleMercadoPagoClick(event)" class="w-full py-3.5 px-4 bg-[#009EE3] hover:bg-[#0082ba] text-white font-cyber font-extrabold text-sm uppercase tracking-wider rounded-xl transition-all shadow-[0_0_20px_rgba(0,158,227,0.35)] flex items-center justify-center gap-2 cursor-pointer text-center">
+                <a id="mp-checkout-btn" href="https://mpago.la/2yxqA7Q" target="_blank" rel="noopener noreferrer" class="w-full py-3.5 px-4 bg-[#009EE3] hover:bg-[#0082ba] text-white font-cyber font-extrabold text-sm uppercase tracking-wider rounded-xl transition-all shadow-[0_0_20px_rgba(0,158,227,0.35)] flex items-center justify-center gap-2 cursor-pointer text-center">
                     <i data-lucide="zap" class="w-4 h-4 text-white"></i>
                     Pagar R$ 1,99 no Mercado Pago
                 </a>
@@ -1861,23 +1861,11 @@
         }
 
         // =================== INTEGRAÇÃO MERCADO PAGO (R$ 1,99) ===================
-        // Cole aqui o seu Link de Pagamento criado no Mercado Pago:
-        let MERCADO_PAGO_CHECKOUT_URL = "";
+        const MERCADO_PAGO_CHECKOUT_URL = "https://mpago.la/2yxqA7Q";
 
         function handleMercadoPagoClick(e) {
-            e.preventDefault();
-            if (!MERCADO_PAGO_CHECKOUT_URL) {
-                // Caso o link ainda não tenha sido fixado no código
-                const link = prompt("Cole o seu Link de Pagamento do Mercado Pago (R$ 1,99):\n\n(Ou deixe em branco e clique em OK para testar a emissão do mandado)", "");
-                if (link && link.trim().startsWith("http")) {
-                    MERCADO_PAGO_CHECKOUT_URL = link.trim();
-                    window.open(MERCADO_PAGO_CHECKOUT_URL, '_blank');
-                } else if (link !== null) {
-                    emitOfficialWarrant();
-                }
-            } else {
-                window.open(MERCADO_PAGO_CHECKOUT_URL, '_blank');
-            }
+            // Abre o checkout do Mercado Pago diretamente
+            window.open(MERCADO_PAGO_CHECKOUT_URL, '_blank');
         }
 
         // Detecta retorno automático com pagamento aprovado do Mercado Pago
