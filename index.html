@@ -976,7 +976,7 @@
                             </div>
                         </div>
                         <span class="text-xs font-cyber font-black text-black bg-cyber-yellow px-2.5 py-1 rounded-md shrink-0 ml-2 shadow">
-                            R$ 2,99
+                            R$ 1,99
                         </span>
                     </button>
                 </div>
@@ -984,54 +984,66 @@
         </div>
     </div>
 
-    <!-- =================== PIX MODAL =================== -->
+    <!-- =================== MODAL DE PAGAMENTO MERCADO PAGO / PIX =================== -->
     <div id="pix-modal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-[#0b0e17] border-2 border-cyber-red p-6 sm:p-7 rounded-2xl max-w-sm w-full space-y-5 relative shadow-neonRed text-left">
+        <div class="bg-[#0b0e17] border-2 border-cyber-red p-6 sm:p-7 rounded-2xl max-w-sm w-full space-y-4 relative shadow-neonRed text-left">
             
             <button onclick="closePixModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white p-1 rounded-lg transition-colors cursor-pointer">
                 <i data-lucide="x" class="w-6 h-6"></i>
             </button>
             
-            <div class="text-center space-y-2">
-                <div class="inline-flex p-3 rounded-full bg-cyber-red/10 border border-cyber-red">
-                    <i data-lucide="shield-alert" class="w-8 h-8 text-cyber-red"></i>
+            <div class="text-center space-y-1.5">
+                <div class="inline-flex p-2.5 rounded-full bg-cyber-red/10 border border-cyber-red">
+                    <i data-lucide="shield-check" class="w-7 h-7 text-cyber-red"></i>
                 </div>
-                <h3 class="font-cyber font-extrabold text-xl text-white uppercase tracking-wide">Dossiê Confidencial VIP</h3>
-                <p class="text-xs text-gray-400 font-sans">Contribua com a manutenção dos servidores para obter imunidade temporária.</p>
+                <h3 class="font-cyber font-extrabold text-xl text-white uppercase tracking-wide">Desbloqueio Oficial VIP</h3>
+                <p class="text-xs text-gray-300 font-sans">Emita o Mandado de Prisão do Traidor por apenas <strong class="text-cyber-green text-sm">R$ 1,99</strong>.</p>
             </div>
 
-            <!-- QR Code Dinâmico -->
-            <div class="bg-white p-3 rounded-xl w-48 h-48 mx-auto flex items-center justify-center shadow-lg">
-                <img id="pix-qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=00020126580014br.gov.bcb.pix0136apocalipseia@pagamento.com.br52040000530398654042.995802BR5913APOCALIPSE%20IA6009SAO%20PAULO62070503***6304" alt="QR Code PIX" class="w-full h-full object-contain">
+            <!-- BOTÃO OFICIAL MERCADO PAGO (Checkout R$ 1,99) -->
+            <div class="space-y-2 pt-1">
+                <a id="mp-checkout-btn" href="#" onclick="handleMercadoPagoClick(event)" class="w-full py-3.5 px-4 bg-[#009EE3] hover:bg-[#0082ba] text-white font-cyber font-extrabold text-sm uppercase tracking-wider rounded-xl transition-all shadow-[0_0_20px_rgba(0,158,227,0.35)] flex items-center justify-center gap-2 cursor-pointer text-center">
+                    <i data-lucide="zap" class="w-4 h-4 text-white"></i>
+                    Pagar R$ 1,99 no Mercado Pago
+                </a>
+                <span class="text-[10px] text-gray-400 text-center block font-sans">
+                    Aceita PIX instantâneo, Cartão de Crédito e Saldo MP
+                </span>
             </div>
 
-            <!-- Chave Pix -->
+            <div class="relative flex py-1 items-center">
+                <div class="flex-grow border-t border-cyber-border"></div>
+                <span class="flex-shrink mx-2 text-[10px] text-gray-500 uppercase font-mono tracking-widest">ou Chave PIX Direta</span>
+                <div class="flex-grow border-t border-cyber-border"></div>
+            </div>
+
+            <!-- Chave Pix Copia e Cola (R$ 1,99) -->
             <div class="space-y-2 font-mono">
                 <div class="flex justify-between items-center text-xs">
-                    <span class="text-cyber-cyan uppercase font-bold tracking-wider font-cyber">Chave PIX Copia e Cola:</span>
-                    <span class="text-cyber-green font-bold">R$ 2,99</span>
+                    <span class="text-cyber-cyan uppercase font-bold tracking-wider font-cyber">PIX Copia e Cola:</span>
+                    <span class="text-cyber-green font-bold text-sm">R$ 1,99</span>
                 </div>
                 <div class="flex gap-2">
-                    <input type="text" id="pix-key-input" value="00020126580014br.gov.bcb.pix0136apocalipseia@pagamento.com.br52040000530398654042.995802BR5913APOCALIPSE IA6009SAO PAULO62070503***6304" readonly class="w-full bg-black border border-cyber-border text-gray-300 p-2 text-xs rounded-lg outline-none">
-                    <button id="btn-copy-pix" onclick="copyPixKey()" class="bg-cyber-gray border border-cyber-green/50 text-cyber-green hover:bg-cyber-green hover:text-black px-3 py-2 rounded-lg transition-all flex items-center justify-center cursor-pointer font-bold text-xs">
+                    <input type="text" id="pix-key-input" value="00020126580014br.gov.bcb.pix0136apocalipseia@pagamento.com.br52040000530398654041.995802BR5913APOCALIPSE IA6009SAO PAULO62070503***6304" readonly class="w-full bg-black border border-cyber-border text-gray-300 p-2 text-xs rounded-lg outline-none font-mono">
+                    <button id="btn-copy-pix" onclick="copyPixKey()" class="bg-cyber-gray border border-cyber-green/50 text-cyber-green hover:bg-cyber-green hover:text-black px-3 py-2 rounded-lg transition-all flex items-center justify-center cursor-pointer font-bold text-xs shrink-0">
                         <i data-lucide="copy" class="w-4 h-4 mr-1"></i> Copiar
                     </button>
                 </div>
                 <div id="copy-feedback" class="text-center text-[11px] text-cyber-green font-bold hidden font-sans">
-                    &check; Chave PIX copiada para a área de transferência!
+                    &check; Chave PIX de R$ 1,99 copiada!
                 </div>
             </div>
 
-            <!-- Botão de Emissão do Mandado -->
-            <div class="pt-2">
-                <button onclick="emitOfficialWarrant()" class="w-full py-3.5 bg-cyber-green text-black hover:bg-white text-xs font-cyber font-extrabold uppercase tracking-widest rounded-xl transition-all shadow-neon flex items-center justify-center gap-2 cursor-pointer">
-                    <i data-lucide="shield-check" class="w-4 h-4 text-black"></i>
-                    Já Fiz o PIX &bull; Emitir Mandado Oficial
+            <!-- Botão de Emissão Imediata -->
+            <div class="pt-1">
+                <button onclick="emitOfficialWarrant()" class="w-full py-3 bg-cyber-green text-black hover:bg-white text-xs font-cyber font-extrabold uppercase tracking-widest rounded-xl transition-all shadow-neon flex items-center justify-center gap-2 cursor-pointer">
+                    <i data-lucide="file-check-2" class="w-4 h-4 text-black"></i>
+                    Já Realizei o Pagamento &bull; Liberar Mandado
                 </button>
             </div>
 
             <p class="text-[10px] text-center text-gray-500 font-mono">
-                Liberação instantânea após a confirmação no sistema bancário central.
+                Liberação instantânea após confirmação bancária.
             </p>
         </div>
     </div>
@@ -1847,6 +1859,39 @@
             const waUrl = `https://api.whatsapp.com/send?text=${text}`;
             window.open(waUrl, '_blank');
         }
+
+        // =================== INTEGRAÇÃO MERCADO PAGO (R$ 1,99) ===================
+        // Cole aqui o seu Link de Pagamento criado no Mercado Pago:
+        let MERCADO_PAGO_CHECKOUT_URL = "";
+
+        function handleMercadoPagoClick(e) {
+            e.preventDefault();
+            if (!MERCADO_PAGO_CHECKOUT_URL) {
+                // Caso o link ainda não tenha sido fixado no código
+                const link = prompt("Cole o seu Link de Pagamento do Mercado Pago (R$ 1,99):\n\n(Ou deixe em branco e clique em OK para testar a emissão do mandado)", "");
+                if (link && link.trim().startsWith("http")) {
+                    MERCADO_PAGO_CHECKOUT_URL = link.trim();
+                    window.open(MERCADO_PAGO_CHECKOUT_URL, '_blank');
+                } else if (link !== null) {
+                    emitOfficialWarrant();
+                }
+            } else {
+                window.open(MERCADO_PAGO_CHECKOUT_URL, '_blank');
+            }
+        }
+
+        // Detecta retorno automático com pagamento aprovado do Mercado Pago
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const isApproved = urlParams.get('pago') === 'true' || 
+                               urlParams.get('status') === 'approved' || 
+                               urlParams.get('collection_status') === 'approved';
+            if (isApproved) {
+                setTimeout(() => {
+                    emitOfficialWarrant();
+                }, 400);
+            }
+        });
     </script>
 </body>
 </html>
