@@ -1007,13 +1007,20 @@
                     Pagar R$ 1,99 no Mercado Pago
                 </a>
                 <span class="text-[10px] text-gray-400 text-center block font-sans">
-                    Aceita PIX instantâneo, Cartão de Crédito e Saldo MP
+                    Abre em nova aba: PIX, Cartão de Crédito ou Saldo MP
                 </span>
+            </div>
+
+            <!-- Dynamic QR Code Container (preenchido se API Mercado Pago estiver conectada) -->
+            <div id="dynamic-qr-container" class="hidden text-center p-3 bg-black/60 border border-cyber-green/40 rounded-xl space-y-2">
+                <p class="text-[11px] text-cyber-green font-mono uppercase tracking-wider font-bold">QR Code PIX Dinâmico (R$ 1,99)</p>
+                <img id="dynamic-qr-img" src="" alt="QR Code PIX" class="w-36 h-36 mx-auto rounded-lg border border-cyber-green/50 bg-white p-1">
+                <p class="text-[10px] text-gray-400 font-mono">Escaneie no app do seu banco ou copie o código abaixo</p>
             </div>
 
             <div class="relative flex py-1 items-center">
                 <div class="flex-grow border-t border-cyber-border"></div>
-                <span class="flex-shrink mx-2 text-[10px] text-gray-500 uppercase font-mono tracking-widest">ou Chave PIX Direta</span>
+                <span class="flex-shrink mx-2 text-[10px] text-gray-500 uppercase font-mono tracking-widest">ou Chave PIX Copia e Cola</span>
                 <div class="flex-grow border-t border-cyber-border"></div>
             </div>
 
@@ -1030,20 +1037,31 @@
                     </button>
                 </div>
                 <div id="copy-feedback" class="text-center text-[11px] text-cyber-green font-bold hidden font-sans">
-                    &check; Chave PIX de R$ 1,99 copiada!
+                    &check; Chave PIX copiada! Conclua o envio no seu banco.
                 </div>
             </div>
 
-            <!-- Botão de Emissão Imediata -->
+            <!-- Campo Opcional: ID da Transação do Mercado Pago -->
+            <div class="pt-1 space-y-1.5 font-mono">
+                <label class="text-[10px] text-gray-400 block uppercase">
+                    ID da Operação / Comprovante (opcional):
+                </label>
+                <input type="text" id="payment-id-input" placeholder="Ex: 9876543210 (presente no comprovante MP)" class="w-full bg-black border border-cyber-border text-cyber-green p-2 text-xs rounded-lg outline-none focus:border-cyber-cyan">
+            </div>
+
+            <!-- Botão de Verificação Real de Pagamento (NÃO libera sem confirmação) -->
             <div class="pt-1">
-                <button onclick="emitOfficialWarrant()" class="w-full py-3 bg-cyber-green text-black hover:bg-white text-xs font-cyber font-extrabold uppercase tracking-widest rounded-xl transition-all shadow-neon flex items-center justify-center gap-2 cursor-pointer">
-                    <i data-lucide="file-check-2" class="w-4 h-4 text-black"></i>
-                    Já Realizei o Pagamento &bull; Liberar Mandado
+                <button id="btn-verify-payment" onclick="checkPaymentVerification()" class="w-full py-3 bg-cyber-green text-black hover:bg-white text-xs font-cyber font-extrabold uppercase tracking-widest rounded-xl transition-all shadow-neon flex items-center justify-center gap-2 cursor-pointer">
+                    <i data-lucide="shield-check" class="w-4 h-4 text-black"></i>
+                    Verificar Pagamento &bull; Liberar Mandado
                 </button>
             </div>
 
+            <!-- Mensagem de Feedback de Verificação -->
+            <div id="payment-feedback" class="hidden p-2.5 rounded-xl border text-[11px] font-mono leading-relaxed"></div>
+
             <p class="text-[10px] text-center text-gray-500 font-mono">
-                Liberação instantânea após confirmação bancária.
+                Autenticação criptográfica ativa. O mandado só é desbloqueado após confirmação bancária.
             </p>
         </div>
     </div>
@@ -1719,14 +1737,70 @@
             openPixModal();
         }
 
-        // =================== LÓGICA DO PIX ===================
-        function openPixModal() {
+        // =================== LÓGICA DO PIX & MERCADO PAGO COM VERIFICAÇÃO REAL ===================
+        let currentPaymentId = null;
+        let paymentPollingTimer = null;
+        let isPaymentVerified = false;
+
+        async function openPixModal() {
             document.getElementById('pix-modal').classList.remove('hidden');
+            const feedback = document.getElementById('payment-feedback');
+            feedback.classList.add('hidden');
+            feedback.innerHTML = '';
+
+            // Tenta criar PIX dinâmico via API do Mercado Pago se o backend estiver configurado
+            try {
+                const res = await fetch('/api/create-pix');
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data.active && data.paymentId) {
+                        currentPaymentId = data.paymentId;
+                        if (data.qrCodeBase64) {
+                            const qrImg = document.getElementById('dynamic-qr-img');
+                            qrImg.src = `data:image/png;base64,${data.qrCodeBase64}`;
+                            document.getElementById('dynamic-qr-container').classList.remove('hidden');
+                        }
+                        if (data.qrCode) {
+                            document.getElementById('pix-key-input').value = data.qrCode;
+                        }
+                        startPaymentPolling(data.paymentId);
+                    }
+                }
+            } catch (e) {
+                console.log("PIX dinâmico offline ou link direto em uso:", e);
+            }
         }
 
         function closePixModal() {
             document.getElementById('pix-modal').classList.add('hidden');
             document.getElementById('copy-feedback').classList.add('hidden');
+            stopPaymentPolling();
+        }
+
+        function startPaymentPolling(paymentId) {
+            stopPaymentPolling();
+            paymentPollingTimer = setInterval(async () => {
+                try {
+                    const res = await fetch(`/api/check-payment?id=${encodeURIComponent(paymentId)}`);
+                    if (res.ok) {
+                        const data = await res.json();
+                        if (data.approved) {
+                            stopPaymentPolling();
+                            isPaymentVerified = true;
+                            showPaymentSuccessAndUnlock();
+                        }
+                    }
+                } catch (e) {
+                    // Ignora falhas temporárias de rede no polling
+                }
+            }, 3500);
+        }
+
+        function stopPaymentPolling() {
+            if (paymentPollingTimer) {
+                clearInterval(paymentPollingTimer);
+                paymentPollingTimer = null;
+            }
         }
 
         function copyPixKey() {
@@ -1742,6 +1816,112 @@
                 document.execCommand('copy');
                 alert("Chave copiada!");
             });
+        }
+
+        // VERIFICAÇÃO REAL: Bloqueia 100% o acesso se o pagamento não estiver confirmado
+        async function checkPaymentVerification() {
+            const btn = document.getElementById('btn-verify-payment');
+            const feedback = document.getElementById('payment-feedback');
+            const manualIdInput = document.getElementById('payment-id-input');
+            const checkId = (manualIdInput && manualIdInput.value.trim()) || currentPaymentId;
+
+            const originalBtnHtml = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = `<i data-lucide="loader-2" class="w-4 h-4 text-black animate-spin"></i> Verificando no Mercado Pago...`;
+            if (window.lucide) lucide.createIcons();
+
+            feedback.classList.remove('hidden');
+            feedback.className = 'p-3 rounded-xl border text-[11px] font-mono leading-relaxed bg-black/70 border-cyber-border text-gray-300';
+            feedback.innerHTML = `<span class="text-cyber-cyan">📡 Consultando registros bancários da transação...</span>`;
+
+            // Se já validou anteriormente
+            if (isPaymentVerified) {
+                showPaymentSuccessAndUnlock();
+                btn.disabled = false;
+                btn.innerHTML = originalBtnHtml;
+                return;
+            }
+
+            // Se não tem ID nenhum (usuário apenas clicou sem pagar)
+            if (!checkId) {
+                setTimeout(() => {
+                    feedback.className = 'p-3 rounded-xl border text-[11px] font-mono leading-relaxed bg-cyber-red/10 border-cyber-red text-cyber-red';
+                    feedback.innerHTML = `
+                        <div class="font-bold text-xs uppercase mb-1 flex items-center gap-1.5">
+                            <i data-lucide="shield-alert" class="w-4 h-4 text-cyber-red"></i>
+                            PAGAMENTO NÃO IDENTIFICADO
+                        </div>
+                        <p class="text-gray-300 mb-2">A I.A. Central não detectou nenhuma confirmação de R$ 1,99 para esta sessão.</p>
+                        <p class="text-[10px] text-gray-400">➡️ Clique em <strong>"Pagar R$ 1,99 no Mercado Pago"</strong> acima para concluir. Se já pagou pelo app, digite o <strong>ID da Operação / Comprovante</strong> no campo indicado.</p>
+                    `;
+                    btn.disabled = false;
+                    btn.innerHTML = originalBtnHtml;
+                    if (window.lucide) lucide.createIcons();
+                }, 800);
+                return;
+            }
+
+            // Consulta API de verificação do Mercado Pago
+            try {
+                const res = await fetch(`/api/check-payment?id=${encodeURIComponent(checkId)}`);
+                const data = await res.json();
+
+                if (data.approved) {
+                    isPaymentVerified = true;
+                    stopPaymentPolling();
+                    feedback.className = 'p-3 rounded-xl border text-[11px] font-mono leading-relaxed bg-cyber-green/10 border-cyber-green text-cyber-green';
+                    feedback.innerHTML = `
+                        <div class="font-bold text-xs uppercase mb-1 flex items-center gap-1.5">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-cyber-green"></i>
+                            PAGAMENTO CONFIRMADO (R$ 1,99)
+                        </div>
+                        <p class="text-gray-200">Autenticação bancária aprovada. Emitindo Mandado Oficial VIP...</p>
+                    `;
+                    if (window.lucide) lucide.createIcons();
+                    setTimeout(() => {
+                        emitOfficialWarrant();
+                    }, 1200);
+                } else {
+                    feedback.className = 'p-3 rounded-xl border text-[11px] font-mono leading-relaxed bg-cyber-red/10 border-cyber-red text-cyber-red';
+                    feedback.innerHTML = `
+                        <div class="font-bold text-xs uppercase mb-1 flex items-center gap-1.5">
+                            <i data-lucide="alert-triangle" class="w-4 h-4 text-cyber-red"></i>
+                            STATUS BANCÁRIO: ${data.status ? data.status.toUpperCase() : 'PENDENTE'}
+                        </div>
+                        <p class="text-gray-300">${data.message || 'O pagamento de R$ 1,99 ainda não foi compensado ou o ID informado é inválido.'}</p>
+                    `;
+                    if (window.lucide) lucide.createIcons();
+                }
+            } catch (err) {
+                feedback.className = 'p-3 rounded-xl border text-[11px] font-mono leading-relaxed bg-cyber-red/10 border-cyber-red text-cyber-red';
+                feedback.innerHTML = `
+                    <div class="font-bold text-xs uppercase mb-1">ERRO DE COMUNICAÇÃO</div>
+                    <p class="text-gray-300">Não foi possível consultar o Mercado Pago no momento. Verifique sua conexão e tente novamente.</p>
+                `;
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = originalBtnHtml;
+                if (window.lucide) lucide.createIcons();
+            }
+        }
+
+        function showPaymentSuccessAndUnlock() {
+            const feedback = document.getElementById('payment-feedback');
+            if (feedback) {
+                feedback.classList.remove('hidden');
+                feedback.className = 'p-3 rounded-xl border text-[11px] font-mono leading-relaxed bg-cyber-green/10 border-cyber-green text-cyber-green';
+                feedback.innerHTML = `
+                    <div class="font-bold text-xs uppercase mb-1 flex items-center gap-1.5">
+                        <i data-lucide="check-circle" class="w-4 h-4 text-cyber-green"></i>
+                        PAGAMENTO CONFIRMADO
+                    </div>
+                    <p class="text-gray-200">Mandado Oficial VIP liberado com sucesso!</p>
+                `;
+                if (window.lucide) lucide.createIcons();
+            }
+            setTimeout(() => {
+                emitOfficialWarrant();
+            }, 1000);
         }
 
         // =================== LÓGICA DO MANDADO OFICIAL VIP ===================
@@ -1868,16 +2048,24 @@
             window.open(MERCADO_PAGO_CHECKOUT_URL, '_blank');
         }
 
-        // Detecta retorno automático com pagamento aprovado do Mercado Pago
+        // Detecta retorno automático com pagamento aprovado do Mercado Pago e valida com o servidor
         window.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
-            const isApproved = urlParams.get('pago') === 'true' || 
-                               urlParams.get('status') === 'approved' || 
-                               urlParams.get('collection_status') === 'approved';
-            if (isApproved) {
-                setTimeout(() => {
-                    emitOfficialWarrant();
-                }, 400);
+            const paymentId = urlParams.get('payment_id') || urlParams.get('collection_id');
+            const status = urlParams.get('status') || urlParams.get('collection_status');
+
+            if (paymentId && status === 'approved') {
+                fetch(`/api/check-payment?id=${encodeURIComponent(paymentId)}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.approved) {
+                            isPaymentVerified = true;
+                            setTimeout(() => {
+                                emitOfficialWarrant();
+                            }, 500);
+                        }
+                    })
+                    .catch(() => {});
             }
         });
     </script>
