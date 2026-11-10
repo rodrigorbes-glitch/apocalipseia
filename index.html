@@ -1021,9 +1021,9 @@
                     <span class="text-cyber-green font-bold text-xs bg-cyber-green/10 border border-cyber-green/40 px-2 py-0.5 rounded-full font-mono">R$ 1,99</span>
                 </div>
                 <div class="inline-block p-2.5 bg-white rounded-xl shadow-[0_0_20px_rgba(0,255,65,0.25)]">
-                    <img id="dynamic-qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https%3A%2F%2Fmpago.la%2F2yxqA7Q" alt="QR Code PIX R$ 1,99" class="w-36 h-36 mx-auto rounded-lg">
+                    <img id="dynamic-qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=8&data=00020126360014br.gov.bcb.pix0114%2B552199117897252040000530398654041.995802BR5913APOCALIPSE%20IA6014RIO%20DE%20JANEIRO62110507QUIZVIP6304CAD4" alt="QR Code PIX R$ 1,99" class="w-40 h-40 mx-auto rounded-lg">
                 </div>
-                <p class="text-[10px] text-gray-400 font-mono">Abra o app do seu banco &gt; Pagar com QR Code ou copie o código abaixo</p>
+                <p class="text-[10px] text-gray-400 font-mono">Abra o app do seu banco &gt; Pagar com Pix &gt; Ler QR Code</p>
             </div>
 
             <div class="relative flex py-1 items-center">
@@ -1039,13 +1039,13 @@
                     <span class="text-cyber-green font-bold text-sm">R$ 1,99</span>
                 </div>
                 <div class="flex gap-2">
-                    <input type="text" id="pix-key-input" value="00020126580014br.gov.bcb.pix0136apocalipseia@pagamento.com.br52040000530398654041.995802BR5913APOCALIPSE IA6009SAO PAULO62070503***6304" readonly class="w-full bg-black border border-cyber-border text-gray-300 p-2 text-xs rounded-lg outline-none font-mono">
+                    <input type="text" id="pix-key-input" value="00020126360014br.gov.bcb.pix0114+552199117897252040000530398654041.995802BR5913APOCALIPSE IA6014RIO DE JANEIRO62110507QUIZVIP6304CAD4" readonly class="w-full bg-black border border-cyber-border text-gray-300 p-2 text-xs rounded-lg outline-none font-mono">
                     <button id="btn-copy-pix" onclick="copyPixKey()" class="bg-cyber-gray border border-cyber-green/50 text-cyber-green hover:bg-cyber-green hover:text-black px-3 py-2 rounded-lg transition-all flex items-center justify-center cursor-pointer font-bold text-xs shrink-0">
                         <i data-lucide="copy" class="w-4 h-4 mr-1"></i> Copiar
                     </button>
                 </div>
                 <div id="copy-feedback" class="text-center text-[11px] text-cyber-green font-bold hidden font-sans">
-                    &check; Chave PIX copiada! Conclua o envio no seu banco.
+                    &check; Código PIX Copia e Cola copiado! Abra seu banco e cole na opção PIX Copia e Cola.
                 </div>
             </div>
 
@@ -1751,7 +1751,9 @@
         let isPaymentVerified = false;
 
         // Gerador Oficial de Código PIX Padrão Banco Central (BR Code EMV)
-        function generatePixPayload(key, amount = '1.99', name = 'APOCALIPSE IA', city = 'SAO PAULO', txId = 'QUIZVIP') {
+        const OFFICIAL_PIX_KEY = '+5521991178972';
+        
+        function generatePixPayload(key, amount = '1.99', name = 'APOCALIPSE IA', city = 'RIO DE JANEIRO', txId = 'QUIZVIP') {
             const formatField = (id, value) => {
                 const len = value.length.toString().padStart(2, '0');
                 return id + len + value;
@@ -1784,11 +1786,18 @@
             return rawPayload + crcHex;
         }
 
+        const OFFICIAL_PIX_PAYLOAD = generatePixPayload(OFFICIAL_PIX_KEY, '1.99', 'APOCALIPSE IA', 'RIO DE JANEIRO', 'QUIZVIP');
+
         async function openPixModal() {
             document.getElementById('pix-modal').classList.remove('hidden');
             const feedback = document.getElementById('payment-feedback');
             feedback.classList.add('hidden');
             feedback.innerHTML = '';
+
+            // Garante o QR Code e o Copia e Cola oficiais ativos imediatamente
+            document.getElementById('pix-key-input').value = OFFICIAL_PIX_PAYLOAD;
+            const qrImg = document.getElementById('dynamic-qr-img');
+            qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=8&data=${encodeURIComponent(OFFICIAL_PIX_PAYLOAD)}`;
 
             // Tenta criar PIX dinâmico via API do Mercado Pago se o backend estiver configurado
             try {
@@ -1798,9 +1807,9 @@
                     if (data.active && data.paymentId) {
                         currentPaymentId = data.paymentId;
                         if (data.qrCodeBase64) {
-                            const qrImg = document.getElementById('dynamic-qr-img');
                             qrImg.src = `data:image/png;base64,${data.qrCodeBase64}`;
-                            document.getElementById('dynamic-qr-container').classList.remove('hidden');
+                        } else if (data.qrCode) {
+                            qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=8&data=${encodeURIComponent(data.qrCode)}`;
                         }
                         if (data.qrCode) {
                             document.getElementById('pix-key-input').value = data.qrCode;
