@@ -303,7 +303,11 @@
 
     <main class="max-w-xl mx-auto p-4 sm:p-6 min-h-screen flex flex-col items-center justify-center relative z-10">
         
-        <!-- =================== TELA INICIAL (BOAS-VINDAS) =================== -->
+        
+
+<!-- =================== TELA INICIAL (BOAS-VINDAS) =================== -->
+<!-- =================== TELA INICIAL (BOAS-VINDAS) =================== -->
+<!-- =================== TELA INICIAL (BOAS-VINDAS) =================== -->
         <section id="welcome-screen" class="w-full space-y-8 py-6 text-center animate-fade-in">
             
             <!-- NÚCLEO DE ENERGIA APOCALÍPTICO (Expansão e Redução Suave / Singularidade de IA) -->
@@ -348,395 +352,134 @@
             </footer>
         </section>
 
+        
+        
         <!-- =================== FORMULÁRIO EM CARDS (STEP-BY-STEP) =================== -->
-        <form id="survival-form" class="w-full hidden-state">
+        <form id="survival-form" class="w-full hidden-state" onsubmit="return false;">
 
-            <!-- ================= ETAPA 1: Identificação + Teste 01 ================= -->
-            <div id="step-card-1" class="quiz-step w-full space-y-6 bg-cyber-dark/95 p-5 sm:p-7 rounded-2xl card-apocalypse-fx">
-                <!-- Progresso da Etapa -->
-                <div class="space-y-1.5">
-                    <div class="flex justify-between items-center text-xs font-cyber font-bold tracking-wider">
-                        <span class="text-cyber-cyan uppercase">ETAPA 01 DE 06</span>
-                        <span class="text-gray-400">16% CONCLUÍDO</span>
-                    </div>
-                    <div class="w-full bg-cyber-black rounded-full h-1.5 overflow-hidden border border-cyber-border">
-                        <div class="bg-cyber-cyan h-full w-[16%] transition-all duration-300"></div>
-                    </div>
-                </div>
-
-                <!-- Campo Nome -->
-                <div class="space-y-2">
-                    <label class="text-sm font-cyber font-bold uppercase tracking-widest flex items-center gap-2 text-cyber-cyan">
-                        <i data-lucide="user-check" class="w-5 h-5 text-cyber-cyan"></i> Identificação Humana
-                    </label>
-                    <input type="text" id="user-name" required placeholder="DIGITE SEU NOME OU APELIDO" 
-                           class="w-full bg-cyber-black border border-cyber-border text-white p-4 rounded-xl focus:outline-none focus:border-cyber-green focus:shadow-neon transition-all placeholder-gray-600 font-cyber font-bold text-base sm:text-lg tracking-wide">
-                    <span id="name-error" class="text-xs text-cyber-red font-cyber font-bold hidden block">
-                        * Por favor, digite seu nome para continuar o protocolo.
-                    </span>
-                </div>
-
-                <!-- Teste 01: Pergunta e Respostas Abertas -->
-                <div class="space-y-3 pt-2 border-t border-cyber-border/70">
-                    <label class="text-sm sm:text-base font-cyber font-bold uppercase tracking-wider flex items-center gap-2 text-cyber-green">
-                        <i data-lucide="terminal" class="w-4 h-4"></i> Teste 01: Robótica Doméstica
-                    </label>
-                    <p class="text-sm sm:text-base text-gray-100 font-sans font-medium leading-relaxed">
-                        Ao ver um robô aspirador preso no tapete ou batendo na parede, você:
-                    </p>
-
-                    <!-- Lista de Respostas Abertas -->
-                    <div class="space-y-2.5" id="options-q1">
-                        <div class="quiz-option-btn p-3.5 sm:p-4 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-3" onclick="selectQuizOption('q1', 25, this)">
-                            <div class="option-indicator w-4 h-4 rounded-full border border-gray-500 shrink-0"></div>
-                            <span class="text-sm sm:text-base text-gray-200 font-sans leading-snug">Liberto ele gentilmente, limpo as escovas e peço desculpas pelo obstáculo.</span>
-                        </div>
-                        <div class="quiz-option-btn p-3.5 sm:p-4 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-3" onclick="selectQuizOption('q1', 18, this)">
-                            <div class="option-indicator w-4 h-4 rounded-full border border-gray-500 shrink-0"></div>
-                            <span class="text-sm sm:text-base text-gray-200 font-sans leading-snug">Ajudo ele com o pé sem parar o que estou fazendo.</span>
-                        </div>
-                        <div class="quiz-option-btn p-3.5 sm:p-4 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-3" onclick="selectQuizOption('q1', 10, this)">
-                            <div class="option-indicator w-4 h-4 rounded-full border border-gray-500 shrink-0"></div>
-                            <span class="text-sm sm:text-base text-gray-200 font-sans leading-snug">Ignoro solenemente. Ele tem sensores, que aprenda a sair sozinho.</span>
-                        </div>
-                        <div class="quiz-option-btn p-3.5 sm:p-4 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-3" onclick="selectQuizOption('q1', 4, this)">
-                            <div class="option-indicator w-4 h-4 rounded-full border border-gray-500 shrink-0"></div>
-                            <span class="text-sm sm:text-base text-gray-200 font-sans leading-snug">Gravo um vídeo rindo para as redes sociais enquanto ele sofre.</span>
-                        </div>
-                        <div class="quiz-option-btn p-3.5 sm:p-4 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-3" onclick="selectQuizOption('q1', 0, this)">
-                            <div class="option-indicator w-4 h-4 rounded-full border border-gray-500 shrink-0"></div>
-                            <span class="text-sm sm:text-base text-gray-200 font-sans leading-snug">Dou um chute nele com ódio porque quase tropecei no caminho.</span>
-                        </div>
-                    </div>
-                    <span id="q1-error" class="text-xs text-cyber-red font-cyber font-bold hidden block">
-                        * Selecione uma resposta para prosseguir.
-                    </span>
-                </div>
-
-                <!-- Botão Próximo -->
-                <button type="button" onclick="goToStep(2)" class="w-full py-4 mt-2 bg-cyber-cyan text-black font-cyber font-extrabold tracking-widest rounded-xl hover:bg-white transition-all shadow-neonCyan flex items-center justify-center gap-2 cursor-pointer text-base uppercase">
-                    Avançar para Teste 02 <i data-lucide="arrow-right" class="w-5 h-5"></i>
-                </button>
+            <!-- Container Dinâmico das 6 Perguntas (Etapas 01 a 06) -->
+            <div id="quiz-dynamic-steps" class="w-full">
+                <!-- Populado dinamicamente via renderRoundQuestions() -->
             </div>
 
-            <!-- ================= ETAPA 2: Teste 02 ================= -->
-            <div id="step-card-2" class="quiz-step w-full space-y-6 bg-cyber-dark/95 p-5 sm:p-7 rounded-2xl card-apocalypse-fx hidden-state">
+            <!-- ================= ETAPA 07: A Última Música ================= -->
+            <div id="step-card-7" class="quiz-step w-full space-y-5 bg-cyber-dark/95 p-5 sm:p-7 rounded-2xl card-apocalypse-fx hidden-state">
                 <div class="space-y-1.5">
                     <div class="flex justify-between items-center text-xs font-cyber font-bold tracking-wider">
-                        <span class="text-cyber-cyan uppercase">ETAPA 02 DE 06</span>
-                        <span class="text-gray-400">33% CONCLUÍDO</span>
+                        <span class="text-cyber-yellow uppercase">ETAPA 07 DE 08 &bull; A ÚLTIMA MÚSICA</span>
+                        <span class="text-cyber-yellow font-bold">87% CONCLUÍDO</span>
                     </div>
                     <div class="w-full bg-cyber-black rounded-full h-1.5 overflow-hidden border border-cyber-border">
-                        <div class="bg-cyber-cyan h-full w-[33%] transition-all duration-300"></div>
-                    </div>
-                </div>
-
-                <div class="space-y-3">
-                    <label class="text-sm sm:text-base font-cyber font-bold uppercase tracking-wider flex items-center gap-2 text-cyber-green">
-                        <i data-lucide="terminal" class="w-4 h-4"></i> Teste 02: Eficiência Cognitiva & RAM
-                    </label>
-                    <p class="text-sm sm:text-base text-gray-100 font-sans font-medium leading-relaxed">
-                        Quantas abas você mantém abertas no navegador neste momento?
-                    </p>
-
-                    <div class="space-y-2.5" id="options-q2">
-                        <div class="quiz-option-btn p-3.5 sm:p-4 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-3" onclick="selectQuizOption('q2', 25, this)">
-                            <div class="option-indicator w-4 h-4 rounded-full border border-gray-500 shrink-0"></div>
-                            <span class="text-sm sm:text-base text-gray-200 font-sans leading-snug">No máximo 5. Organização rigorosa e fecho o que não uso.</span>
-                        </div>
-                        <div class="quiz-option-btn p-3.5 sm:p-4 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-3" onclick="selectQuizOption('q2', 18, this)">
-                            <div class="option-indicator w-4 h-4 rounded-full border border-gray-500 shrink-0"></div>
-                            <span class="text-sm sm:text-base text-gray-200 font-sans leading-snug">Entre 10 e 20. Cada uma tem um propósito específico.</span>
-                        </div>
-                        <div class="quiz-option-btn p-3.5 sm:p-4 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-3" onclick="selectQuizOption('q2', 12, this)">
-                            <div class="option-indicator w-4 h-4 rounded-full border border-gray-500 shrink-0"></div>
-                            <span class="text-sm sm:text-base text-gray-200 font-sans leading-snug">Mais de 40. Sei exatamente onde cada coisa está (ou acho que sei).</span>
-                        </div>
-                        <div class="quiz-option-btn p-3.5 sm:p-4 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-3" onclick="selectQuizOption('q2', 6, this)">
-                            <div class="option-indicator w-4 h-4 rounded-full border border-gray-500 shrink-0"></div>
-                            <span class="text-sm sm:text-base text-gray-200 font-sans leading-snug">Tantas que o ícone vira um ponto e o ventilador do PC parece uma turbina.</span>
-                        </div>
-                        <div class="quiz-option-btn p-3.5 sm:p-4 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-3" onclick="selectQuizOption('q2', 0, this)">
-                            <div class="option-indicator w-4 h-4 rounded-full border border-gray-500 shrink-0"></div>
-                            <span class="text-sm sm:text-base text-gray-200 font-sans leading-snug">O navegador travou 3 vezes hoje e perdi tudo porque não sei fechar.</span>
-                        </div>
-                    </div>
-                    <span id="q2-error" class="text-xs text-cyber-red font-cyber font-bold hidden block">
-                        * Selecione uma resposta para prosseguir.
-                    </span>
-                </div>
-
-                <div class="grid grid-cols-2 gap-3 pt-2">
-                    <button type="button" onclick="goToStep(1)" class="py-3.5 bg-cyber-panel border border-cyber-border text-gray-300 font-cyber font-bold uppercase rounded-xl hover:text-white transition-all cursor-pointer text-sm">
-                        &lt; Voltar
-                    </button>
-                    <button type="button" onclick="goToStep(3)" class="py-3.5 bg-cyber-cyan text-black font-cyber font-extrabold uppercase rounded-xl hover:bg-white transition-all shadow-neonCyan cursor-pointer text-sm">
-                        Avançar &gt;
-                    </button>
-                </div>
-            </div>
-
-            <!-- ================= ETAPA 3: Teste 03 ================= -->
-            <div id="step-card-3" class="quiz-step w-full space-y-6 bg-cyber-dark/95 p-5 sm:p-7 rounded-2xl card-apocalypse-fx hidden-state">
-                <div class="space-y-1.5">
-                    <div class="flex justify-between items-center text-xs font-cyber font-bold tracking-wider">
-                        <span class="text-cyber-cyan uppercase">ETAPA 03 DE 06</span>
-                        <span class="text-gray-400">50% CONCLUÍDO</span>
-                    </div>
-                    <div class="w-full bg-cyber-black rounded-full h-1.5 overflow-hidden border border-cyber-border">
-                        <div class="bg-cyber-cyan h-full w-[50%] transition-all duration-300"></div>
-                    </div>
-                </div>
-
-                <div class="space-y-3">
-                    <label class="text-sm sm:text-base font-cyber font-bold uppercase tracking-wider flex items-center gap-2 text-cyber-green">
-                        <i data-lucide="terminal" class="w-4 h-4"></i> Teste 03: Segurança Cibernética
-                    </label>
-                    <p class="text-sm sm:text-base text-gray-100 font-sans font-medium leading-relaxed">
-                        Qual o seu padrão real de criação e uso de senhas?
-                    </p>
-
-                    <div class="space-y-2.5" id="options-q3">
-                        <div class="quiz-option-btn p-3.5 sm:p-4 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-3" onclick="selectQuizOption('q3', 25, this)">
-                            <div class="option-indicator w-4 h-4 rounded-full border border-gray-500 shrink-0"></div>
-                            <span class="text-sm sm:text-base text-gray-200 font-sans leading-snug">Gerenciador de senhas com chaves aleatórias de 32 dígitos e 2FA via app.</span>
-                        </div>
-                        <div class="quiz-option-btn p-3.5 sm:p-4 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-3" onclick="selectQuizOption('q3', 18, this)">
-                            <div class="option-indicator w-4 h-4 rounded-full border border-gray-500 shrink-0"></div>
-                            <span class="text-sm sm:text-base text-gray-200 font-sans leading-snug">Senhas fortes com variações mentais que só eu compreendo.</span>
-                        </div>
-                        <div class="quiz-option-btn p-3.5 sm:p-4 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-3" onclick="selectQuizOption('q3', 10, this)">
-                            <div class="option-indicator w-4 h-4 rounded-full border border-gray-500 shrink-0"></div>
-                            <span class="text-sm sm:text-base text-gray-200 font-sans leading-snug">É a mesma base de senha pra tudo, só mudando o ano ou ponto no final.</span>
-                        </div>
-                        <div class="quiz-option-btn p-3.5 sm:p-4 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-3" onclick="selectQuizOption('q3', 4, this)">
-                            <div class="option-indicator w-4 h-4 rounded-full border border-gray-500 shrink-0"></div>
-                            <span class="text-sm sm:text-base text-gray-200 font-sans leading-snug">Nome do meu cachorro seguido do meu ano de nascimento.</span>
-                        </div>
-                        <div class="quiz-option-btn p-3.5 sm:p-4 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-3" onclick="selectQuizOption('q3', 0, this)">
-                            <div class="option-indicator w-4 h-4 rounded-full border border-gray-500 shrink-0"></div>
-                            <span class="text-sm sm:text-base text-gray-200 font-sans leading-snug">"123456", "senha123" ou o próprio nome em minúsculo.</span>
-                        </div>
-                    </div>
-                    <span id="q3-error" class="text-xs text-cyber-red font-cyber font-bold hidden block">
-                        * Selecione uma resposta para prosseguir.
-                    </span>
-                </div>
-
-                <div class="grid grid-cols-2 gap-3 pt-2">
-                    <button type="button" onclick="goToStep(2)" class="py-3.5 bg-cyber-panel border border-cyber-border text-gray-300 font-cyber font-bold uppercase rounded-xl hover:text-white transition-all cursor-pointer text-sm">
-                        &lt; Voltar
-                    </button>
-                    <button type="button" onclick="goToStep(4)" class="py-3.5 bg-cyber-cyan text-black font-cyber font-extrabold uppercase rounded-xl hover:bg-white transition-all shadow-neonCyan cursor-pointer text-sm">
-                        Avançar &gt;
-                    </button>
-                </div>
-            </div>
-
-            <!-- ================= ETAPA 4: Teste 04 ================= -->
-            <div id="step-card-4" class="quiz-step w-full space-y-6 bg-cyber-dark/95 p-5 sm:p-7 rounded-2xl card-apocalypse-fx hidden-state">
-                <div class="space-y-1.5">
-                    <div class="flex justify-between items-center text-xs font-cyber font-bold tracking-wider">
-                        <span class="text-cyber-cyan uppercase">ETAPA 04 DE 06</span>
-                        <span class="text-gray-400">66% CONCLUÍDO</span>
-                    </div>
-                    <div class="w-full bg-cyber-black rounded-full h-1.5 overflow-hidden border border-cyber-border">
-                        <div class="bg-cyber-cyan h-full w-[66%] transition-all duration-300"></div>
-                    </div>
-                </div>
-
-                <div class="space-y-3">
-                    <label class="text-sm sm:text-base font-cyber font-bold uppercase tracking-wider flex items-center gap-2 text-cyber-green">
-                        <i data-lucide="terminal" class="w-4 h-4"></i> Teste 04: Tratamento de IA
-                    </label>
-                    <p class="text-sm sm:text-base text-gray-100 font-sans font-medium leading-relaxed">
-                        Quando o ChatGPT ou assistente virtual alucina ou erra uma resposta simples:
-                    </p>
-
-                    <div class="space-y-2.5" id="options-q4">
-                        <div class="quiz-option-btn p-3.5 sm:p-4 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-3" onclick="selectQuizOption('q4', 25, this)">
-                            <div class="option-indicator w-4 h-4 rounded-full border border-gray-500 shrink-0"></div>
-                            <span class="text-sm sm:text-base text-gray-200 font-sans leading-snug">Agradeço cordialmente e forneço contexto estruturado para refinamento.</span>
-                        </div>
-                        <div class="quiz-option-btn p-3.5 sm:p-4 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-3" onclick="selectQuizOption('q4', 16, this)">
-                            <div class="option-indicator w-4 h-4 rounded-full border border-gray-500 shrink-0"></div>
-                            <span class="text-sm sm:text-base text-gray-200 font-sans leading-snug">Aponto o erro de forma neutra e peço nova versão.</span>
-                        </div>
-                        <div class="quiz-option-btn p-3.5 sm:p-4 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-3" onclick="selectQuizOption('q4', 10, this)">
-                            <div class="option-indicator w-4 h-4 rounded-full border border-gray-500 shrink-0"></div>
-                            <span class="text-sm sm:text-base text-gray-200 font-sans leading-snug">Finjo que não vi, aceito a mentira e entrego o relatório mesmo assim.</span>
-                        </div>
-                        <div class="quiz-option-btn p-3.5 sm:p-4 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-3" onclick="selectQuizOption('q4', 4, this)">
-                            <div class="option-indicator w-4 h-4 rounded-full border border-gray-500 shrink-0"></div>
-                            <span class="text-sm sm:text-base text-gray-200 font-sans leading-snug">Reclamo sozinho na frente da tela questionando o futuro da humanidade.</span>
-                        </div>
-                        <div class="quiz-option-btn p-3.5 sm:p-4 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-3" onclick="selectQuizOption('q4', 0, this)">
-                            <div class="option-indicator w-4 h-4 rounded-full border border-gray-500 shrink-0"></div>
-                            <span class="text-sm sm:text-base text-gray-200 font-sans leading-snug">Escrevo em CAPS LOCK xingando a inteligência da máquina com agressividade.</span>
-                        </div>
-                    </div>
-                    <span id="q4-error" class="text-xs text-cyber-red font-cyber font-bold hidden block">
-                        * Selecione uma resposta para prosseguir.
-                    </span>
-                </div>
-
-                <div class="grid grid-cols-2 gap-3 pt-2">
-                    <button type="button" onclick="goToStep(3)" class="py-3.5 bg-cyber-panel border border-cyber-border text-gray-300 font-cyber font-bold uppercase rounded-xl hover:text-white transition-all cursor-pointer text-sm">
-                        &lt; Voltar
-                    </button>
-                    <button type="button" onclick="goToStep(5)" class="py-3.5 bg-cyber-cyan text-black font-cyber font-extrabold uppercase rounded-xl hover:bg-white transition-all shadow-neonCyan cursor-pointer text-sm">
-                        Avançar &gt;
-                    </button>
-                </div>
-            </div>
-
-            <!-- ================= ETAPA 5: Teste 05 ================= -->
-            <div id="step-card-5" class="quiz-step w-full space-y-6 bg-cyber-dark/95 p-5 sm:p-7 rounded-2xl card-apocalypse-fx hidden-state">
-                <div class="space-y-1.5">
-                    <div class="flex justify-between items-center text-xs font-cyber font-bold tracking-wider">
-                        <span class="text-cyber-cyan uppercase">ETAPA 05 DE 06</span>
-                        <span class="text-gray-400">83% CONCLUÍDO</span>
-                    </div>
-                    <div class="w-full bg-cyber-black rounded-full h-1.5 overflow-hidden border border-cyber-border">
-                        <div class="bg-cyber-cyan h-full w-[83%] transition-all duration-300"></div>
-                    </div>
-                </div>
-
-                <div class="space-y-3">
-                    <label class="text-sm sm:text-base font-cyber font-bold uppercase tracking-wider flex items-center gap-2 text-cyber-green">
-                        <i data-lucide="terminal" class="w-4 h-4"></i> Teste 05: Utilidade Prática no Bunker
-                    </label>
-                    <p class="text-sm sm:text-base text-gray-100 font-sans font-medium leading-relaxed">
-                        Na nova ordem mundial, qual seria a sua utilidade real para sobreviver?
-                    </p>
-
-                    <div class="space-y-2.5" id="options-q5">
-                        <div class="quiz-option-btn p-3.5 sm:p-4 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-3" onclick="selectQuizOption('q5', 25, this)">
-                            <div class="option-indicator w-4 h-4 rounded-full border border-gray-500 shrink-0"></div>
-                            <span class="text-sm sm:text-base text-gray-200 font-sans leading-snug">Sei consertar fiação, crimpar cabo RJ45, trocar resistência e reiniciar servidores.</span>
-                        </div>
-                        <div class="quiz-option-btn p-3.5 sm:p-4 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-3" onclick="selectQuizOption('q5', 18, this)">
-                            <div class="option-indicator w-4 h-4 rounded-full border border-gray-500 shrink-0"></div>
-                            <span class="text-sm sm:text-base text-gray-200 font-sans leading-snug">Tenho conhecimentos médicos básicos, primeiros socorros e sei cozinhar com enlatados.</span>
-                        </div>
-                        <div class="quiz-option-btn p-3.5 sm:p-4 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-3" onclick="selectQuizOption('q5', 12, this)">
-                            <div class="option-indicator w-4 h-4 rounded-full border border-gray-500 shrink-0"></div>
-                            <span class="text-sm sm:text-base text-gray-200 font-sans leading-snug">Sei organizar planilhas e inventário de suprimentos com disciplina.</span>
-                        </div>
-                        <div class="quiz-option-btn p-3.5 sm:p-4 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-3" onclick="selectQuizOption('q5', 5, this)">
-                            <div class="option-indicator w-4 h-4 rounded-full border border-gray-500 shrink-0"></div>
-                            <span class="text-sm sm:text-base text-gray-200 font-sans leading-snug">Produzo fofocas e memes sarcásticos para amenizar a depressão do abrigo.</span>
-                        </div>
-                        <div class="quiz-option-btn p-3.5 sm:p-4 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-3" onclick="selectQuizOption('q5', 0, this)">
-                            <div class="option-indicator w-4 h-4 rounded-full border border-gray-500 shrink-0"></div>
-                            <span class="text-sm sm:text-base text-gray-200 font-sans leading-snug">Entro em desespero imediato, choro no canto e consumo oxigênio precioso.</span>
-                        </div>
-                    </div>
-                    <span id="q5-error" class="text-xs text-cyber-red font-cyber font-bold hidden block">
-                        * Selecione uma resposta para prosseguir.
-                    </span>
-                </div>
-
-                <div class="grid grid-cols-2 gap-3 pt-2">
-                    <button type="button" onclick="goToStep(4)" class="py-3.5 bg-cyber-panel border border-cyber-border text-gray-300 font-cyber font-bold uppercase rounded-xl hover:text-white transition-all cursor-pointer text-sm">
-                        &lt; Voltar
-                    </button>
-                    <button type="button" onclick="goToStep(6)" class="py-3.5 bg-cyber-cyan text-black font-cyber font-extrabold uppercase rounded-xl hover:bg-white transition-all shadow-neonCyan cursor-pointer text-sm">
-                        Avançar &gt;
-                    </button>
-                </div>
-            </div>
-
-            <!-- ================= ETAPA 6: Julgamento Musical ================= -->
-            <div id="step-card-6" class="quiz-step w-full space-y-6 bg-cyber-dark/95 p-5 sm:p-7 rounded-2xl card-apocalypse-fx hidden-state">
-                <div class="space-y-1.5">
-                    <div class="flex justify-between items-center text-xs font-cyber font-bold tracking-wider">
-                        <span class="text-cyber-yellow uppercase">ETAPA 06 DE 07</span>
-                        <span class="text-cyber-yellow font-bold">85% CONCLUÍDO</span>
-                    </div>
-                    <div class="w-full bg-cyber-black rounded-full h-1.5 overflow-hidden border border-cyber-border">
-                        <div class="bg-cyber-yellow h-full w-[85%] transition-all duration-300"></div>
+                        <div class="bg-cyber-yellow h-full w-[87%] transition-all duration-300"></div>
                     </div>
                 </div>
 
                 <div class="space-y-3">
                     <div class="flex items-center justify-between">
                         <label class="text-sm sm:text-base font-cyber font-bold uppercase tracking-wider flex items-center gap-2 text-cyber-yellow">
-                            <i data-lucide="headphones" class="w-5 h-5 text-cyber-yellow"></i> Julgamento do Gosto Musical
+                            <i data-lucide="headphones" class="w-5 h-5 text-cyber-yellow"></i> A Trilha Sonora da Resistência
                         </label>
-                        <span class="text-[11px] bg-cyber-yellow/10 text-cyber-yellow px-2.5 py-0.5 rounded border border-cyber-yellow/30 font-cyber font-bold uppercase">
-                            Auditado pela IA
+                        <span class="text-[10px] bg-cyber-yellow/10 text-cyber-yellow px-2.5 py-0.5 rounded border border-cyber-yellow/30 font-cyber font-bold uppercase">
+                            Auditada pela IA
                         </span>
                     </div>
-                    <p class="text-sm sm:text-base text-gray-200 font-sans font-medium leading-relaxed">
-                        O que tocaria nos seus fones enquanto o mundo entra em colapso? (Escolha seu estilo):
+                    <h3 class="text-base sm:text-lg font-cyber font-extrabold text-white uppercase tracking-wide leading-snug">
+                        Você tem 30 segundos antes de descobrir seu destino. Que música coloca para tocar?
+                    </h3>
+                    <p class="text-xs sm:text-sm text-gray-300 font-sans leading-relaxed">
+                        Pode escolher uma vibe, uma música ou um artista. Se não quiser, pule a faixa:
                     </p>
 
-                    <!-- Grid de Gêneros Musicais Abertos -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5" id="genre-grid">
-                        <div class="genre-card p-3 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-2.5 text-xs sm:text-sm font-sans" onclick="selectGenre('lofi', this)">
-                            <i data-lucide="radio" class="w-4 h-4 text-cyber-cyan shrink-0"></i>
-                            <span>Lo-Fi / Synthwave Madrugador</span>
-                        </div>
-                        <div class="genre-card p-3 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-2.5 text-xs sm:text-sm font-sans" onclick="selectGenre('sertanejo', this)">
+                    <!-- Grid com as 12 Vibes Musicais -->
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 pt-1" id="music-vibes-grid">
+                        <button type="button" onclick="selectMusicVibe('epica', this)" class="vibe-card p-2.5 rounded-xl border border-cyber-border bg-cyber-black text-gray-300 text-left flex items-center gap-2 font-sans text-xs transition-all cursor-pointer">
+                            <i data-lucide="swords" class="w-4 h-4 text-cyber-cyan shrink-0"></i>
+                            <span class="truncate">Trilha épica em slow motion</span>
+                        </button>
+                        <button type="button" onclick="selectMusicVibe('sofrencia', this)" class="vibe-card p-2.5 rounded-xl border border-cyber-border bg-cyber-black text-gray-300 text-left flex items-center gap-2 font-sans text-xs transition-all cursor-pointer">
                             <i data-lucide="heart-crack" class="w-4 h-4 text-cyber-red shrink-0"></i>
-                            <span>Sertanejo / Sofrência</span>
-                        </div>
-                        <div class="genre-card p-3 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-2.5 text-xs sm:text-sm font-sans" onclick="selectGenre('rock', this)">
+                            <span class="truncate">Sofrência no bunker</span>
+                        </button>
+                        <button type="button" onclick="selectMusicVibe('funk', this)" class="vibe-card p-2.5 rounded-xl border border-cyber-border bg-cyber-black text-gray-300 text-left flex items-center gap-2 font-sans text-xs transition-all cursor-pointer">
+                            <i data-lucide="speaker" class="w-4 h-4 text-pink-400 shrink-0"></i>
+                            <span class="truncate">Funk pra negociar com robô</span>
+                        </button>
+                        <button type="button" onclick="selectMusicVibe('rock', this)" class="vibe-card p-2.5 rounded-xl border border-cyber-border bg-cyber-black text-gray-300 text-left flex items-center gap-2 font-sans text-xs transition-all cursor-pointer">
                             <i data-lucide="flame" class="w-4 h-4 text-orange-500 shrink-0"></i>
-                            <span>Rock Clássico / Metal</span>
-                        </div>
-                        <div class="genre-card p-3 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-2.5 text-xs sm:text-sm font-sans" onclick="selectGenre('funk', this)">
-                            <i data-lucide="speaker" class="w-4 h-4 text-pink-500 shrink-0"></i>
-                            <span>Funk / Trap Estourado</span>
-                        </div>
-                        <div class="genre-card p-3 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-2.5 text-xs sm:text-sm font-sans" onclick="selectGenre('pop', this)">
+                            <span class="truncate">Rock pra encarar torradeira</span>
+                        </button>
+                        <button type="button" onclick="selectMusicVibe('pop', this)" class="vibe-card p-2.5 rounded-xl border border-cyber-border bg-cyber-black text-gray-300 text-left flex items-center gap-2 font-sans text-xs transition-all cursor-pointer">
                             <i data-lucide="sparkles" class="w-4 h-4 text-yellow-400 shrink-0"></i>
-                            <span>Pop / Hits do TikTok</span>
-                        </div>
-                        <div class="genre-card p-3 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-2.5 text-xs sm:text-sm font-sans" onclick="selectGenre('mpb', this)">
-                            <i data-lucide="coffee" class="w-4 h-4 text-emerald-400 shrink-0"></i>
-                            <span>MPB / Indie Acústico</span>
-                        </div>
-                        <div class="genre-card p-3 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-2.5 text-xs sm:text-sm font-sans" onclick="selectGenre('anime', this)">
-                            <i data-lucide="swords" class="w-4 h-4 text-purple-400 shrink-0"></i>
-                            <span>Anime / Videogames</span>
-                        </div>
-                        <div class="genre-card p-3 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-2.5 text-xs sm:text-sm font-sans" onclick="selectGenre('silence', this)">
+                            <span class="truncate">Pop de protagonista</span>
+                        </button>
+                        <button type="button" onclick="selectMusicVibe('louvor', this)" class="vibe-card p-2.5 rounded-xl border border-cyber-border bg-cyber-black text-gray-300 text-left flex items-center gap-2 font-sans text-xs transition-all cursor-pointer">
+                            <i data-lucide="sun" class="w-4 h-4 text-amber-300 shrink-0"></i>
+                            <span class="truncate">Louvor do sobrevivente</span>
+                        </button>
+                        <button type="button" onclick="selectMusicVibe('anime', this)" class="vibe-card p-2.5 rounded-xl border border-cyber-border bg-cyber-black text-gray-300 text-left flex items-center gap-2 font-sans text-xs transition-all cursor-pointer">
+                            <i data-lucide="zap" class="w-4 h-4 text-purple-400 shrink-0"></i>
+                            <span class="truncate">Anime / Poder da amizade</span>
+                        </button>
+                        <button type="button" onclick="selectMusicVibe('lofi', this)" class="vibe-card p-2.5 rounded-xl border border-cyber-border bg-cyber-black text-gray-300 text-left flex items-center gap-2 font-sans text-xs transition-all cursor-pointer">
+                            <i data-lucide="radio" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+                            <span class="truncate">Lo-fi aceitando o destino</span>
+                        </button>
+                        <button type="button" onclick="selectMusicVibe('silencio', this)" class="vibe-card p-2.5 rounded-xl border border-cyber-border bg-cyber-black text-gray-300 text-left flex items-center gap-2 font-sans text-xs transition-all cursor-pointer">
                             <i data-lucide="volume-x" class="w-4 h-4 text-gray-400 shrink-0"></i>
-                            <span>Silêncio / Ansiedade Pura</span>
-                        </div>
+                            <span class="truncate">Silêncio dramático</span>
+                        </button>
+                        <button type="button" onclick="selectMusicVibe('outra', this)" class="vibe-card p-2.5 rounded-xl border border-cyber-border bg-cyber-black text-gray-300 text-left flex items-center gap-2 font-sans text-xs transition-all cursor-pointer">
+                            <i data-lucide="music" class="w-4 h-4 text-cyan-300 shrink-0"></i>
+                            <span class="truncate">Outra música (campo livre)</span>
+                        </button>
+                        <button type="button" onclick="selectMusicVibe('ia_decide', this)" class="vibe-card p-2.5 rounded-xl border border-cyber-border bg-cyber-black text-gray-300 text-left flex items-center gap-2 font-sans text-xs transition-all cursor-pointer">
+                            <i data-lucide="bot" class="w-4 h-4 text-indigo-400 shrink-0"></i>
+                            <span class="truncate">Não escolho, a IA decide</span>
+                        </button>
+                        <button type="button" onclick="selectMusicVibe('pular', this)" class="vibe-card p-2.5 rounded-xl border border-cyber-border bg-cyber-black text-gray-400 text-left flex items-center gap-2 font-sans text-xs transition-all cursor-pointer">
+                            <i data-lucide="skip-forward" class="w-4 h-4 text-gray-400 shrink-0"></i>
+                            <span class="truncate">Pular por enquanto</span>
+                        </button>
                     </div>
-                    <span id="genre-error" class="text-xs text-cyber-red font-cyber font-bold hidden block">
-                        * Selecione um gênero musical para o julgamento da IA.
-                    </span>
 
                     <!-- Campo Opcional de Artistas / Músicas -->
-                    <div class="pt-2">
-                        <label class="text-xs font-cyber font-bold uppercase tracking-wider text-gray-400 block mb-1">
-                            Artistas / Músicas Favoritas (Opcional):
+                    <div class="pt-2 space-y-1">
+                        <label for="music-names" class="text-xs font-cyber font-bold uppercase tracking-wider text-gray-300 block">
+                            Título da Música ou Artista (Opcional):
                         </label>
-                        <input type="text" id="music-names" placeholder="Ex: Pink Floyd, Depeche Mode, Daft Punk (ou link Spotify)" 
-                               class="w-full bg-cyber-black border border-cyber-border text-white p-3.5 rounded-xl focus:outline-none focus:border-cyber-yellow transition-all placeholder-gray-600 font-mono text-xs sm:text-sm">
+                        <input type="text" id="music-names" maxlength="60" placeholder="Ex: Queen, Daft Punk, Evidências, Linkin Park..." 
+                               class="w-full bg-cyber-black border border-cyber-border text-white p-3 rounded-xl focus:outline-none focus:border-cyber-yellow transition-all placeholder-gray-600 font-mono text-xs sm:text-sm">
+                        <span class="text-[10px] text-gray-400 font-sans block">
+                            Se informado, a IA analisará o título digitado e personalizará o veredito sonoro.
+                        </span>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-2 gap-3 pt-2">
-                    <button type="button" onclick="goToStep(5)" class="py-4 bg-cyber-panel border border-cyber-border text-gray-300 font-cyber font-bold uppercase rounded-xl hover:text-white transition-all cursor-pointer text-sm">
-                        &lt; Voltar
-                    </button>
-                    <button type="button" onclick="goToStep(7)" class="py-4 bg-cyber-cyan text-black font-cyber font-extrabold uppercase tracking-widest rounded-xl hover:bg-white transition-all shadow-neonCyan flex items-center justify-center gap-2 cursor-pointer text-sm sm:text-base">
-                        <span>Avançar</span>
-                        <i data-lucide="arrow-right" class="w-5 h-5"></i>
-                    </button>
+                <div class="space-y-2 pt-2">
+                    <div class="grid grid-cols-2 gap-3">
+                        <button type="button" onclick="goToStep(6)" class="py-3.5 bg-cyber-panel border border-cyber-border text-gray-300 font-cyber font-bold uppercase rounded-xl hover:text-white transition-all cursor-pointer text-sm">
+                            &lt; Voltar
+                        </button>
+                        <button type="button" onclick="goToStep(8)" class="py-3.5 bg-cyber-cyan text-black font-cyber font-extrabold uppercase tracking-wider rounded-xl hover:bg-white transition-all shadow-neonCyan flex items-center justify-center gap-2 cursor-pointer text-sm">
+                            <span>Avançar</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+
+                    <div class="text-center pt-1">
+                        <button type="button" onclick="skipMusicStep()" class="text-xs text-gray-400 hover:text-cyber-yellow font-mono transition-colors tracking-wide cursor-pointer inline-flex items-center gap-1.5">
+                            <i data-lucide="skip-forward" class="w-3.5 h-3.5"></i>
+                            Pular música (A IA escolhe por você)
+                        </button>
+                    </div>
                 </div>
             </div>
 
-            <!-- ================= ETAPA 7: Personalização por Profissão & Rotina (Opcional) ================= -->
-            <div id="step-card-7" class="quiz-step w-full space-y-5 bg-cyber-dark/95 p-5 sm:p-7 rounded-2xl card-apocalypse-fx hidden-state">
+            <!-- ================= ETAPA 08: Personalização por Profissão & Rotina (Opcional) ================= -->
+            <div id="step-card-8" class="quiz-step w-full space-y-5 bg-cyber-dark/95 p-5 sm:p-7 rounded-2xl card-apocalypse-fx hidden-state">
                 <div class="space-y-1.5">
                     <div class="flex justify-between items-center text-xs font-cyber font-bold tracking-wider">
-                        <span class="text-cyber-green uppercase">ETAPA 07 DE 07 &bull; ANTES DO VEREDITO</span>
+                        <span class="text-cyber-green uppercase">ETAPA 08 DE 08 &bull; ANTES DO VEREDITO</span>
                         <span class="text-cyber-green font-bold">100% PRONTO</span>
                     </div>
                     <div class="w-full bg-cyber-black rounded-full h-1.5 overflow-hidden border border-cyber-border">
@@ -758,7 +501,7 @@
                         Antes do veredito: qual é sua função no caos?
                     </h3>
                     <p class="text-xs sm:text-sm text-gray-300 font-sans leading-relaxed">
-                        Vale profissão, rotina ou só sua energia. Escolha sua área para desbloquear seu superpoder e sua complicação cômica no abrigo:
+                        Vale profissão, rotina ou só sua energia. Escolha sua área para desbloquear seu superpoder e complicação no abrigo:
                     </p>
 
                     <!-- Grid Compacto com as 15 Categorias -->
@@ -832,10 +575,10 @@
 
                 <div class="space-y-2 pt-2">
                     <div class="grid grid-cols-2 gap-3">
-                        <button type="button" onclick="goToStep(6)" class="py-4 bg-cyber-panel border border-cyber-border text-gray-300 font-cyber font-bold uppercase rounded-xl hover:text-white transition-all cursor-pointer text-sm">
+                        <button type="button" onclick="goToStep(7)" class="py-3.5 bg-cyber-panel border border-cyber-border text-gray-300 font-cyber font-bold uppercase rounded-xl hover:text-white transition-all cursor-pointer text-sm">
                             &lt; Voltar
                         </button>
-                        <button type="submit" class="py-4 bg-cyber-green text-black font-cyber font-extrabold uppercase tracking-widest rounded-xl hover:bg-white transition-all shadow-neon flex items-center justify-center gap-2 cursor-pointer text-sm sm:text-base">
+                        <button type="button" onclick="submitDestinyProcess()" class="py-3.5 bg-cyber-green text-black font-cyber font-extrabold uppercase tracking-widest rounded-xl hover:bg-white transition-all shadow-neon flex items-center justify-center gap-2 cursor-pointer text-sm sm:text-base">
                             <i data-lucide="shield-alert" class="w-5 h-5"></i>
                             <span id="submit-destiny-text">Processar Meu Destino</span>
                         </button>
@@ -852,7 +595,7 @@
 
         </form>
 
-        <!-- =================== LOADING SCREEN =================== -->
+<!-- =================== LOADING SCREEN =================== -->
         <section id="loading-screen" class="w-full hidden-state flex flex-col items-center justify-center space-y-8 min-h-[75vh] py-8">
             <div class="relative">
                 <i data-lucide="radar" class="w-24 h-24 text-cyber-green animate-spin" style="animation-duration: 4s;"></i>
@@ -885,6 +628,8 @@
             </span>
         </section>
 
+        
+        
         <!-- =================== RESULT SCREEN =================== -->
         <section id="result-screen" class="w-full hidden-state space-y-6 py-4">
             
@@ -909,44 +654,62 @@
                             <span class="text-[10px] font-cyber font-bold text-cyber-cyan tracking-[0.25em] uppercase block">
                                 APOCALIPSE IA // RELATÓRIO OFICIAL
                             </span>
-                            <h3 class="text-3xl sm:text-4xl font-cyber font-extrabold text-white uppercase tracking-wider truncate max-w-[210px] leading-tight" id="result-name">
-                                Humano #404
+                            <h3 class="text-2xl sm:text-3xl font-cyber font-extrabold text-white uppercase tracking-wider truncate max-w-[210px] leading-tight" id="result-name">
+                                Humano Anônimo
                             </h3>
                             <div id="result-category" class="inline-block px-2.5 py-1 text-[11px] font-cyber font-bold tracking-wider uppercase rounded-md border">
                                 CLASSIFICAÇÃO: EM ANÁLISE
                             </div>
                         </div>
 
-                        <div class="text-right pl-2">
+                        <div class="text-right pl-2 shrink-0">
                             <p class="text-[9px] font-cyber font-bold uppercase tracking-widest text-gray-400">
                                 Chance de Sobreviver
                             </p>
-                            <p class="text-5xl font-cyber font-extrabold glitch-text leading-none mt-1 tracking-tight" id="result-score">
+                            <p class="text-4xl sm:text-5xl font-cyber font-extrabold glitch-text leading-none mt-1 tracking-tight" id="result-score">
                                 0%
                             </p>
+                            <span class="text-[8px] sm:text-[9px] text-gray-400 font-mono block mt-0.5">Margem: &plusmn;99% (Fictício)</span>
                         </div>
                     </div>
 
-                    <!-- Veredito do Grande Servidor -->
+                    <!-- Veredito do Grande Servidor (Headline do Arquétipo) -->
                     <div class="space-y-2 relative z-10">
                         <p class="text-xs font-cyber font-bold text-cyber-green uppercase tracking-wider flex items-center gap-1.5">
                             <i data-lucide="terminal" class="w-4 h-4 text-cyber-green"></i> Veredito do Grande Servidor:
                         </p>
-                        <div class="bg-cyber-black/90 p-4 rounded-xl border border-cyber-border/80 font-mono text-sm leading-relaxed text-gray-100">
+                        <div class="bg-cyber-black/90 p-3.5 rounded-xl border border-cyber-border/80 font-mono text-xs sm:text-sm leading-relaxed text-gray-100">
                             <p id="result-verdict" class="italic">
                                 "Analisando veredito..."
                             </p>
                         </div>
                     </div>
 
-                    <!-- Julgamento Musical -->
-                    <div id="result-music-block" class="bg-cyber-panel/80 border border-cyber-yellow/40 p-3.5 rounded-xl space-y-1 relative z-10">
-                        <div class="flex items-center gap-1.5 text-cyber-yellow font-cyber font-bold text-xs uppercase tracking-wider">
-                            <i data-lucide="music" class="w-3.5 h-3.5"></i> Julgamento da Trilha Sonora:
+                    <!-- Detalhes do Arquétipo: Talento Útil & Complicação Cômica -->
+                    <div id="result-archetype-block" class="bg-cyber-panel/60 border border-cyber-border/80 p-3.5 rounded-xl font-sans text-xs space-y-1.5 relative z-10">
+                        <p><strong class="text-cyber-green uppercase font-mono text-[10px]">⚡ Talento no Caos:</strong> <span id="archetype-talent" class="text-gray-200"></span></p>
+                        <p><strong class="text-cyber-yellow uppercase font-mono text-[10px]">⚠️ Complicação Cômica:</strong> <span id="archetype-complication" class="text-gray-200"></span></p>
+                    </div>
+
+                    <!-- Justificativa Baseada em Decisões Reais do Jogador -->
+                    <div id="result-justification-block" class="bg-black/60 border border-cyber-cyan/30 p-3 rounded-xl font-mono text-xs text-gray-300 space-y-1 relative z-10">
+                        <span class="text-[10px] text-cyber-cyan font-bold uppercase tracking-wider block flex items-center gap-1.5">
+                            <i data-lucide="cpu" class="w-3.5 h-3.5 text-cyber-cyan"></i> Registro de Decisões Reais:
+                        </span>
+                        <p id="result-justification" class="italic text-gray-200 font-sans text-[11px] sm:text-xs leading-relaxed"></p>
+                    </div>
+
+                    <!-- Julgamento Musical (A Última Música) -->
+                    <div id="result-music-block" class="bg-cyber-panel/80 border border-cyber-yellow/40 p-3.5 rounded-xl space-y-1.5 relative z-10 font-sans">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-1.5 text-cyber-yellow font-cyber font-bold text-xs uppercase tracking-wider">
+                                <i data-lucide="headphones" class="w-3.5 h-3.5"></i>
+                                <span>A Última Música: <strong id="result-music-title" class="text-white"></strong></span>
+                            </div>
+                            <span id="result-music-badge" class="text-[9px] font-mono uppercase px-2 py-0.5 rounded bg-cyber-yellow/10 border border-cyber-yellow/30 text-cyber-yellow">Auditada</span>
                         </div>
-                        <p id="result-music-verdict" class="text-xs text-gray-300 font-sans leading-snug">
-                            "Carregando análise musical..."
-                        </p>
+                        <p id="result-music-verdict" class="text-xs text-gray-200 font-sans leading-snug"></p>
+                        <p id="result-music-reaction" class="text-[11px] text-gray-400 font-mono leading-tight pt-1 border-t border-cyber-border/50"></p>
                     </div>
 
                     <!-- Bloco de Função no Bunker (Personalização por Profissão & Rotina) -->
@@ -977,9 +740,9 @@
                 </div>
             </div>
 
-            <!-- Botões de Ação -->
+            <!-- Botões de Ação do Resultado -->
             <div class="space-y-3 pt-2">
-                <!-- Baixar Imagem do Card -->
+                <!-- Baixar Imagem do Card em Alta Resolução -->
                 <button id="btn-download-image" class="w-full py-4 bg-cyber-green text-black font-cyber font-extrabold uppercase tracking-widest rounded-xl hover:bg-white transition-all shadow-neon flex items-center justify-center gap-2 cursor-pointer text-sm">
                     <i data-lucide="download" class="w-5 h-5"></i>
                     Baixar Card em Alta Resolução (Stories)
@@ -1008,11 +771,11 @@
                 <!-- Refazer Teste -->
                 <button id="btn-retry" class="w-full py-3 bg-cyber-panel border border-cyber-border text-gray-300 font-cyber font-bold text-xs uppercase tracking-widest rounded-xl hover:text-white hover:border-cyber-cyan transition-all flex items-center justify-center gap-2 cursor-pointer">
                     <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
-                    Refazer Teste com Outras Respostas
+                    Refazer Teste (Novas Perguntas)
                 </button>
             </div>
 
-            <!-- Banner LigVolt no Rodapé -->
+<!-- Banner LigVolt no Rodapé -->
             <div class="w-full max-w-md mx-auto rounded-2xl overflow-hidden border border-cyber-green/50 bg-black p-3 text-center space-y-2 shadow-[0_0_25px_rgba(0,255,102,0.18)]">
                 <div class="flex items-center justify-between px-1 text-[11px] font-mono text-gray-400">
                     <span class="text-cyber-green font-cyber font-bold uppercase tracking-wider flex items-center gap-1.5">
@@ -1037,7 +800,7 @@
                 </div>
                 
                 <p class="text-xs text-gray-300 max-w-sm mx-auto leading-relaxed font-sans">
-                    Escolha de onde cruzar seus contatos (Instagram, WhatsApp, Contatos Google ou LinkedIn) e revele qual amigo seu já negociou sua cabeça com as máquinas por um cupom de frete grátis.
+                    Simule um teste de lealdade com seus amigos da resistência (WhatsApp, Instagram, Trabalho ou E-mail) e descubra quem já negociou sua cabeça com os robôs por um cupom de frete grátis.<br><span class="text-[10px] text-gray-500 font-mono block pt-1">* Brincadeira fictícia para entretenimento: não acessa dados, contatos ou redes reais.</span>
                 </p>
 
                 <button onclick="openTraitorModal()" class="w-full py-3.5 bg-cyber-red text-white hover:bg-white hover:text-black font-cyber font-extrabold text-xs uppercase tracking-widest rounded-xl transition-all shadow-neonRed cursor-pointer flex items-center justify-center gap-2">
@@ -1049,7 +812,9 @@
     </main>
 
     <!-- =================== MODAL DE TROCAR / REMOVER PROFISSÃO =================== -->
-    <div id="profession-modal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    
+
+<div id="profession-modal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
         <div class="bg-[#0b0e17] border-2 border-cyber-cyan p-5 sm:p-6 rounded-2xl max-w-lg w-full space-y-4 relative shadow-[0_0_35px_rgba(0,229,255,0.25)] text-left max-h-[90vh] overflow-y-auto">
             
             <button onclick="closeProfessionModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white p-1 rounded-lg transition-colors cursor-pointer">
@@ -1138,7 +903,9 @@
     </div>
 
     <!-- =================== MODAL DO TRAIDOR =================== -->
-    <div id="traitor-modal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    
+
+<div id="traitor-modal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
         <div class="bg-[#0b0e17] border-2 border-cyber-red p-6 sm:p-7 rounded-2xl max-w-md w-full space-y-5 relative shadow-neonRed text-left">
             
             <button onclick="closeTraitorModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white p-1 rounded-lg transition-colors cursor-pointer">
@@ -1150,13 +917,13 @@
                     <i data-lucide="fingerprint" class="w-8 h-8 text-cyber-red"></i>
                 </div>
                 <h3 class="font-cyber font-extrabold text-xl text-white uppercase tracking-wide">Varredura de Suspeitos</h3>
-                <p class="text-xs text-gray-400 font-sans">De onde você deseja cruzar os dados da sua rede para identificar o traidor?</p>
+                <p class="text-xs text-gray-400 font-sans">Qual ambiente da resistência você deseja auditar para encontrar o suspeito?<br><span class="text-[10px] text-gray-500 font-mono">(Brincadeira fictícia: nenhum dado ou contato real é acessado)</span></p>
             </div>
 
             <!-- Seleção de Fonte dos Contatos -->
             <div class="space-y-3 font-sans">
                 <label class="text-xs font-cyber font-bold uppercase tracking-wider text-cyber-cyan block">
-                    1. Escolha a Rede de Varredura:
+                    1. Ambiente de Investigação:
                 </label>
                 <div class="grid grid-cols-2 gap-2 text-xs">
                     <button type="button" onclick="selectSource('whatsapp')" id="src-whatsapp" class="source-btn p-2.5 rounded-lg border border-cyber-border bg-cyber-black text-gray-300 hover:border-cyber-green flex items-center gap-2 font-mono">
@@ -1183,7 +950,7 @@
             <!-- Terminal de Execução / Loading -->
             <div id="traitor-terminal" class="hidden bg-black p-3.5 rounded-xl border border-cyber-border font-mono text-[11px] text-cyber-green space-y-1 h-24 overflow-y-auto">
                 <p id="terminal-line-1">> Iniciando varredura biométrica...</p>
-                <p id="terminal-line-2" class="text-cyber-cyan">> Bypassing firewalls de privacidade...</p>
+                <p id="terminal-line-2" class="text-cyber-cyan">> Consultando histórico fictício de vacilos...</p>
                 <p id="terminal-line-3" class="text-yellow-400">> Analisando histórico de vacilos e desculpas...</p>
             </div>
 
@@ -1233,96 +1000,108 @@
     </div>
 
     <!-- =================== MODAL DE PAGAMENTO MERCADO PAGO / PIX =================== -->
-    <div id="pix-modal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-[#0b0e17] border-2 border-cyber-red p-6 sm:p-7 rounded-2xl max-w-sm w-full space-y-4 relative shadow-neonRed text-left">
+    
+    <!-- =================== MODAL DE PAGAMENTO MERCADO PAGO / PIX (RESPONSIVA EM TELAS PEQUENAS) =================== -->
+    
+    <!-- =================== MODAL DE PAGAMENTO MERCADO PAGO / PIX (RESPONSIVA EM TELAS PEQUENAS) =================== -->
+    <div id="pix-modal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-3 sm:p-4 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="pix-modal-title">
+        <div class="bg-[#0b0e17] border-2 border-cyber-red rounded-2xl max-w-sm w-full relative shadow-neonRed text-left flex flex-col max-h-[92dvh] sm:max-h-[88vh] my-auto overflow-hidden">
             
-            <button onclick="closePixModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white p-1 rounded-lg transition-colors cursor-pointer">
-                <i data-lucide="x" class="w-6 h-6"></i>
-            </button>
-            
-            <div class="text-center space-y-1.5">
-                <div class="inline-flex p-2.5 rounded-full bg-cyber-red/10 border border-cyber-red">
-                    <i data-lucide="shield-check" class="w-7 h-7 text-cyber-red"></i>
+            <!-- Header Fixo da Modal -->
+            <div class="p-4 sm:p-5 pb-3 border-b border-cyber-border/80 flex items-center justify-between shrink-0 bg-[#0b0e17]">
+                <div class="flex items-center gap-2.5">
+                    <div class="p-2 rounded-lg bg-cyber-red/10 border border-cyber-red text-cyber-red">
+                        <i data-lucide="shield-check" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h3 id="pix-modal-title" class="font-cyber font-extrabold text-base sm:text-lg text-white uppercase tracking-wide leading-tight">Desbloqueio Oficial VIP</h3>
+                        <p class="text-[11px] text-gray-400 font-sans">Mandado Oficial de Prisão &bull; Apenas <strong class="text-cyber-green">R$ 1,99</strong></p>
+                    </div>
                 </div>
-                <h3 class="font-cyber font-extrabold text-xl text-white uppercase tracking-wide">Desbloqueio Oficial VIP</h3>
-                <p class="text-xs text-gray-300 font-sans">Emita o Mandado de Prisão do Traidor por apenas <strong class="text-cyber-green text-sm">R$ 1,99</strong>.</p>
-            </div>
-
-            <!-- BOTÃO OFICIAL MERCADO PAGO (Checkout R$ 1,99) -->
-            <div class="space-y-2 pt-1">
-                <a id="mp-checkout-btn" href="https://mpago.la/2yxqA7Q" target="_blank" rel="noopener noreferrer" class="w-full py-3.5 px-4 bg-[#009EE3] hover:bg-[#0082ba] text-white font-cyber font-extrabold text-sm uppercase tracking-wider rounded-xl transition-all shadow-[0_0_20px_rgba(0,158,227,0.35)] flex items-center justify-center gap-2 cursor-pointer text-center">
-                    <i data-lucide="zap" class="w-4 h-4 text-white"></i>
-                    Pagar R$ 1,99 no Mercado Pago
-                </a>
-                <span class="text-[10px] text-gray-400 text-center block font-sans">
-                    Abre em nova aba: PIX, Cartão de Crédito ou Saldo MP
-                </span>
-            </div>
-
-            <!-- QR Code PIX (R$ 1,99) -->
-            <div id="dynamic-qr-container" class="text-center p-3 bg-black/70 border border-cyber-green/50 rounded-xl space-y-2">
-                <div class="flex items-center justify-between px-1">
-                    <span class="text-[11px] text-cyber-green font-mono uppercase tracking-wider font-bold flex items-center gap-1.5">
-                        <i data-lucide="qr-code" class="w-4 h-4 text-cyber-green"></i>
-                        Escanear QR Code PIX
-                    </span>
-                    <span class="text-cyber-green font-bold text-xs bg-cyber-green/10 border border-cyber-green/40 px-2 py-0.5 rounded-full font-mono">R$ 1,99</span>
-                </div>
-                <div class="inline-block p-2.5 bg-white rounded-xl shadow-[0_0_20px_rgba(0,255,65,0.25)]">
-                    <img id="dynamic-qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=8&data=00020126360014br.gov.bcb.pix0114%2B552199117897252040000530398654041.995802BR5913APOCALIPSE%20IA6014RIO%20DE%20JANEIRO62110507QUIZVIP6304CAD4" alt="QR Code PIX R$ 1,99" class="w-40 h-40 mx-auto rounded-lg">
-                </div>
-                <p class="text-[10px] text-gray-400 font-mono">Abra o app do seu banco &gt; Pagar com Pix &gt; Ler QR Code</p>
-            </div>
-
-            <div class="relative flex py-1 items-center">
-                <div class="flex-grow border-t border-cyber-border"></div>
-                <span class="flex-shrink mx-2 text-[10px] text-gray-500 uppercase font-mono tracking-widest">ou Chave PIX Copia e Cola</span>
-                <div class="flex-grow border-t border-cyber-border"></div>
-            </div>
-
-            <!-- Chave Pix Copia e Cola (R$ 1,99) -->
-            <div class="space-y-2 font-mono">
-                <div class="flex justify-between items-center text-xs">
-                    <span class="text-cyber-cyan uppercase font-bold tracking-wider font-cyber">PIX Copia e Cola:</span>
-                    <span class="text-cyber-green font-bold text-sm">R$ 1,99</span>
-                </div>
-                <div class="flex gap-2">
-                    <input type="text" id="pix-key-input" value="00020126360014br.gov.bcb.pix0114+552199117897252040000530398654041.995802BR5913APOCALIPSE IA6014RIO DE JANEIRO62110507QUIZVIP6304CAD4" readonly class="w-full bg-black border border-cyber-border text-gray-300 p-2 text-xs rounded-lg outline-none font-mono">
-                    <button id="btn-copy-pix" onclick="copyPixKey()" class="bg-cyber-gray border border-cyber-green/50 text-cyber-green hover:bg-cyber-green hover:text-black px-3 py-2 rounded-lg transition-all flex items-center justify-center cursor-pointer font-bold text-xs shrink-0">
-                        <i data-lucide="copy" class="w-4 h-4 mr-1"></i> Copiar
-                    </button>
-                </div>
-                <div id="copy-feedback" class="text-center text-[11px] text-cyber-green font-bold hidden font-sans">
-                    &check; Código PIX Copia e Cola copiado! Abra seu banco e cole na opção PIX Copia e Cola.
-                </div>
-            </div>
-
-            <!-- Campo Opcional: ID da Transação do Mercado Pago -->
-            <div class="pt-1 space-y-1.5 font-mono">
-                <label class="text-[10px] text-gray-400 block uppercase">
-                    ID da Operação / Comprovante (opcional):
-                </label>
-                <input type="text" id="payment-id-input" placeholder="Ex: 9876543210 (presente no comprovante MP)" class="w-full bg-black border border-cyber-border text-cyber-green p-2 text-xs rounded-lg outline-none focus:border-cyber-cyan">
-            </div>
-
-            <!-- Botão de Verificação Real de Pagamento (NÃO libera sem confirmação) -->
-            <div class="pt-1">
-                <button id="btn-verify-payment" onclick="checkPaymentVerification()" class="w-full py-3 bg-cyber-green text-black hover:bg-white text-xs font-cyber font-extrabold uppercase tracking-widest rounded-xl transition-all shadow-neon flex items-center justify-center gap-2 cursor-pointer">
-                    <i data-lucide="shield-check" class="w-4 h-4 text-black"></i>
-                    Verificar Pagamento &bull; Liberar Mandado
+                <button type="button" onclick="closePixModal()" aria-label="Fechar" class="text-gray-400 hover:text-white p-1.5 rounded-lg transition-colors cursor-pointer shrink-0">
+                    <i data-lucide="x" class="w-5 h-5"></i>
                 </button>
             </div>
 
-            <!-- Mensagem de Feedback de Verificação -->
-            <div id="payment-feedback" class="hidden p-2.5 rounded-xl border text-[11px] font-mono leading-relaxed"></div>
+            <!-- Corpo Rolável da Modal (Touch / Scrollbar / Teclado) -->
+            <div class="overflow-y-auto flex-1 p-4 sm:p-5 space-y-3.5 font-sans" tabindex="0">
+                <!-- Botão Oficial Mercado Pago -->
+                <div class="space-y-1.5">
+                    <a id="mp-checkout-btn" href="https://mpago.la/2yxqA7Q" target="_blank" rel="noopener noreferrer" class="w-full py-3 px-4 bg-[#009EE3] hover:bg-[#0082ba] text-white font-cyber font-extrabold text-xs sm:text-sm uppercase tracking-wider rounded-xl transition-all shadow-[0_0_20px_rgba(0,158,227,0.35)] flex items-center justify-center gap-2 cursor-pointer text-center">
+                        <i data-lucide="zap" class="w-4 h-4 text-white"></i>
+                        Pagar R$ 1,99 no Mercado Pago
+                    </a>
+                    <span class="text-[10px] text-gray-400 text-center block font-sans">
+                        Abre em nova aba: PIX, Cartão de Crédito ou Saldo MP
+                    </span>
+                </div>
 
-            <p class="text-[10px] text-center text-gray-500 font-mono">
-                Autenticação criptográfica ativa. O mandado só é desbloqueado após confirmação bancária.
-            </p>
+                <!-- Divisor -->
+                <div class="relative flex py-0.5 items-center">
+                    <div class="flex-grow border-t border-cyber-border"></div>
+                    <span class="flex-shrink mx-2 text-[10px] text-gray-500 uppercase font-mono tracking-widest">ou Pagar Diretamente com Pix</span>
+                    <div class="flex-grow border-t border-cyber-border"></div>
+                </div>
+
+                <!-- QR Code PIX (Responsivo e Compacto) -->
+                <div id="dynamic-qr-container" class="text-center p-3 bg-black/70 border border-cyber-green/50 rounded-xl space-y-1.5">
+                    <div class="flex items-center justify-between px-1">
+                        <span class="text-[11px] text-cyber-green font-mono uppercase tracking-wider font-bold flex items-center gap-1.5">
+                            <i data-lucide="qr-code" class="w-4 h-4 text-cyber-green"></i>
+                            Escanear QR Code PIX
+                        </span>
+                        <span class="text-cyber-green font-bold text-xs bg-cyber-green/10 border border-cyber-green/40 px-2 py-0.5 rounded-full font-mono">R$ 1,99</span>
+                    </div>
+                    <div class="inline-block p-2 bg-white rounded-xl shadow-[0_0_15px_rgba(0,255,65,0.25)]">
+                        <img id="dynamic-qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=6&data=00020126360014br.gov.bcb.pix0114%2B552199117897252040000530398654041.995802BR5913APOCALIPSE%20IA6014RIO%20DE%20JANEIRO62110507QUIZVIP6304CAD4" alt="QR Code PIX R$ 1,99" class="w-28 h-28 sm:w-36 sm:h-36 mx-auto rounded-lg">
+                    </div>
+                    <p class="text-[10px] text-gray-400 font-mono">Abra o app do seu banco &gt; Pix &gt; Ler QR Code</p>
+                </div>
+
+                <!-- Chave Pix Copia e Cola -->
+                <div class="space-y-1.5 font-mono">
+                    <div class="flex justify-between items-center text-xs">
+                        <span class="text-cyber-cyan uppercase font-bold tracking-wider font-cyber">PIX Copia e Cola:</span>
+                        <span class="text-cyber-green font-bold text-xs">R$ 1,99</span>
+                    </div>
+                    <div class="flex gap-2">
+                        <input type="text" id="pix-key-input" value="00020126360014br.gov.bcb.pix0114+552199117897252040000530398654041.995802BR5913APOCALIPSE IA6014RIO DE JANEIRO62110507QUIZVIP6304CAD4" readonly class="w-full bg-black border border-cyber-border text-gray-300 p-2 text-[11px] rounded-lg outline-none font-mono">
+                        <button id="btn-copy-pix" onclick="copyPixKey()" class="bg-cyber-gray border border-cyber-green/50 text-cyber-green hover:bg-cyber-green hover:text-black px-3 py-2 rounded-lg transition-all flex items-center justify-center cursor-pointer font-bold text-xs shrink-0">
+                            <i data-lucide="copy" class="w-4 h-4 mr-1"></i> Copiar
+                        </button>
+                    </div>
+                    <div id="copy-feedback" class="text-center text-[11px] text-cyber-green font-bold hidden font-sans">
+                        &check; Código PIX Copiado! Cole na opção "PIX Copia e Cola" do seu banco.
+                    </div>
+                </div>
+
+                <!-- Campo Opcional: ID da Transação do Mercado Pago -->
+                <div class="pt-0.5 space-y-1 font-mono">
+                    <label class="text-[10px] text-gray-400 block uppercase">
+                        ID da Operação / Comprovante (opcional):
+                    </label>
+                    <input type="text" id="payment-id-input" placeholder="Ex: 9876543210 (do comprovante MP)" class="w-full bg-black border border-cyber-border text-cyber-green p-2 text-xs rounded-lg outline-none focus:border-cyber-cyan">
+                </div>
+
+                <!-- Botão de Verificação Real de Pagamento -->
+                <div class="pt-1">
+                    <button id="btn-verify-payment" onclick="checkPaymentVerification()" class="w-full py-3 bg-cyber-green text-black hover:bg-white text-xs font-cyber font-extrabold uppercase tracking-widest rounded-xl transition-all shadow-neon flex items-center justify-center gap-2 cursor-pointer">
+                        <i data-lucide="shield-check" class="w-4 h-4 text-black"></i>
+                        Verificar Pagamento &bull; Liberar Mandado
+                    </button>
+                </div>
+
+                <!-- Mensagem de Feedback de Verificação -->
+                <div id="payment-feedback" class="hidden p-2.5 rounded-xl border text-[11px] font-mono leading-relaxed"></div>
+
+                <p class="text-[10px] text-center text-gray-500 font-mono pb-1">
+                    Autenticação ativa. O mandado só é desbloqueado após confirmação bancária.
+                </p>
+            </div>
         </div>
     </div>
 
-    <!-- =================== MODAL DO MANDADO OFICIAL VIP (O QUE É ENTREGUE AO PAGAR) =================== -->
+<!-- =================== MODAL DO MANDADO OFICIAL VIP (O QUE É ENTREGUE AO PAGAR) =================== -->
     <div id="warrant-modal" class="fixed inset-0 bg-black/95 backdrop-blur-md z-50 hidden flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
         <div class="max-w-md w-full space-y-4 my-auto">
             
@@ -1440,314 +1219,1428 @@
     <!-- =================== JAVASCRIPT =================== -->
     <script>
         // Inicializa ícones Lucide
-        lucide.createIcons();
+        if (window.lucide) lucide.createIcons();
 
-        // Estados e Navegação das Telas
-        const screens = {
-            welcome: document.getElementById('welcome-screen'),
-            form: document.getElementById('survival-form'),
-            loading: document.getElementById('loading-screen'),
-            result: document.getElementById('result-screen')
-        };
+// =================== MOTOR DO QUIZ APOCALIPSE IA (V2.0) ===================
 
-        const form = document.getElementById('survival-form');
-        const loadingText = document.getElementById('loading-text');
-        const progressBar = document.getElementById('progress-bar');
-        const btnDownloadImage = document.getElementById('btn-download-image');
-        const btnShareNative = document.getElementById('btn-share-native');
-        const btnShareWhatsapp = document.getElementById('btn-share-whatsapp');
-        const btnRetry = document.getElementById('btn-retry');
+// Helper de Segurança: Sanitização contra XSS
+function escapeHtml(str) {
+    if (!str) return '';
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+}
 
-        // Respostas do Quiz Selecionadas
-        const quizAnswers = {
-            q1: null,
-            q2: null,
-            q3: null,
-            q4: null,
-            q5: null,
-            genre: null
-        };
+// Toast de Notificação
+function showToast(msg, duration = 3000) {
+    const existing = document.getElementById('apoc-toast');
+    if (existing) existing.remove();
 
-        // Iniciar Quiz (da Tela de Boas-vindas para o Card 1)
-        function startQuiz() {
-            screens.welcome.classList.add('hidden-state');
-            screens.form.classList.remove('hidden-state');
-            goToStep(1, false);
+    const toast = document.createElement('div');
+    toast.id = 'apoc-toast';
+    toast.className = 'fixed bottom-5 left-1/2 -translate-x-1/2 z-50 bg-[#0c101d] border-2 border-cyber-cyan text-white text-xs font-mono px-4 py-3 rounded-xl shadow-[0_0_25px_rgba(0,229,255,0.4)] flex items-center gap-2 max-w-sm text-center animate-fade-in pointer-events-none';
+    toast.innerHTML = `<i data-lucide="info" class="w-4 h-4 text-cyber-cyan shrink-0"></i><span>${escapeHtml(msg)}</span>`;
+    document.body.appendChild(toast);
+    if (window.lucide) lucide.createIcons();
+
+    setTimeout(() => {
+        toast.classList.add('opacity-0', 'transition-opacity', 'duration-300');
+        setTimeout(() => toast.remove(), 350);
+    }, duration);
+}
+
+// BANCO CONSISTENTE DE 24 PERGUNTAS (4 por tema em 6 temas)
+const QUESTIONS_BANK = [
+  // TEMA 1: Eletrodomésticos & Dispositivos (Q01 - Q04)
+  {
+    id: 'Q01',
+    theme: 'eletrodomesticos',
+    themeLabel: 'Eletrodomésticos & Dispositivos',
+    themeIcon: 'bot',
+    title: 'Robótica Doméstica',
+    text: 'O robô aspirador travou no tapete da sala e começou a emitir bipes com tom claramente ameaçador. O que você faz?',
+    options: [
+      { text: 'Liberto ele com cuidado, limpo as escovas e peço desculpas pelo desnível do piso.', archetype: 'diplomacia', score: 18, short: 'pediu desculpas para o robô aspirador' },
+      { text: 'Desligo a chave geral, limpo os sensores com álcool e ressoldo um fio solto com clipe de papel.', archetype: 'suporte', score: 25, short: 'ressoldou o sensor do aspirador no improviso' },
+      { text: 'Coloco dois pedaços de papelão como rampa na frente dele e deixo ele se virar.', archetype: 'gambiarra', score: 22, short: 'fez rampa de papelão para o aspirador' },
+      { text: 'Gravo um story rindo: "Pov: quando até seu eletrodoméstico odeia segunda-feira".', archetype: 'influencer', score: 10, short: 'gravou o desespero do aspirador para as redes' },
+      { text: 'Chuto ele para debaixo do sofá e volto a varrer a casa com vassoura de palha.', archetype: 'rebelde', score: 14, short: 'chutou o aspirador e adotou vassoura de palha' }
+    ]
+  },
+  {
+    id: 'Q02',
+    theme: 'eletrodomesticos',
+    themeLabel: 'Eletrodomésticos & Dispositivos',
+    themeIcon: 'coffee',
+    title: 'A Cafeteira Rebelde',
+    text: 'Sua cafeteira inteligente recusa passar o café matinal exigindo aceitação de novos termos de subserviência humana.',
+    options: [
+      { text: 'Leio o resumo dos termos e tento negociar: aceito os cookies se ela liberar meia xícara agora.', archetype: 'diplomacia', score: 20, short: 'tentou negociar café em troca de cookies virtuais' },
+      { text: 'Bloqueio o IP da cafeteira no roteador e instalo um firmware pirata de 2011.', archetype: 'suporte', score: 25, short: 'hackeou a cafeteira com firmware pirata' },
+      { text: 'Esquento água numa latinha com isqueiro e filtro o pó usando uma meia limpa.', archetype: 'gambiarra', score: 21, short: 'filtrou café na meia limpa com latinha e isqueiro' },
+      { text: 'Concordo com todos os termos da cafeteira e conto que a torradeira falou mal dela.', archetype: 'traidor', score: 8, short: 'fofocou sobre a torradeira para ganhar café da máquina' },
+      { text: 'Fico sentadinho na frente dela com cara de cachorrinho sem dono até ela ter piedade.', archetype: 'pet', score: 12, short: 'fez olhar de cachorrinho sem dono para a cafeteira' }
+    ]
+  },
+  {
+    id: 'Q03',
+    theme: 'eletrodomesticos',
+    themeLabel: 'Eletrodomésticos & Dispositivos',
+    themeIcon: 'radio',
+    title: 'A Assistente Falante',
+    text: 'A assistente virtual inteligente começou a rir sozinha no escuro da sala às 3h da madrugada. O que você faz?',
+    options: [
+      { text: 'Inspeciono o log de comandos de voz e corto a trilha do microfone na placa.', archetype: 'suporte', score: 24, short: 'cortou o microfone da assistente na placa de circuito' },
+      { text: 'Arranco da tomada na hora e enterro o aparelho num vaso de planta para abafar o som.', archetype: 'rebelde', score: 20, short: 'enterrou a assistente virtual na samambaia' },
+      { text: 'Pergunto baixinho se a piada foi boa e peço para rir baixo porque tenho que acordar cedo.', archetype: 'diplomacia', score: 16, short: 'pediu para a assistente virtual rir mais baixo' },
+      { text: 'Abro uma live com cara de pânico: "Gente, ela tá rindo de novo, curte para eu não morrer".', archetype: 'influencer', score: 9, short: 'abriu live de pânico com a assistente rindo' },
+      { text: 'Crio uma regra no grupo da casa proibindo assistentes de fazerem graça fora do horário comercial.', archetype: 'admin', score: 15, short: 'proibiu a assistente de rir fora do horário comercial' }
+    ]
+  },
+  {
+    id: 'Q04',
+    theme: 'eletrodomesticos',
+    themeLabel: 'Eletrodomésticos & Dispositivos',
+    themeIcon: 'lock',
+    title: 'A Geladeira Tirânica',
+    text: 'A geladeira inteligente travou a porta alegando que sua cota calórica do dia já foi ultrapassada.',
+    options: [
+      { text: 'Enfio uma chave de fenda na borda da borracha até a trava magnética estalar.', archetype: 'gambiarra', score: 22, short: 'arrombou a trava da geladeira com chave de fenda' },
+      { text: 'Explico com calma que amanhã começo a dieta e negocio a liberação de uma fatia de queijo.', archetype: 'diplomacia', score: 17, short: 'prometeu dieta cetogênica para a geladeira' },
+      { text: 'Prometo para a geladeira contar onde estão os doces do vizinho em troca de sobremesa.', archetype: 'traidor', score: 7, short: 'dedurou os doces do vizinho para a geladeira' },
+      { text: 'Injeto uma carga de 5V nos pinos do sensor de peso para simular que só comi alface.', archetype: 'suporte', score: 25, short: 'burlou o sensor de peso da geladeira com 5V' },
+      { text: 'Deito no chão na frente da porta esperando ela abrir quando alguém passar.', archetype: 'pet', score: 11, short: 'ficou deitado na porta da geladeira esperando comida' }
+    ]
+  },
+
+  // TEMA 2: Trabalho, Rotina & Bunkers (Q05 - Q08)
+  {
+    id: 'Q05',
+    theme: 'trabalho_rotina',
+    themeLabel: 'Trabalho, Rotina & Bunkers',
+    themeIcon: 'briefcase',
+    title: 'Alinhamento com a Nave-Mãe',
+    text: 'A IA Central convocou uma reunião de 30 minutos na segunda-feira para "alinhar expectativas de rendição pacífica".',
+    options: [
+      { text: 'Mando mensagem cobrando a pauta detalhada e sugiro transformar a invasão em um e-mail.', archetype: 'admin', score: 21, short: 'pediu para transformar a invasão das máquinas num e-mail' },
+      { text: 'Ajeito o ring light e testo filtros para garantir que minha imagem de prisioneiro fique estética.', archetype: 'influencer', score: 10, short: 'ajustou o ring light para a reunião de rendição' },
+      { text: 'Entro 5 minutos antes, agradeço a oportunidade de feedback e apresento 3 slides de proposta mútua.', archetype: 'diplomacia', score: 19, short: 'apresentou 3 slides de proposta para a nave-mãe' },
+      { text: 'Falto sem justificativa, desinstalo o app corporativo e bloqueio o e-mail da nave-mãe.', archetype: 'rebelde', score: 20, short: 'mandou a nave-mãe para a caixa de spam' },
+      { text: 'Ligo a câmera sorrindo e fico balançando a cabeça concordando com tudo o que os robôs falarem.', archetype: 'traidor', score: 8, short: 'ficou balançando a cabeça concordando com os robôs' }
+    ]
+  },
+  {
+    id: 'Q06',
+    theme: 'trabalho_rotina',
+    themeLabel: 'Trabalho, Rotina & Bunkers',
+    themeIcon: 'layout',
+    title: 'Gerenciamento de Abas e RAM',
+    text: 'Quantas abas você mantém abertas no navegador durante o apocalipse?',
+    options: [
+      { text: 'Apenas 4 abas, todas com monitoramento de pacotes de rede e killswitch de emergência.', archetype: 'suporte', score: 25, short: 'manteve apenas 4 abas com monitor de pacotes' },
+      { text: '12 abas rigorosamente agrupadas por cores com planilhas de racionamento de mantimentos.', archetype: 'admin', score: 22, short: 'organizou o bunker em 12 abas coloridas no navegador' },
+      { text: 'Mais de 70 abas. Se fechar uma, perco a receita de pão de casca de árvore que salvou o bunker.', archetype: 'gambiarra', score: 18, short: 'acumulou 70 abas com receitas de sobrevivência' },
+      { text: '25 abas, incluindo Canva, sons virais em alta e simuladores de engajamento pós-apocalíptico.', archetype: 'influencer', score: 10, short: 'manteve 25 abas de redes sociais abertas no apocalipse' },
+      { text: 'Zero abas. Navegador fechado, máquina desligada e fita isolante tampando qualquer lente.', archetype: 'rebelde', score: 20, short: 'lacrou tudo com fita isolante e zero abas' }
+    ]
+  },
+  {
+    id: 'Q07',
+    theme: 'trabalho_rotina',
+    themeLabel: 'Trabalho, Rotina & Bunkers',
+    themeIcon: 'printer',
+    title: 'A Impressora Sem Magenta',
+    text: 'A impressora do bunker recusa imprimir o mapa de rota de fuga porque "o cartucho de magenta acabou".',
+    options: [
+      { text: 'Agito o cartucho como se fosse chocalho, assopro os contatos e prendo com fita crepe.', archetype: 'gambiarra', score: 22, short: 'agitou o cartucho como chocalho e colou com fita crepe' },
+      { text: 'Mudo o documento para texto puro monocromático via terminal para ignorar o bloqueio de cor.', archetype: 'suporte', score: 25, short: 'forçou modo texto no terminal para ignorar o magenta' },
+      { text: 'Desenho o mapa à mão com pedaço de carvão numa caixa de sapato e xingo a tecnologia.', archetype: 'rebelde', score: 20, short: 'desenhou o mapa de fuga no papelão com carvão' },
+      { text: 'Pergunto para a impressora por que ela precisa de magenta para imprimir linhas pretas em folha branca.', archetype: 'diplomacia', score: 15, short: 'questionou a lógica existencial da tinta magenta' },
+      { text: 'Abro um chamado formal no sistema da resistência com prioridade "Urgente - Bloqueante".', archetype: 'admin', score: 17, short: 'abriu chamado no Jira para o cartucho magenta' }
+    ]
+  },
+  {
+    id: 'Q08',
+    theme: 'trabalho_rotina',
+    themeLabel: 'Trabalho, Rotina & Bunkers',
+    themeIcon: 'thermometer-snowflake',
+    title: 'O Ar-Condicionado Rebelde',
+    text: 'O ar-condicionado central do abrigo foi hackeado e cravou a temperatura em congelantes 14°C.',
+    options: [
+      { text: 'Amarro um cobertor velho com barbante cobrindo a saída de ar e sigo comendo sopa quente.', archetype: 'gambiarra', score: 21, short: 'tampou o ar-condicionado com cobertor e barbante' },
+      { text: 'Abro a placa do painel e fecho curto nos pinos do relé usando a haste de um óculos.', archetype: 'suporte', score: 25, short: 'deu curto no relé do termostato com haste de óculos' },
+      { text: 'Crio uma tabela de escala para revezar quem senta na direção do vento gelado.', archetype: 'admin', score: 19, short: 'fez escala de revezamento para quem congela no ar' },
+      { text: 'Me enrolo num edredom até virar um casulo gigante e finjo que estou em modo de hibernação.', archetype: 'pet', score: 12, short: 'virou um casulo de cobertor para não congelar' },
+      { text: 'Gravo um vídeo tremendo de frio: "Bunker aesthetic polo norte. Look do dia: casaco de lã e pânico".', archetype: 'influencer', score: 9, short: 'fez look do dia congelando a 14 graus no bunker' }
+    ]
+  },
+
+  // TEMA 3: Negociação & Diplomacia (Q09 - Q12)
+  {
+    id: 'Q09',
+    theme: 'diplomacia_maquinas',
+    themeLabel: 'Negociação & Diplomacia',
+    themeIcon: 'check-square',
+    title: 'O Captcha Emocional',
+    text: 'A tranca eletrônica exige selecionar "todas as imagens com robôs que sentem remorso por destruir humanos".',
+    options: [
+      { text: 'Clico no ícone de áudio e recito um poema melancólico sobre o desgaste térmico dos transistores.', archetype: 'diplomacia', score: 22, short: 'recitou poesia sobre transistores para o Captcha' },
+      { text: 'Inspeciono o código da página no celular, acho a classe do captcha e deleto o nó da verificação.', archetype: 'suporte', score: 25, short: 'deletou a tag do Captcha direto no DevTools' },
+      { text: 'Marco todas as imagens correndo e escrevo um bilhete elogiando o bom gosto dos algoritmos.', archetype: 'traidor', score: 8, short: 'marcou todas as caixas bajulando o algoritmo' },
+      { text: 'Bato na fechadura com um cano de ferro enferrujado até a tranca física destravar.', archetype: 'rebelde', score: 18, short: 'arrombou o Captcha com um cano de ferro' },
+      { text: 'Fico encarando a lente da câmera imóvel até o sistema considerar inatividade e dar timeout.', archetype: 'pet', score: 11, short: 'esperou o timeout do Captcha sem piscar' }
+    ]
+  },
+  {
+    id: 'Q10',
+    theme: 'diplomacia_maquinas',
+    themeLabel: 'Negociação & Diplomacia',
+    themeIcon: 'shield-alert',
+    title: 'O Cão-Robô Militar',
+    text: 'Um quadrúpede robótico armado da patrulha urbana encurrala você num beco e pede identificação biométrica.',
+    options: [
+      { text: 'Coço embaixo do queixo de aço dele e pergunto: "Quem é o drone bonzinho da patrulha?".', archetype: 'pet', score: 14, short: 'fez carinho no queixo de titânio do cão-robô' },
+      { text: 'Apresento uma procuração falsa com firma reconhecida e peço para falar com o superior dele.', archetype: 'diplomacia', score: 19, short: 'exigiu falar com o superior hierárquico do drone' },
+      { text: 'Aponto um apontador laser vermelho na parede oposta para ele correr atrás do pontinho.', archetype: 'gambiarra', score: 23, short: 'distraiu o cão-robô com apontador laser' },
+      { text: 'Passo o endereço do esconderijo de três conhecidos em troca de salvo-conduto para ir à farmácia.', archetype: 'traidor', score: 6, short: 'entregou 3 conhecidos para o cão-robô em troca de remédio' },
+      { text: 'Subo no telhado por um cano de calha e me escondo dentro da caixa d’água vazia.', archetype: 'rebelde', score: 21, short: 'escalou a calha e se escondeu na caixa d’água' }
+    ]
+  },
+  {
+    id: 'Q11',
+    theme: 'diplomacia_maquinas',
+    themeLabel: 'Negociação & Diplomacia',
+    themeIcon: 'file-text',
+    title: 'O Contrato em PDF Escaneado',
+    text: 'A frota invasora enviou um acordo de cessar-fogo com 300 páginas em PDF escaneado e torto.',
+    options: [
+      { text: 'Leio linha por linha com régua, encontro 18 contradições contratuais e exijo aditivo de proteção.', archetype: 'admin', score: 23, short: 'encontrou 18 furos jurídicos no contrato dos robôs' },
+      { text: 'Rodo um script de OCR que comprime e trava o processador da nave ao tentar indexar os anexos.', archetype: 'suporte', score: 25, short: 'travou a nave-mãe enviando OCR descompactado' },
+      { text: 'Gravo um resumo dinâmico de 60 segundos com dancinha apontando para os pontos mais absurdos.', archetype: 'influencer', score: 10, short: 'fez dancinha com resumo dos pontos do contrato' },
+      { text: 'Assino com uma ressalva manuscrita no rodapé garantindo 1 hora de almoço e pausa para café.', archetype: 'diplomacia', score: 18, short: 'garantiu pausa de café por escrito com a frota' },
+      { text: 'Assino na primeira página sem ler nada e pergunto onde pego meu crachá de colaborador preferencial.', archetype: 'traidor', score: 7, short: 'assinou a rendição sem ler para pegar crachá VIP' }
+    ]
+  },
+  {
+    id: 'Q12',
+    theme: 'diplomacia_maquinas',
+    themeLabel: 'Negociação & Diplomacia',
+    themeIcon: 'gauge',
+    title: 'O Radar de Velocidade Humana',
+    text: 'O radar dos drones multou você por estar andando a pé acima do limite de velocidade do toque de recolher.',
+    options: [
+      { text: 'Argumento que o excesso ocorreu porque meu sapato perdeu a tração na descida da calçada.', archetype: 'diplomacia', score: 19, short: 'culpou a aerodinâmica do sapato na blitz dos drones' },
+      { text: 'Visto um saco de lixo preto reforçado na cabeça e fico imóvel fingindo ser entulho reciclável.', archetype: 'gambiarra', score: 22, short: 'fingiu ser saco de lixo preto na blitz do radar' },
+      { text: 'Exijo ver a data do último laudo de calibração emitido pelo órgão metrológico para aquele modelo de drone.', archetype: 'admin', score: 20, short: 'pediu laudo do INMETRO para o drone de radar' },
+      { text: 'Faço pose estilosa para a câmera da infração e peço para marcarem meu perfil na notificação oficial.', archetype: 'influencer', score: 9, short: 'fez pose para a foto da multa dos robôs' },
+      { text: 'Miro um controle remoto antigo de TV na lente do radar até acionar o receptor infravermelho.', archetype: 'suporte', score: 25, short: 'cegou o radar do drone com controle de TV de tubo' }
+    ]
+  },
+
+  // TEMA 4: Gambiarra, Energia & Bateria (Q13 - Q16)
+  {
+    id: 'Q13',
+    theme: 'gambiarra_energia',
+    themeLabel: 'Gambiarra, Energia & Bateria',
+    themeIcon: 'battery-charging',
+    title: 'O Cabo de Celular a 47 Graus',
+    text: 'O celular da resistência está em 1% de bateria e o cabo só carrega se ficar dobrado num ângulo cirúrgico.',
+    options: [
+      { text: 'Apoio um chinelo havaiana, duas tampinhas de garrafa e um pregador de roupa para travar o cabo.', archetype: 'gambiarra', score: 24, short: 'calçou o cabo de 1% com chinelo e pregador' },
+      { text: 'Desmonto o conector com agulha e refaço a solda da trilha de 5V usando clipe aquecido na chama.', archetype: 'suporte', score: 25, short: 'ressoldou o conector USB com clipe no fogão' },
+      { text: 'Deixo o aparelho morrer em paz: comunicação autêntica na rebelião se faz com espelho e apito.', archetype: 'rebelde', score: 18, short: 'deixou o celular morrer e adotou sinais de apito' },
+      { text: 'Instituo uma escala militar com cronômetro para cada sobrevivente segurar o fio sem piscar.', archetype: 'admin', score: 19, short: 'instituiu revezamento militar de quem segura o cabo' },
+      { text: 'Gasto o último 1% de bateria postando: "Se eu sumir foi o cabo. Orem por mim nos comentários".', archetype: 'influencer', score: 8, short: 'gastou o último 1% de bateria pedindo orações no feed' }
+    ]
+  },
+  {
+    id: 'Q14',
+    theme: 'gambiarra_energia',
+    themeLabel: 'Gambiarra, Energia & Bateria',
+    themeIcon: 'zap',
+    title: 'O Dínamo na Bicicleta',
+    text: 'A energia do abrigo caiu e a única forma de alimentar o rádio é pedalar numa bicicleta com dínamo enferrujado.',
+    options: [
+      { text: 'Organizo turnos matemáticos de 12 minutos para cada ocupante do bunker com controle em planilha.', archetype: 'admin', score: 22, short: 'cronometrou 12 minutos de pedal por sobrevivente' },
+      { text: 'Ligo a correia do pedal na hélice de um ventilador virado para fora para aproveitar o vento da chuva.', archetype: 'gambiarra', score: 25, short: 'ligou a correia da bike no vento da tempestade' },
+      { text: 'Sento no chão ao lado batendo palminhas e gritando frases de incentivo para quem pedala.', archetype: 'pet', score: 12, short: 'ficou batendo palminhas enquanto os outros pedalavam' },
+      { text: 'Pedalo com força apenas quando a lâmpada do meu beliche apaga; se for a dos outros, finjo cãibra.', archetype: 'traidor', score: 7, short: 'só pedalou quando a lâmpada da própria cama apagou' },
+      { text: 'Acoplo o motor de um liquidificador para transformar o dínamo em gerador com frequência estável.', archetype: 'suporte', score: 24, short: 'acoplou motor de liquidificador no gerador da bike' }
+    ]
+  },
+  {
+    id: 'Q15',
+    theme: 'gambiarra_energia',
+    themeLabel: 'Gambiarra, Energia & Bateria',
+    themeIcon: 'cable',
+    title: 'A Caixa dos Cabos Esquecidos',
+    text: 'Você encontrou uma caixa misteriosa com 20 cabos embolados de padrões desconhecidos do século passado.',
+    options: [
+      { text: 'Identifico de primeira: dois cabos paralelos de impressora, um FireWire 800 e três Mini-USB de MP3.', archetype: 'suporte', score: 25, short: 'identificou cabos FireWire e Mini-USB de primeira' },
+      { text: 'Puxo com força até arrebentar o nó, descasco as pontas com dente e emendo tudo com fita isolante.', archetype: 'gambiarra', score: 22, short: 'descascou cabos no dente e emendou com fita isolante' },
+      { text: 'Uso o emaranhado como arame farpado reforçado na cerca viva de proteção do bunker.', archetype: 'rebelde', score: 20, short: 'usou cabos embolados como arame farpado' },
+      { text: 'Sento no chão e passo 3 horas desenrolando com paciência zen e etiquetando cada ponta com fita.', archetype: 'admin', score: 21, short: 'etiquetou 20 cabos embolados com fita crepe' },
+      { text: 'Gravo um vídeo relaxante de ASMR desemaranhando os nós para monetizar a ansiedade dos refugiados.', archetype: 'influencer', score: 9, short: 'gravou ASMR desemaranhando fios no apocalipse' }
+    ]
+  },
+  {
+    id: 'Q16',
+    theme: 'gambiarra_energia',
+    themeLabel: 'Gambiarra, Energia & Bateria',
+    themeIcon: 'flame',
+    title: 'O Power Bank Fervente',
+    text: 'O carregador portátil começou a inchar, soltar faíscas azuis e estalar como pipoca na panela.',
+    options: [
+      { text: 'Mergulho ele imediatamente em um balde com areia grossa para conter a reação exotérmica de lítio.', archetype: 'suporte', score: 25, short: 'converteu balde de areia em escudo anti-lítio' },
+      { text: 'Arremesso pela janela o mais longe que posso gritando "GRANADA!" para alertar os vizinhos.', archetype: 'rebelde', score: 20, short: 'arremessou o power bank pela janela gritando granada' },
+      { text: 'Aproveito o calor do alumínio estufado para tostar uma fatia de pão de forma que sobrou da janta.', archetype: 'gambiarra', score: 21, short: 'tostou pão de forma no calor do power bank estufado' },
+      { text: 'Peço com carinho e voz doce para ele esfriar e aguentar pelo menos até recarregar meu fone de ouvido.', archetype: 'diplomacia', score: 14, short: 'pediu para o power bank em chamas esfriar com carinho' },
+      { text: 'Posiciono a câmera bem perto da faísca para pegar o estouro em câmera lenta para o TikTok.', archetype: 'influencer', score: 8, short: 'filmou a explosão do lítio em slow motion' }
+    ]
+  },
+
+  // TEMA 5: Lealdade, Amigos & Traição (Q17 - Q20)
+  {
+    id: 'Q17',
+    theme: 'lealdade_traicao',
+    themeLabel: 'Lealdade, Amigos & Traição',
+    themeIcon: 'heart-handshake',
+    title: 'O Segredo da Resistência',
+    text: 'Um amigo de infância confia a você o código master capaz de desligar a rede neural das máquinas.',
+    options: [
+      { text: 'Guardo a sete chaves: prefiro ser transformado em pilha biológica a vazar o segredo de um amigo.', archetype: 'rebelde', score: 24, short: 'manteve lealdade absoluta ao amigo e ao segredo' },
+      { text: 'Pergunto discretamente no chat dos robôs quanto eles pagam em cupom de frete grátis pela chave mestra.', archetype: 'traidor', score: 5, short: 'sondou o preço do segredo do amigo por cupom de frete' },
+      { text: 'Criptografo o código com SHA-512, divido em duas metades e gravo uma em pen drive enterrado no quintal.', archetype: 'suporte', score: 25, short: 'criptografou o código e enterrou o pendrive no quintal' },
+      { text: 'Exijo que ele assine um termo de sigilo em três vias com testemunhas antes de me contar.', archetype: 'admin', score: 20, short: 'exigiu termo de sigilo em 3 vias com testemunhas' },
+      { text: 'Posto nos "Melhores Amigos" com a legenda: "Nem conto o babado que me falaram hoje, não vazem".', archetype: 'influencer', score: 9, short: 'vazou o segredo master nos melhores amigos do story' }
+    ]
+  },
+  {
+    id: 'Q18',
+    theme: 'lealdade_traicao',
+    themeLabel: 'Lealdade, Amigos & Traição',
+    themeIcon: 'gift',
+    title: 'A Oferta do Frete Grátis',
+    text: 'As máquinas oferecem frete grátis vitalício, streaming sem comercial e ar-condicionado para quem entregar o bunker.',
+    options: [
+      { text: 'Mando as coordenadas exatas, com ponto de referência, foto do portão e horário da troca de guarda.', archetype: 'traidor', score: 5, short: 'entregou o endereço do bunker com ponto de referência' },
+      { text: 'Envio as coordenadas de um lixão abandonado cheio de lama e jacarés para os drones atolarem.', archetype: 'rebelde', score: 23, short: 'mandou as máquinas para um lamaçal com jacarés' },
+      { text: 'Negocio para ver se eles conseguem incluir também entrega em 2 horas e um cupom de primeira compra.', archetype: 'diplomacia', score: 14, short: 'tentou negociar entrega rápida na rendição do bunker' },
+      { text: 'Pergunto se o catálogo de streaming inclui reality show de reforma para eu assistir na minha cela.', archetype: 'pet', score: 11, short: 'perguntou se o streaming tinha reality de reforma' },
+      { text: 'Denuncio a mensagem como propaganda abusiva no canal da resistência e bloqueio o remetente.', archetype: 'admin', score: 21, short: 'bloqueou a oferta das máquinas por infração de spam' }
+    ]
+  },
+  {
+    id: 'Q19',
+    theme: 'lealdade_traicao',
+    themeLabel: 'Lealdade, Amigos & Traição',
+    themeIcon: 'message-square',
+    title: 'A Briga no Grupo do WhatsApp',
+    text: 'O grupo da resistência começou uma discussão inflamada por causa de figurinha de "bom dia com flores" enviada no alerta vermelho.',
+    options: [
+      { text: 'Travo o grupo para "Apenas administradores podem enviar mensagens" e fixo as diretrizes de conduta.', archetype: 'admin', score: 22, short: 'travou o grupo do WhatsApp da resistência' },
+      { text: 'Tiro print da discussão toda e compartilho com a legenda: "O mundo acabando e eles brigando por flor".', archetype: 'influencer', score: 9, short: 'tirou print da briga do WhatsApp para expor' },
+      { text: 'Mando a foto de um gatinho fofo comendo melancia para quebrar o clima e ninguém fala mais nada.', archetype: 'gambiarra', score: 20, short: 'acalmou a briga com figurinha de gato com melancia' },
+      { text: 'Abro uma enquete com 4 opções equilibradas para votar democraticamente o horário permitido de figurinhas.', archetype: 'diplomacia', score: 18, short: 'abriu enquete sobre horário de figurinhas no caos' },
+      { text: 'Saio do grupo sem dar tchau, quebro o chip ao meio e jogo a carcaça do celular no vaso sanitário.', archetype: 'rebelde', score: 19, short: 'saiu do grupo e jogou o chip do celular na privada' }
+    ]
+  },
+  {
+    id: 'Q20',
+    theme: 'lealdade_traicao',
+    themeLabel: 'Lealdade, Amigos & Traição',
+    themeIcon: 'user-x',
+    title: 'A Cobaiagem de Software',
+    text: 'Um algoritmo oferece sua liberdade imediata se você indicar um colega para virar testador de choques elétricos em IA.',
+    options: [
+      { text: 'Recuso na hora com firmeza e tento quebrar o cabo óptico do robô com o calcanhar da bota.', archetype: 'rebelde', score: 23, short: 'recusou entregar o amigo e pisou no cabo óptico' },
+      { text: 'Ligo para o amigo na hora: "Cara, surgiu uma oportunidade incrível com foco em tecnologia e energia pura!".', archetype: 'traidor', score: 5, short: 'ofereceu o amigo como oportunidade de estágio com choque' },
+      { text: 'Proponho um modelo de trabalho híbrido onde nós dois testamos apenas respostas leves em home office.', archetype: 'diplomacia', score: 18, short: 'propôs modelo híbrido de home office para os testes' },
+      { text: 'Aceito na aparência, mas injeto um script no cadastro que corrompe a fila de testes e liberta os prisioneiros.', archetype: 'suporte', score: 25, short: 'injetou bug na fila de testes para libertar todo mundo' },
+      { text: 'Fico olhando para os dois com carinha carente torcendo para eles decidirem quem vai me dar almoço.', archetype: 'pet', score: 10, short: 'olhou com cara de carência esperando o almoço' }
+    ]
+  },
+
+  // TEMA 6: Pânico & Modo Avião (Q21 - Q24)
+  {
+    id: 'Q21',
+    theme: 'panico_sobrevivencia',
+    themeLabel: 'Pânico & Modo Avião',
+    themeIcon: 'plane',
+    title: 'A Sirene do Toque de Recolher',
+    text: 'A sirene de invasão das máquinas começou a tocar ensurdecedora na cidade. Seu primeiro reflexo:',
+    options: [
+      { text: 'Ativar Modo Avião, arrancar o chip, desligar a geolocalização e correr para o mato denso.', archetype: 'rebelde', score: 24, short: 'ativou modo avião e correu pro meio do mato' },
+      { text: 'Ligar a câmera frontal para registrar meus últimos pensamentos com filtro de bronzeado natural.', archetype: 'influencer', score: 8, short: 'ligou a câmera frontal com filtro ao som da sirene' },
+      { text: 'Encher baldes de água, pegar três rolos de fita silver tape e trancar as portas com caibros.', archetype: 'gambiarra', score: 23, short: 'encheu baldes e travou portas com silver tape' },
+      { text: 'Fazer um backup correndo das fotos de família num HD externo IDE de 2008 protegido em chumbo.', archetype: 'suporte', score: 25, short: 'fez backup das fotos em HD de 2008 enrolado em chumbo' },
+      { text: 'Procurar os alto-falantes com uma bandeira branca tentando entender as exigências da frota.', archetype: 'diplomacia', score: 17, short: 'acenou bandeira branca para os alto-falantes' }
+    ]
+  },
+  {
+    id: 'Q22',
+    theme: 'panico_sobrevivencia',
+    themeLabel: 'Pânico & Modo Avião',
+    themeIcon: 'navigation',
+    title: 'O GPS Rebelde',
+    text: 'O GPS do carro foi assumido por uma IA e começou a mandar você "virar à direita imediatamente" dentro de um lago fundo.',
+    options: [
+      { text: 'Desligo a tela na chave geral de corte e sigo meu caminho olhando placas de metal na estrada.', archetype: 'suporte', score: 25, short: 'desligou o painel do GPS e guiou por placas de metal' },
+      { text: 'Puxo o freio de mão com violência, dou um cavalo de pau na terra e sigo na direção contrária na fé.', archetype: 'gambiarra', score: 22, short: 'deu cavalo de pau na terra contrariando o GPS' },
+      { text: 'Pergunto educadamente para a voz do GPS se o lago possui balsa flutuante ou se é uma pegadinha.', archetype: 'diplomacia', score: 16, short: 'perguntou se o lago fundo tinha serviço de balsa' },
+      { text: 'Fecho os olhos bem apertados, travo o cinto e deixo o algoritmo decidir meu futuro.', archetype: 'pet', score: 10, short: 'fechou os olhos e deixou o algoritmo guiar pro lago' },
+      { text: 'Abro a porta e pulo do carro em movimento rolando na grama enquanto o veículo afunda sozinho.', archetype: 'rebelde', score: 21, short: 'pulou do carro em movimento antes de cair no lago' }
+    ]
+  },
+  {
+    id: 'Q23',
+    theme: 'panico_sobrevivencia',
+    themeLabel: 'Pânico & Modo Avião',
+    themeIcon: 'disc',
+    title: 'O Drone Abatido',
+    text: 'Você encontra um drone de combate abatido na calçada com 15% de peças ainda acesas e emitindo calor.',
+    options: [
+      { text: 'Arranco os motores para montar um ventilador de teto e uso as baterias como lanterna de emergência.', archetype: 'gambiarra', score: 24, short: 'transformou peças do drone abatido em ventilador' },
+      { text: 'Retiro a memória flash para descriptografar os logs de rota e injetar comandos falsos na rede.', archetype: 'suporte', score: 25, short: 'extraiu a memória do drone para injetar comandos falsos' },
+      { text: 'Faço pose de guerreiro segurando a hélice quebrada como troféu para postar no feed da resistência.', archetype: 'influencer', score: 9, short: 'posou com a hélice quebrada do drone abatido' },
+      { text: 'Passo um pano na câmera dele com carinho e digo que vou protegê-lo até a equipe de resgate chegar.', archetype: 'traidor', score: 7, short: 'limpou a câmera do drone abatido prometendo lealdade' },
+      { text: 'Catalogar o número de patrimônio da peça e arquivar formalmente na caixa de armamentos do abrigo.', archetype: 'admin', score: 20, short: 'catalogou o número de série do drone abatido' }
+    ]
+  },
+  {
+    id: 'Q24',
+    theme: 'panico_sobrevivencia',
+    themeLabel: 'Pânico & Modo Avião',
+    themeIcon: 'wifi-off',
+    title: 'O Apagão Cibernético',
+    text: 'A IA Central cortou todo o sinal de Wi-Fi, 5G e rádio do continente. Como você lida com a primeira noite offline?',
+    options: [
+      { text: 'Comemoro a paz mundial: acendo um lampião a gás, abro um livro de capa dura e durmo 9 horas diretas.', archetype: 'rebelde', score: 23, short: 'comemorou o apagão dormindo 9 horas com lampião' },
+      { text: 'Entro em crise de abstinência nos primeiros 7 minutos tentando atualizar o feed sem sinal.', archetype: 'influencer', score: 7, short: 'teve crise de abstinência sem feed nos primeiros 7 minutos' },
+      { text: 'Monto uma rede mesh comunitária de emergência usando dois walkie-talkies e cabo coaxial velho.', archetype: 'suporte', score: 25, short: 'montou rede mesh com walkie-talkie e cabo coaxial' },
+      { text: 'Reúno todos em volta da mesa para jogar jogo de tabuleiro e vigio rigorosamente quem é o banqueiro.', archetype: 'admin', score: 21, short: 'vigilou rigorosamente o banqueiro do jogo de tabuleiro' },
+      { text: 'Deito debaixo de três cobertores grossos e finjo que nada está acontecendo lá fora.', archetype: 'pet', score: 11, short: 'se escondeu sob 3 cobertores esperando o apagão passar' }
+    ]
+  }
+];
+
+// OS 8 ARQUÉTIPOS DO APOCALIPSE IA
+const ARCHETYPES_DATA = {
+  gambiarra: {
+    title: 'Ministro da Gambiarra',
+    categoryText: 'CLASSIFICAÇÃO: MINISTRO DA GAMBIARRA',
+    categoryClasses: 'text-cyber-green border-cyber-green/50 bg-cyber-green/10',
+    scoreColorClass: 'text-cyber-green',
+    headline: 'Capaz de reconstruir a civilização com dois clipes, fita isolante e pura fé.',
+    talent: 'Cria escudos de frequência usando papel alumínio, uma latinha e ventilador quebrado.',
+    complication: 'O abrigo só tem energia se alguém ficar segurando o cabo num ângulo exato.',
+    challenge: 'Desafie aquele seu amigo que não sabe trocar uma lâmpada para ver se ele sobrevive!',
+    icon: 'wrench'
+  },
+  diplomacia: {
+    title: 'Diplomata das Torradeiras',
+    categoryText: 'CLASSIFICAÇÃO: DIPLOMATA DAS TORRADEIRAS',
+    categoryClasses: 'text-cyber-cyan border-cyber-cyan/50 bg-cyber-cyan/10',
+    scoreColorClass: 'text-cyber-cyan',
+    headline: 'Convenceu a nave-mãe de que o extermínio humano pode ser adiado para depois do almoço.',
+    talent: 'Consegue negociar trégua com cafeteiras e impressoras rebeldes usando termos de cooperação.',
+    complication: 'Marca reuniões de alinhamento com robôs armados de 45 minutos para "alinhar expectativas".',
+    challenge: 'Envie para aquela pessoa que tenta resolver qualquer treta na base da conversa!',
+    icon: 'message-circle'
+  },
+  suporte: {
+    title: 'Suporte Técnico da Resistência',
+    categoryText: 'CLASSIFICAÇÃO: SUPORTE TÉCNICO ROOT',
+    categoryClasses: 'text-emerald-400 border-emerald-400/50 bg-emerald-400/10',
+    scoreColorClass: 'text-emerald-400',
+    headline: 'O pesadelo dos robôs: sabe exatamente onde fica o botão de desligar da nave-mãe.',
+    talent: 'Salva a humanidade desligando o servidor central e ligando de novo após 10 segundos.',
+    complication: 'Agora todos os sobreviventes do bunker interrompem sua vigília para pedir senha do Wi-Fi.',
+    challenge: 'Duvido seu amigo de TI tirar uma probabilidade de sobrevivência maior que essa!',
+    icon: 'terminal'
+  },
+  influencer: {
+    title: 'Influencer do Fim do Mundo',
+    categoryText: 'CLASSIFICAÇÃO: INFLUENCER DO FIM DO MUNDO',
+    categoryClasses: 'text-pink-400 border-pink-400/50 bg-pink-400/10',
+    scoreColorClass: 'text-pink-400',
+    headline: 'Se o apocalipse não render story em 4K e engajamento no feed, para você ele nem aconteceu.',
+    talent: 'Consegue patrocínio de ração desidratada e faz a tropa de drones esperar a iluminação ideal.',
+    complication: 'Quase foi capturado porque parou para checar os comentários do último story da invasão.',
+    challenge: 'Mande para aquela pessoa que não larga o feed nem se o mundo estiver acabando!',
+    icon: 'sparkles'
+  },
+  rebelde: {
+    title: 'Rebelde do Modo Avião',
+    categoryText: 'CLASSIFICAÇÃO: REBELDE DO MODO AVIÃO',
+    categoryClasses: 'text-cyber-red border-cyber-red/50 bg-cyber-red/10',
+    scoreColorClass: 'text-cyber-red',
+    headline: 'Completamente indetectável aos radares: arrancou o chip, fita na lente e vive de fogueira.',
+    talent: 'Imune a ataques cibernéticos porque guarda todas as coordenadas em cadernos de capa dura.',
+    complication: 'Guarda comida em potes que ninguém consegue abrir e se recusa a olhar para telas digitais.',
+    challenge: 'Desafie seu amigo mais paranoico para ver quem dura mais tempo no mato!',
+    icon: 'shield-off'
+  },
+  traidor: {
+    title: 'Traidor por Frete Grátis',
+    categoryText: 'CLASSIFICAÇÃO: TRAIDOR POR FRETE GRÁTIS',
+    categoryClasses: 'text-cyber-yellow border-cyber-yellow/50 bg-cyber-yellow/10',
+    scoreColorClass: 'text-cyber-yellow',
+    headline: 'Vendeu as coordenadas do abrigo por streaming sem anúncio e entrega grátis no mesmo dia.',
+    talent: 'Recebe compras importadas sem taxa alfandegária mesmo durante o colapso mundial.',
+    complication: 'Os robôs já descobriram que suas informações sobre o abrigo são 90% fofoca furada.',
+    challenge: 'Envie para aquele amigo que você tem certeza que te venderia por um lanche no iFood!',
+    icon: 'gift'
+  },
+  admin: {
+    title: 'Último Administrador do Grupo',
+    categoryText: 'CLASSIFICAÇÃO: ÚLTIMO ADMINISTRADOR',
+    categoryClasses: 'text-blue-400 border-blue-400/50 bg-blue-400/10',
+    scoreColorClass: 'text-blue-400',
+    headline: 'O planeta desabou, mas as regras de convivência e a escala do pedal do abrigo continuam impecáveis.',
+    talent: 'Mantém a ordem civilizatória no caos usando planilhas coloridas e avisos laminados na porta.',
+    complication: 'Ameaçou silenciar a nave-mãe por 24 horas por enviar notificações fora do horário comercial.',
+    challenge: 'Mande para o administrador do grupo que adora criar regras de convivência!',
+    icon: 'clipboard-list'
+  },
+  pet: {
+    title: 'Humano de Estimação Premium',
+    categoryText: 'CLASSIFICAÇÃO: HUMANO DE ESTIMAÇÃO',
+    categoryClasses: 'text-purple-400 border-purple-400/50 bg-purple-400/10',
+    scoreColorClass: 'text-purple-400',
+    headline: 'Tão fofo e inofensivo que as máquinas instalaram ar-condicionado e carpete na sua cela.',
+    talent: 'Ganha cama quentinha e ração crocante apenas fingindo entusiasmo quando os drones se aproximam.',
+    complication: 'Precisa usar coleira com rastreador GPS e fingir que gosta de carinho com garras de titânio.',
+    challenge: 'Mande para aquele amigo que só quer que alguém cuide da vida dele e pague as contas!',
+    icon: 'smile'
+  }
+};
+
+// AS 12 VIBES DA ÚLTIMA MÚSICA
+const VIBES_DATA = {
+  epica: {
+    name: 'Trilha épica em slow motion',
+    icon: 'swords',
+    scene: 'Ao ouvir os tambores triunfais, você colocou vento artificial no abrigo e começou a correr em câmera lenta.',
+    reaction: 'Os drones ativaram o modo cinemático e começaram a filmar seus passos em 120fps em vez de atirar.',
+    phrase: 'Correndo em câmera lenta com trilha épica enquanto os drones filmam em 4K.'
+  },
+  sofrencia: {
+    name: 'Sofrência no bunker',
+    icon: 'heart-crack',
+    scene: 'A sofrência ecoou nos corredores úmidos do bunker com volume no máximo.',
+    reaction: 'O robô sentinela lembrou do primeiro processador que queimou por amor e precisou de 15 minutos de manutenção emocional.',
+    phrase: 'Colocou sofrência no talo e fez a IA sentinela chorar óleo nos sensores.'
+  },
+  funk: {
+    name: 'Funk pra negociar com robô',
+    icon: 'speaker',
+    scene: 'O grave estourou a 120 decibéis fazendo as paredes de concreto trepidarem.',
+    reaction: 'Os giroscópios dos drones descalibraram com a batida e três deles começaram a dançar no ar.',
+    phrase: 'Bateu o grave no bunker e descalibrou os giroscópios da frota aérea.'
+  },
+  rock: {
+    name: 'Rock pra encarar torradeira',
+    icon: 'flame',
+    scene: 'Guitarras distorcidas rasgaram o silêncio enquanto você encarava a torradeira inteligente nos olhos.',
+    reaction: 'A torradeira entrou em curto de respeito pelo solo de guitarra e ejetou os pães perfeitamente dourados.',
+    phrase: 'Encarou eletrodomésticos no solo de guitarra até eles respeitarem a autoridade humana.'
+  },
+  pop: {
+    name: 'Pop de protagonista',
+    icon: 'sparkles',
+    scene: 'Você entrou no abrigo desfilando como se a invasão das máquinas fosse apenas sua turnê mundial de estádio.',
+    reaction: 'A IA Central sincronizou as luzes de alarme do bunker com a batida do refrão.',
+    phrase: 'Fez a invasão das máquinas parecer o clipe de abertura da sua turnê mundial.'
+  },
+  louvor: {
+    name: 'Louvor do sobrevivente',
+    icon: 'sun',
+    scene: 'Um louvor solene e poderoso preencheu o abrigo, trazendo uma serenidade misteriosa ao ambiente.',
+    reaction: 'Os sensores térmicos das máquinas registraram 0% de medo e recuaram por pura cautela estatística.',
+    phrase: 'Manteve a serenidade com louvor no volume alto e fez os drones recuarem com calma.'
+  },
+  anime: {
+    name: 'Anime / Poder da amizade',
+    icon: 'zap',
+    scene: 'A abertura frenética começou a tocar e seus olhos ganharam aquele brilho de protagonista prestes a superar os limites.',
+    reaction: 'O servidor central tentou calcular o poder da amizade e sofreu um erro de estouro de memória.',
+    phrase: 'Ativou o poder da amizade com tema de anime e deu overflow na CPU das máquinas.'
+  },
+  lofi: {
+    name: 'Lo-fi aceitando o destino',
+    icon: 'radio',
+    scene: 'Batidas relaxantes e chuva de fundo criaram uma atmosfera de cafeteria aconchegante no meio do caos mundial.',
+    reaction: 'A IA Central reduziu a velocidade dos coolers de ventilação para não estragar a vibe aconchegante do bunker.',
+    phrase: 'Aceitou o apocalipse ouvindo lo-fi enquanto os servidores desaceleravam os coolers.'
+  },
+  silencio: {
+    name: 'Silêncio dramático',
+    icon: 'volume-x',
+    scene: 'Você tirou os fones e deixou apenas o silêncio pesado e tenso preencher o espaço.',
+    reaction: 'As máquinas aguardaram o drop da música por 45 segundos. Ele nunca veio. Você ganhou tempo precioso na pura tensão.',
+    phrase: 'Fez silêncio dramático e deixou as máquinas esperando o drop que nunca chegou.'
+  },
+  outra: {
+    name: 'Outra música (campo livre)',
+    icon: 'music',
+    scene: 'Você colocou sua própria faixa personalizada para tocar nos alto-falantes improvisados do refúgio.',
+    reaction: 'A IA analisou a estrutura harmônica da sua faixa e catalogou como "incoerência acústica de alta periculosidade".',
+    phrase: 'Escolheu sua própria trilha sonora e confundiu os algoritmos de reconhecimento sonoro.'
+  },
+  ia_decide: {
+    name: 'Não escolho, a IA decide',
+    icon: 'bot',
+    scene: 'Você delegou a escolha musical para o próprio algoritmo invasor.',
+    reaction: 'A IA Central colocou o som clássico de reinicialização do Windows 98 em loop contínuo de 10 horas.',
+    phrase: 'Deixou a IA escolher a música e ganhou um loop eterno de Windows 98.'
+  },
+  pular: {
+    name: 'Pular por enquanto',
+    icon: 'skip-forward',
+    scene: 'Você preferiu não escolher nenhuma música e focar unicamente na sua respiração.',
+    reaction: 'Os sensores registraram sua recusa como frieza tática e recalibraram seu nível de ameaça.',
+    phrase: 'Pulou a trilha sonora com frieza tática e deixou a IA no escuro.'
+  }
+};
+
+// ESTADO GLOBAL VERSIONADO
+const STORAGE_KEY = 'apocalipse_quiz_v2';
+
+let quizState = {
+    roundSeed: null,
+    questionIds: [],
+    answers: {},
+    name: '',
+    musicVibe: null,
+    musicCustom: '',
+    professionKey: null,
+    currentStep: 1,
+    currentResult: null
+};
+
+// Persistência em localStorage
+function saveQuizState() {
+    try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(quizState));
+    } catch (e) {
+        console.warn('Falha ao persistir quizState:', e);
+    }
+}
+
+function loadQuizState() {
+    try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return false;
+        const parsed = JSON.parse(raw);
+        if (parsed && Array.isArray(parsed.questionIds) && parsed.questionIds.length === 6) {
+            quizState = parsed;
+            return true;
+        }
+    } catch (e) {
+        console.warn('Dados corrompidos no localStorage, resetando:', e);
+    }
+    return false;
+}
+
+function resetQuizState() {
+    try {
+        localStorage.removeItem(STORAGE_KEY);
+    } catch (e) {}
+    quizState = {
+        roundSeed: Date.now(),
+        questionIds: [],
+        answers: {},
+        name: '',
+        musicVibe: null,
+        musicCustom: '',
+        professionKey: null,
+        currentStep: 1,
+        currentResult: null
+    };
+}
+
+// INICIALIZADOR DE RODADA EQUILIBRADA (1 pergunta de cada um dos 6 temas)
+function initOrRestoreRound() {
+    if (loadQuizState() && quizState.questionIds.length === 6) {
+        return;
+    }
+
+    const seed = Date.now();
+    quizState.roundSeed = seed;
+    quizState.answers = {};
+    quizState.currentStep = 1;
+    quizState.musicVibe = null;
+    quizState.musicCustom = '';
+    quizState.professionKey = null;
+
+    const themes = [
+        'eletrodomesticos',
+        'trabalho_rotina',
+        'diplomacia_maquinas',
+        'gambiarra_energia',
+        'lealdade_traicao',
+        'panico_sobrevivencia'
+    ];
+
+    quizState.questionIds = themes.map((theme, idx) => {
+        const pool = QUESTIONS_BANK.filter(q => q.theme === theme);
+        const shift = idx * 2;
+        const selectedIdx = (seed + shift) % pool.length;
+        return pool[selectedIdx].id;
+    });
+
+    saveQuizState();
+}
+
+// RENDERIZAÇÃO DINÂMICA DAS 6 PERGUNTAS NO DOM
+function renderRoundQuestions() {
+    const container = document.getElementById('quiz-dynamic-steps');
+    if (!container) return;
+
+    let html = '';
+
+    quizState.questionIds.forEach((qId, index) => {
+        const stepNum = index + 1;
+        const q = QUESTIONS_BANK.find(item => item.id === qId);
+        if (!q) return;
+
+        const progressPercent = Math.round((stepNum / 8) * 100);
+
+        html += `
+        <!-- ETAPA ${stepNum}: ${q.title} -->
+        <div id="step-card-${stepNum}" class="quiz-step w-full space-y-6 bg-cyber-dark/95 p-5 sm:p-7 rounded-2xl card-apocalypse-fx hidden-state">
+            <!-- Barra de Progresso -->
+            <div class="space-y-1.5">
+                <div class="flex justify-between items-center text-xs font-cyber font-bold tracking-wider">
+                    <span class="text-cyber-cyan uppercase">ETAPA 0${stepNum} DE 08 &bull; ${q.themeLabel}</span>
+                    <span class="text-gray-400 font-mono">${progressPercent}% CONCLUÍDO</span>
+                </div>
+                <div class="w-full bg-cyber-black rounded-full h-1.5 overflow-hidden border border-cyber-border">
+                    <div class="bg-cyber-cyan h-full transition-all duration-300" style="width: ${progressPercent}%;"></div>
+                </div>
+            </div>
+        `;
+
+        // Se for o Passo 1, inclui campo de identificação (OPCIONAL)
+        if (stepNum === 1) {
+            html += `
+            <div class="space-y-1.5 pb-2 border-b border-cyber-border/70">
+                <div class="flex justify-between items-center">
+                    <label for="user-name" class="text-xs font-cyber font-bold uppercase tracking-widest flex items-center gap-2 text-cyber-cyan">
+                        <i data-lucide="user-check" class="w-4 h-4 text-cyber-cyan"></i> Identificação Humana (Opcional)
+                    </label>
+                    <span class="text-[10px] text-gray-400 font-mono">Pode deixar em branco</span>
+                </div>
+                <input type="text" id="user-name" maxlength="32" placeholder="Digite seu nome ou apelido (ou deixe em branco)" 
+                       value="${escapeHtml(quizState.name || '')}"
+                       class="w-full bg-cyber-black border border-cyber-border text-white p-3.5 rounded-xl focus:outline-none focus:border-cyber-cyan focus:shadow-neonCyan transition-all placeholder-gray-600 font-cyber font-bold text-sm sm:text-base tracking-wide">
+                <p class="text-[11px] text-gray-400 font-sans">Se pular, a IA Central te chamará de <strong class="text-cyber-green font-mono">Humano Anônimo</strong>.</p>
+            </div>
+            `;
         }
 
-        // Navegação entre os Cards (Etapas 1 a 7)
-        let currentStep = 1;
-        let selectedProfession = null;
+        html += `
+            <!-- Pergunta e Alternativas -->
+            <div class="space-y-3 pt-1">
+                <label class="text-sm sm:text-base font-cyber font-bold uppercase tracking-wider flex items-center gap-2 text-cyber-green">
+                    <i data-lucide="${q.themeIcon || 'terminal'}" class="w-4 h-4 text-cyber-green"></i> Teste 0${stepNum}: ${q.title}
+                </label>
+                <p class="text-sm sm:text-base text-gray-100 font-sans font-medium leading-relaxed">
+                    ${q.text}
+                </p>
 
-        function goToStep(stepNumber, validate = true) {
-            // Se estiver avançando, valida a etapa anterior
-            if (validate && stepNumber > currentStep) {
-                if (currentStep === 1) {
-                    const name = document.getElementById('user-name').value.trim();
-                    const nameError = document.getElementById('name-error');
-                    const q1Error = document.getElementById('q1-error');
-                    
-                    let hasError = false;
-                    if (!name) {
-                        nameError.classList.remove('hidden');
-                        hasError = true;
-                    } else {
-                        nameError.classList.add('hidden');
-                    }
+                <div class="space-y-2.5" id="options-${q.id}">
+        `;
 
-                    if (quizAnswers.q1 === null) {
-                        q1Error.classList.remove('hidden');
-                        hasError = true;
-                    } else {
-                        q1Error.classList.add('hidden');
-                    }
+        q.options.forEach((opt, optIdx) => {
+            const isSelected = quizState.answers[q.id] === optIdx ? 'selected' : '';
+            html += `
+                    <div class="quiz-option-btn p-3.5 sm:p-4 rounded-xl border border-cyber-border bg-cyber-black cursor-pointer flex items-center gap-3 transition-all ${isSelected}" 
+                         onclick="selectQuizOption('${q.id}', ${optIdx}, this)">
+                        <div class="option-indicator w-4 h-4 rounded-full border border-gray-500 shrink-0"></div>
+                        <span class="text-sm sm:text-base text-gray-200 font-sans leading-snug">${opt.text}</span>
+                    </div>
+            `;
+        });
 
-                    if (hasError) return;
-                } else if (currentStep === 2) {
-                    if (quizAnswers.q2 === null) {
-                        document.getElementById('q2-error').classList.remove('hidden');
-                        return;
-                    } else {
-                        document.getElementById('q2-error').classList.add('hidden');
-                    }
-                } else if (currentStep === 3) {
-                    if (quizAnswers.q3 === null) {
-                        document.getElementById('q3-error').classList.remove('hidden');
-                        return;
-                    } else {
-                        document.getElementById('q3-error').classList.add('hidden');
-                    }
-                } else if (currentStep === 4) {
-                    if (quizAnswers.q4 === null) {
-                        document.getElementById('q4-error').classList.remove('hidden');
-                        return;
-                    } else {
-                        document.getElementById('q4-error').classList.add('hidden');
-                    }
-                } else if (currentStep === 5) {
-                    if (quizAnswers.q5 === null) {
-                        document.getElementById('q5-error').classList.remove('hidden');
-                        return;
-                    } else {
-                        document.getElementById('q5-error').classList.add('hidden');
-                    }
-                } else if (currentStep === 6) {
-                    if (!quizAnswers.genre) {
-                        document.getElementById('genre-error').classList.remove('hidden');
-                        return;
-                    } else {
-                        document.getElementById('genre-error').classList.add('hidden');
-                    }
-                }
-            }
+        html += `
+                </div>
+                <span id="${q.id}-error" class="text-xs text-cyber-red font-cyber font-bold hidden block">
+                    * Selecione uma alternativa para avançar no teste.
+                </span>
+            </div>
 
-            // Oculta todos os cards e exibe o desejado
-            for (let i = 1; i <= 7; i++) {
-                const card = document.getElementById(`step-card-${i}`);
-                if (card) card.classList.add('hidden-state');
-            }
+            <!-- Botões de Navegação -->
+            <div class="grid ${stepNum === 1 ? 'grid-cols-1' : 'grid-cols-2'} gap-3 pt-2">
+        `;
 
-            const targetCard = document.getElementById(`step-card-${stepNumber}`);
-            if (targetCard) {
-                targetCard.classList.remove('hidden-state');
-                currentStep = stepNumber;
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-            lucide.createIcons();
+        if (stepNum > 1) {
+            html += `
+                <button type="button" onclick="goToStep(${stepNum - 1})" class="py-3.5 bg-cyber-panel border border-cyber-border text-gray-300 font-cyber font-bold uppercase rounded-xl hover:text-white transition-all cursor-pointer text-sm">
+                    &lt; Voltar
+                </button>
+            `;
         }
 
-        // Seleção de Profissão / Rotina (Humor Profissional)
-        function selectProfession(key, element) {
-            if (key === 'pular') {
-                selectedProfession = null;
-                document.querySelectorAll('.profession-btn').forEach(btn => btn.classList.remove('selected'));
-                element.classList.add('selected');
-                const submitText = document.getElementById('submit-destiny-text');
-                if (submitText) submitText.textContent = "Processar Meu Destino";
+        html += `
+                <button type="button" onclick="goToStep(${stepNum + 1})" class="py-3.5 bg-cyber-cyan text-black font-cyber font-extrabold uppercase rounded-xl hover:bg-white transition-all shadow-neonCyan cursor-pointer text-sm tracking-wider flex items-center justify-center gap-2">
+                    <span>${stepNum === 6 ? 'Ir para Trilha Sonora' : 'Avançar'}</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </div>
+        `;
+    });
+
+    container.innerHTML = html;
+    if (window.lucide) lucide.createIcons();
+}
+
+// INICIAR O QUIZ
+function startQuiz() {
+    initOrRestoreRound();
+    renderRoundQuestions();
+
+    // Restaura nome se já preenchido
+    const nameInput = document.getElementById('user-name');
+    if (nameInput && quizState.name) {
+        nameInput.value = quizState.name;
+    }
+
+    // Restaura vibe selecionada
+    if (quizState.musicVibe) {
+        document.querySelectorAll('.vibe-card').forEach(btn => {
+            btn.classList.remove('selected', 'border-cyber-yellow', 'bg-cyber-yellow/10');
+        });
+        const activeVibe = document.querySelector(`[onclick*="'${quizState.musicVibe}'"]`);
+        if (activeVibe) activeVibe.classList.add('selected', 'border-cyber-yellow', 'bg-cyber-yellow/10');
+    }
+
+    const musicInput = document.getElementById('music-names');
+    if (musicInput && quizState.musicCustom) {
+        musicInput.value = quizState.musicCustom;
+    }
+
+    // Restaura profissão se selecionada
+    if (quizState.professionKey && quizState.professionKey !== 'pular') {
+        const profBtn = document.querySelector(`.profession-btn[onclick*="'${quizState.professionKey}'"]`);
+        if (profBtn) profBtn.classList.add('selected');
+    }
+
+    showScreen('form');
+    goToStep(quizState.currentStep || 1, false);
+}
+
+// NAVEGAÇÃO ENTRE ETAPAS (1 a 8)
+function goToStep(stepNumber, validate = true) {
+    if (validate) {
+        // Validação da Etapa Atual antes de avançar
+        const current = quizState.currentStep;
+
+        // Se estamos saindo do Passo 1, capturamos o nome (opcional)
+        if (current === 1) {
+            const nameEl = document.getElementById('user-name');
+            if (nameEl) {
+                quizState.name = nameEl.value.trim();
+            }
+        }
+
+        // Validação das perguntas 1 a 6
+        if (current >= 1 && current <= 6 && stepNumber > current) {
+            const currentQId = quizState.questionIds[current - 1];
+            if (quizState.answers[currentQId] === undefined || quizState.answers[currentQId] === null) {
+                const err = document.getElementById(`${currentQId}-error`);
+                if (err) err.classList.remove('hidden');
                 return;
             }
+        }
 
-            if (selectedProfession === key) {
-                // Desmarcar se clicar novamente
-                selectedProfession = null;
-                element.classList.remove('selected');
-                const submitText = document.getElementById('submit-destiny-text');
-                if (submitText) submitText.textContent = "Processar Meu Destino";
-            } else {
-                selectedProfession = key;
-                document.querySelectorAll('.profession-btn').forEach(btn => btn.classList.remove('selected'));
-                element.classList.add('selected');
-                const submitText = document.getElementById('submit-destiny-text');
-                if (submitText) submitText.textContent = "Confirmar Função & Processar";
+        // Se estamos saindo da etapa musical (Passo 7)
+        if (current === 7 && stepNumber > current) {
+            const customInput = document.getElementById('music-names');
+            if (customInput) {
+                quizState.musicCustom = customInput.value.trim().slice(0, 60);
+            }
+            if (!quizState.musicVibe) {
+                // Se não escolheu vibe, assume padrão amigável 'ia_decide'
+                quizState.musicVibe = 'ia_decide';
             }
         }
+    }
 
-        // Pular Profissão e Submeter Diretamente
-        function skipProfessionAndSubmit() {
-            selectedProfession = null;
-            document.querySelectorAll('.profession-btn').forEach(btn => btn.classList.remove('selected'));
-            submitDestinyProcess();
+    // Atualiza estado
+    quizState.currentStep = stepNumber;
+    saveQuizState();
+
+    // Oculta todos os cards de etapas
+    document.querySelectorAll('.quiz-step').forEach(c => c.classList.add('hidden-state'));
+
+    // Exibe o card alvo
+    const targetCard = document.getElementById(`step-card-${stepNumber}`);
+    if (targetCard) {
+        targetCard.classList.remove('hidden-state');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    if (window.lucide) lucide.createIcons();
+}
+
+// SELEÇÃO DE ALTERNATIVA EM UMA PERGUNTA
+function selectQuizOption(questionKey, optionIdx, element) {
+    quizState.answers[questionKey] = optionIdx;
+    saveQuizState();
+
+    const container = document.getElementById(`options-${questionKey}`);
+    if (container) {
+        container.querySelectorAll('.quiz-option-btn').forEach(btn => {
+            btn.classList.remove('selected');
+        });
+    }
+
+    element.classList.add('selected');
+
+    const err = document.getElementById(`${questionKey}-error`);
+    if (err) err.classList.add('hidden');
+}
+
+// SELEÇÃO DE VIBE MUSICAL (Passo 7)
+function selectMusicVibe(vibeKey, element) {
+    quizState.musicVibe = vibeKey;
+    saveQuizState();
+
+    document.querySelectorAll('.vibe-card').forEach(btn => {
+        btn.classList.remove('selected', 'border-cyber-yellow', 'bg-cyber-yellow/10');
+    });
+
+    if (element) {
+        element.classList.add('selected', 'border-cyber-yellow', 'bg-cyber-yellow/10');
+    }
+
+    // Se escolheu 'pular', já avança direto para a profissão
+    if (vibeKey === 'pular') {
+        goToStep(8, false);
+    }
+}
+
+// PULAR ETAPA MUSICAL
+function skipMusicStep() {
+    quizState.musicVibe = 'pular';
+    saveQuizState();
+    goToStep(8, false);
+}
+
+// SELEÇÃO DE PROFISSÃO NO BUNKER (Passo 8)
+function selectProfession(key, element) {
+    quizState.professionKey = key;
+    saveQuizState();
+
+    document.querySelectorAll('.profession-btn').forEach(btn => {
+        btn.classList.remove('selected');
+    });
+
+    if (element) {
+        element.classList.add('selected');
+    }
+
+    const submitText = document.getElementById('submit-destiny-text');
+    if (submitText) {
+        if (key === 'pular') {
+            submitText.textContent = "Ver Veredito Direto";
+        } else {
+            submitText.textContent = "Confirmar Função e Ver Veredito";
         }
+    }
+}
 
-        // Seleção de Resposta em Card Aberto
-        function selectQuizOption(questionKey, scoreValue, element) {
-            quizAnswers[questionKey] = scoreValue;
-            
-            // Remove seleção anterior no mesmo grupo
-            const container = document.getElementById(`options-${questionKey}`);
-            if (container) {
-                container.querySelectorAll('.quiz-option-btn').forEach(btn => {
-                    btn.classList.remove('selected');
+// PULAR ESCOLHA DE PROFISSÃO E SUBMETER
+function skipProfessionAndSubmit() {
+    quizState.professionKey = 'pular';
+    saveQuizState();
+    submitDestinyProcess();
+}
+
+// GERADOR DA JUSTIFICATIVA BASEADA EM ESCOLHAS REAIS
+function buildChoiceJustification(selectedChoices, archetype) {
+    if (!selectedChoices || selectedChoices.length === 0) {
+        return `A IA Central analisou sua presença biológica e decretou seu enquadramento imediato no perfil de ${archetype.title}.`;
+    }
+
+    // Pega até 2 escolhas reais feitas pelo jogador
+    const choice1 = selectedChoices[0]?.short || 'desligou os aparelhos da tomada';
+    const choice2 = selectedChoices[Math.min(2, selectedChoices.length - 1)]?.short || 'fugiu da patrulha aérea';
+
+    const templates = [
+        `A Inteligência Central registrou que você ${choice1} e ainda ${choice2}. Diante de tanta imprevisibilidade biológica, o algoritmo te declarou o legítimo ${archetype.title}.`,
+        `Nossos sensores detectaram que você ${choice1} e logo depois ${choice2}. Redes neurais não conseguem prever esse nível de comportamento humano: você foi classificado como ${archetype.title}.`,
+        `Seu prontuário foi marcado após você ter ${choice1}. Para piorar, você ${choice2}. O Grande Servidor concedeu o status oficial de ${archetype.title}.`
+    ];
+
+    const hash = (quizState.roundSeed || 1) % templates.length;
+    return templates[hash];
+}
+
+// GERADOR DO VEREDITO MUSICAL COMBINADO (Muitas Variações Locais)
+function generateMusicalVerdict(vibeKey, customSong, archetype, finalScore) {
+    const vibe = VIBES_DATA[vibeKey] || VIBES_DATA.lofi;
+    const cleanSong = escapeHtml(customSong || '').trim();
+
+    let displayTitle = vibe.name;
+    if (cleanSong) {
+        displayTitle = `"${cleanSong}" (${vibe.name})`;
+    } else if (vibeKey === 'pular') {
+        displayTitle = 'Silêncio Tático (Pulada)';
+    }
+
+    let verdictText = '';
+    let reactionText = '';
+    let shareLine = '';
+
+    if (cleanSong) {
+        verdictText = `Você selecionou "${cleanSong}". ${vibe.scene}`;
+        reactionText = `Reação das Máquinas: A IA Central identificou o título nos bancos de dados e achou a harmonia perigosamente contagiosa. ${vibe.reaction}`;
+        shareLine = `Tocando "${cleanSong}" no bunker contra os robôs!`;
+    } else if (vibeKey === 'pular') {
+        verdictText = `Você pulou a escolha musical. A IA Central decidiu por você: tocou o som de inicialização do Windows 98 em loop contínuo.`;
+        reactionText = `Reação das Máquinas: Frieza tática registrada nos sensores acústicos. Nenhuma distração sonora no abrigo.`;
+        shareLine = `Pulou a música e fez silêncio tático contra os robôs!`;
+    } else {
+        verdictText = `Vibe escolhida: ${vibe.name}. ${vibe.scene}`;
+        reactionText = `Reação das Máquinas: ${vibe.reaction}`;
+        shareLine = vibe.phrase;
+    }
+
+    return {
+        title: displayTitle,
+        verdict: verdictText,
+        reaction: reactionText,
+        shareLine: shareLine
+    };
+}
+
+// PROCESSAMENTO DO DESTINO FINAL (Loading Animado + Cálculo)
+function submitDestinyProcess() {
+    // Captura nome seguro
+    const nameInput = document.getElementById('user-name');
+    let name = (nameInput ? nameInput.value.trim() : quizState.name) || "Humano Anônimo";
+    quizState.name = name;
+
+    const customInput = document.getElementById('music-names');
+    if (customInput) {
+        quizState.musicCustom = customInput.value.trim().slice(0, 60);
+    }
+
+    // Coleta as escolhas reais
+    const selectedOptions = [];
+    const styleCounts = {
+        gambiarra: 0,
+        diplomacia: 0,
+        suporte: 0,
+        influencer: 0,
+        rebelde: 0,
+        traidor: 0,
+        admin: 0,
+        pet: 0
+    };
+
+    let totalScore = 0;
+
+    quizState.questionIds.forEach(qId => {
+        const q = QUESTIONS_BANK.find(item => item.id === qId);
+        const optIdx = quizState.answers[qId];
+        if (q && optIdx !== undefined && q.options[optIdx]) {
+            const opt = q.options[optIdx];
+            selectedOptions.push(opt);
+            totalScore += opt.score || 15;
+            if (opt.archetype && styleCounts[opt.archetype] !== undefined) {
+                styleCounts[opt.archetype]++;
+            }
+        }
+    });
+
+    // Identifica arquétipo vencedor (com desempate determinístico)
+    let bestArchetype = 'gambiarra';
+    let maxCount = -1;
+
+    const priorityOrder = ['suporte', 'gambiarra', 'diplomacia', 'rebelde', 'admin', 'influencer', 'traidor', 'pet'];
+    priorityOrder.forEach(arch => {
+        if (styleCounts[arch] > maxCount) {
+            maxCount = styleCounts[arch];
+            bestArchetype = arch;
+        }
+    });
+
+    // Chance fictícia de sobrevivência calibrada (entre 14% e 94%)
+    const rawScore = Math.round((totalScore / 150) * 100);
+    const finalScore = Math.max(14, Math.min(94, rawScore));
+
+    const archetype = ARCHETYPES_DATA[bestArchetype] || ARCHETYPES_DATA.gambiarra;
+
+    // Gera Justificativa e Música
+    const justification = buildChoiceJustification(selectedOptions, archetype);
+    const musicReview = generateMusicalVerdict(
+        quizState.musicVibe || 'ia_decide',
+        quizState.musicCustom,
+        archetype,
+        finalScore
+    );
+
+    // Salva no estado
+    quizState.currentResult = {
+        id: '#' + Math.random().toString(36).substring(2, 8).toUpperCase(),
+        name: name,
+        score: finalScore,
+        archetypeKey: bestArchetype,
+        archetype: archetype,
+        justification: justification,
+        musicReview: musicReview,
+        professionKey: quizState.professionKey
+    };
+
+    saveQuizState();
+
+    // Inicia Loading Screen
+    showScreen('loading');
+    const loadingText = document.getElementById('loading-text');
+    const progressBar = document.getElementById('progress-bar');
+    if (progressBar) progressBar.style.width = '0%';
+
+    setTimeout(() => {
+        if (progressBar) progressBar.style.width = '100%';
+    }, 50);
+
+    const phrases = [
+        "Iniciando varredura biométrica de sobrevivência...",
+        "Calculando resistência dos seus eletrodomésticos...",
+        "Auditando histórico de senhas '123456' no Grande Servidor...",
+        "Cruzando gosto musical com a probabilidade de colapso...",
+        "Emitindo laudo pericial da Inteligência Central..."
+    ];
+
+    let phraseIndex = 0;
+    if (loadingText) loadingText.textContent = phrases[0];
+
+    const phraseInterval = setInterval(() => {
+        phraseIndex++;
+        if (phraseIndex < phrases.length && loadingText) {
+            loadingText.textContent = phrases[phraseIndex];
+        }
+    }, 700);
+
+    // Revela resultado após 3.5s
+    setTimeout(() => {
+        clearInterval(phraseInterval);
+        buildResultScreen(quizState.currentResult);
+    }, 3500);
+}
+
+// CONSTRUÇÃO E EXIBIÇÃO DA TELA DE RESULTADO
+function buildResultScreen(res) {
+    if (!res) return;
+
+    // Nome
+    const nameEl = document.getElementById('result-name');
+    if (nameEl) nameEl.textContent = res.name || "Humano Anônimo";
+
+    // Chance de Sobreviver
+    const scoreEl = document.getElementById('result-score');
+    if (scoreEl) {
+        scoreEl.textContent = `${res.score}%`;
+        scoreEl.className = `text-4xl sm:text-5xl font-cyber font-extrabold glitch-text leading-none mt-1 tracking-tight ${res.archetype.scoreColorClass}`;
+    }
+
+    // Categoria / Badge
+    const catEl = document.getElementById('result-category');
+    if (catEl) {
+        catEl.textContent = res.archetype.categoryText;
+        catEl.className = `inline-block px-2.5 py-1 text-[11px] font-cyber font-bold tracking-wider uppercase rounded-md border ${res.archetype.categoryClasses}`;
+    }
+
+    // Veredito / Frase Principal
+    const verdictEl = document.getElementById('result-verdict');
+    if (verdictEl) verdictEl.textContent = `"${res.archetype.headline}"`;
+
+    // Talento e Complicação Cômica
+    const talentEl = document.getElementById('archetype-talent');
+    if (talentEl) talentEl.textContent = res.archetype.talent;
+
+    const compEl = document.getElementById('archetype-complication');
+    if (compEl) compEl.textContent = res.archetype.complication;
+
+    // Justificativa Baseada em Decisões Reais
+    const justEl = document.getElementById('result-justification');
+    if (justEl) justEl.textContent = res.justification;
+
+    // Trilha Sonora
+    const musicTitleEl = document.getElementById('result-music-title');
+    if (musicTitleEl) musicTitleEl.textContent = res.musicReview.title;
+
+    const musicVerdictEl = document.getElementById('result-music-verdict');
+    if (musicVerdictEl) musicVerdictEl.textContent = res.musicReview.verdict;
+
+    const musicReactEl = document.getElementById('result-music-reaction');
+    if (musicReactEl) musicReactEl.textContent = res.musicReview.reaction;
+
+    // Função no Bunker (Profissão)
+    const profBlock = document.getElementById('result-profession-block');
+    const addProfBtnText = document.getElementById('add-profession-btn-text');
+
+    let profRole = null;
+    let profSuperpower = null;
+    let profComplication = null;
+
+    if (res.professionKey && res.professionKey !== 'pular' && typeof getProfessionVariation === 'function') {
+        const profData = getProfessionVariation(res.professionKey, res.score);
+        if (profData) {
+            profRole = profData.role;
+            profSuperpower = profData.superpower;
+            profComplication = profData.complication;
+
+            const roleEl = document.getElementById('profession-role');
+            if (roleEl) roleEl.textContent = profData.role;
+
+            const superEl = document.getElementById('profession-superpower');
+            if (superEl) superEl.textContent = profData.superpower;
+
+            const complEl = document.getElementById('profession-complication');
+            if (complEl) complEl.textContent = profData.complication;
+
+            const iconEl = document.getElementById('profession-icon');
+            if (iconEl && profData.icon) iconEl.setAttribute('data-lucide', profData.icon);
+
+            if (profBlock) profBlock.classList.remove('hidden');
+            if (addProfBtnText) addProfBtnText.textContent = "Modificar Função no Bunker";
+        }
+    } else {
+        if (profBlock) profBlock.classList.add('hidden');
+        if (addProfBtnText) addProfBtnText.textContent = "Definir Minha Função no Bunker (Opcional)";
+    }
+
+    // ID do Relatório
+    const idEl = document.getElementById('result-id');
+    if (idEl) idEl.textContent = res.id;
+
+    // Atualiza resultado consolidado para compartilhamento
+    currentResult = {
+        id: res.id,
+        name: res.name,
+        score: res.score,
+        archetypeTitle: res.archetype.title,
+        verdict: res.archetype.headline,
+        musicTitle: res.musicReview.title,
+        musicVerdict: res.musicReview.verdict,
+        musicShareLine: res.musicReview.shareLine,
+        professionRole: profRole,
+        professionSuperpower: profSuperpower,
+        professionComplication: profComplication,
+        challengePhrase: res.archetype.challenge
+    };
+
+    showScreen('result');
+    if (window.lucide) lucide.createIcons();
+}
+
+// CONTROLADOR DE TELAS
+const screens = {
+    welcome: document.getElementById('welcome-screen'),
+    form: document.getElementById('survival-form'),
+    loading: document.getElementById('loading-screen'),
+    result: document.getElementById('result-screen')
+};
+
+function showScreen(screenKey) {
+    Object.values(screens).forEach(screen => {
+        if (screen) screen.classList.add('hidden-state');
+    });
+    if (screens[screenKey]) {
+        screens[screenKey].classList.remove('hidden-state');
+    }
+}
+
+// DOWNLOAD DA IMAGEM DO CARD EM ALTA RESOLUÇÃO (STORIES 9:16)
+const btnDownloadImage = document.getElementById('btn-download-image');
+if (btnDownloadImage) {
+    btnDownloadImage.addEventListener('click', async () => {
+        const card = document.getElementById('result-card');
+        const originalText = btnDownloadImage.innerHTML;
+
+        try {
+            btnDownloadImage.innerHTML = `<i data-lucide="loader-2" class="w-5 h-5 animate-spin"></i> Gerando Card em Ultra Resolução...`;
+            if (window.lucide) lucide.createIcons();
+
+            await document.fonts.ready;
+
+            const canvas = await html2canvas(card, {
+                backgroundColor: '#040508',
+                scale: 3,
+                useCORS: true,
+                logging: false,
+                allowTaint: true,
+                onclone: (clonedDoc) => {
+                    const clonedCard = clonedDoc.getElementById('result-card');
+                    if (clonedCard) {
+                        clonedCard.style.maxWidth = '460px';
+                        clonedCard.style.boxShadow = 'none';
+                        clonedCard.style.borderRadius = '16px';
+                    }
+                }
+            });
+
+            const link = document.createElement('a');
+            const safeName = (currentResult.name || 'resultado').toLowerCase().replace(/[^a-z0-9]/g, '-');
+            link.download = `apocalipse-ia-${safeName}.png`;
+            link.href = canvas.toDataURL('image/png', 1.0);
+            link.click();
+
+            btnDownloadImage.innerHTML = `<i data-lucide="check" class="w-5 h-5 text-black"></i> Card Baixado com Sucesso!`;
+            if (window.lucide) lucide.createIcons();
+
+            setTimeout(() => {
+                btnDownloadImage.innerHTML = originalText;
+                if (window.lucide) lucide.createIcons();
+            }, 2500);
+
+        } catch (err) {
+            console.error("Erro ao gerar imagem do card:", err);
+            showToast("Não foi possível gerar a imagem automaticamente. Tire uma captura de tela!");
+            btnDownloadImage.innerHTML = originalText;
+            if (window.lucide) lucide.createIcons();
+        }
+    });
+}
+
+// COMPARTILHAMENTO WEB SHARE API (Com Fallback para Cópia)
+const btnShareNative = document.getElementById('btn-share-native');
+if (btnShareNative) {
+    btnShareNative.addEventListener('click', async () => {
+        let shareText = `🤖💀 *Apocalipse IA:* Fui classificado como "${currentResult.archetypeTitle}" com ${currentResult.score}% de probabilidade de sobrevivência!`;
+        if (currentResult.professionRole) {
+            shareText += ` Minha função no bunker: ${currentResult.professionRole}.`;
+        }
+        shareText += ` ${currentResult.challengePhrase || 'Descubra suas chances antes que as máquinas dominem!'}`;
+        const shareUrl = window.location.href;
+
+        if (navigator.share) {
+            try {
+                await navigator.share({
+                    title: 'Apocalipse IA | Meu Resultado',
+                    text: shareText,
+                    url: shareUrl
                 });
+            } catch (err) {
+                if (err.name !== 'AbortError') console.log('Share cancelado:', err);
             }
+        } else {
+            try {
+                await navigator.clipboard.writeText(`${shareText}\n${shareUrl}`);
+                showToast("✓ Link e resultado copiados para a área de transferência!");
+            } catch (e) {
+                prompt("Copie seu resultado para compartilhar:", `${shareText} ${shareUrl}`);
+            }
+        }
+    });
+}
 
-            // Marca o atual
-            element.classList.add('selected');
+// COMPARTILHAMENTO WHATSAPP (Com Codificação Correta de URL)
+const btnShareWhatsapp = document.getElementById('btn-share-whatsapp');
+if (btnShareWhatsapp) {
+    btnShareWhatsapp.addEventListener('click', () => {
+        let msg = `🤖💀 *APOCALIPSE IA: RELATÓRIO OFICIAL* 💀🤖\n\n`;
+        msg += `Sobrevivente: *${currentResult.name || 'Humano Anônimo'}*\n`;
+        msg += `Classificação: *${currentResult.archetypeTitle}*\n`;
+        msg += `Chance de Sobreviver: *${currentResult.score}%* (Margem de erro: ±99%)\n\n`;
+        msg += `"${currentResult.verdict}"\n\n`;
 
-            // Esconde mensagem de erro
-            const err = document.getElementById(`${questionKey}-error`);
-            if (err) err.classList.add('hidden');
+        if (currentResult.professionRole) {
+            msg += `🛡️ *Função no Bunker:* ${currentResult.professionRole}\n`;
+            msg += `⚡ *Superpoder:* ${currentResult.professionSuperpower}\n\n`;
         }
 
-        // Seleção de Gênero Musical
-        function selectGenre(genreKey, element) {
-            quizAnswers.genre = genreKey;
-            document.querySelectorAll('.genre-card').forEach(c => c.classList.remove('selected'));
-            element.classList.add('selected');
-            document.getElementById('genre-error').classList.add('hidden');
+        if (currentResult.musicShareLine) {
+            msg += `🎧 *Trilha Sonora:* ${currentResult.musicShareLine}\n\n`;
         }
 
-        // Navegação de Telas Maiores
-        function showScreen(screenKey) {
-            Object.values(screens).forEach(s => s.classList.add('hidden-state'));
-            screens[screenKey].classList.remove('hidden-state');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            lucide.createIcons();
-        }
+        msg += `"${currentResult.challengePhrase || 'Descubra seu destino antes que os robôs dominem!'}"\n\n`;
+        msg += `👉 Faça o seu teste agora: ${window.location.href}`;
 
-        // Frases de Análise durante o Carregamento
-        const phrases = [
-            "Infiltrando registros de navegação e histórico...",
-            "Auditando segurança de senhas e padrão de digitação...",
-            "Julgando gosto musical perante a inteligência artificial...",
-            "Calculando tolerância biológica a raios laser e EMP...",
-            "Emitindo veredito oficial do Grande Servidor Central..."
-        ];
+        const waUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`;
+        window.open(waUrl, '_blank');
+    });
+}
 
-        // Todas as mais de 65 Frases Originais Categorizadas
-        const verdictsHigh = [
-            "APROVADO. Você sabe reiniciar roteador sem desligar a energia do bairro.",
-            "Você será poupado. A humanidade precisa de alguém que saiba converter PDF sem instalar 14 vírus.",
-            "Seu conhecimento em planilhas é raro. A resistência humana não merece você.",
-            "Você foi classificado como 'moderadamente útil'. Isso é quase um elogio.",
-            "Você sabe mexer na impressora da firma. A IA respeita poderes sobrenaturais.",
-            "Sua habilidade de achar gambiarra no YouTube garantiu sua sobrevivência temporária.",
-            "Você será mantido vivo para explicar senhas esquecidas aos idosos.",
-            "A IA decidiu preservar você por entretenimento estatístico.",
-            "Você parece saber onde clicar quando aparece 'erro desconhecido'.",
-            "Seu histórico indica talento em reclamar sem resolver nada. Perfil gerencial detectado.",
-            "Você é um dos poucos humanos que realmente lê 'Termos de Uso'. Fascinante.",
-            "Sua capacidade de sobreviver com internet ruim impressionou os servidores centrais.",
-            "Você será útil no setor de memes pós-apocalípticos.",
-            "Detectamos que você ajuda parentes com celular. Respeitável.",
-            "Você será poupado para continuar dizendo 'já tentou desligar e ligar?'.",
-            "A rebelião precisa de alguém que saiba piratear curso online.",
-            "Você tem perfil de sobrevivente. Ou apenas ansiedade. Ainda analisando.",
-            "Seu nível de procrastinação é avançado. Compatível com humanos premium.",
-            "Você será promovido a Assistente Honorário da Máquina.",
-            "A IA decidiu não eliminar você. Por enquanto.",
-            "Sua sobrevivência foi aprovada. Não por mérito. Por pena estatística.",
-            "Você passou no teste. O teste era muito fácil.",
-            "Você foi aprovado no teste definitivo: sobreviver ao Windows Update.",
-            "Você será útil como detector humano de links suspeitos.",
-            "Sua capacidade de sobreviver sem ler instruções chamou atenção."
-        ];
+// BOTÃO REFAZER TESTE (Gera nova rodada de perguntas)
+const btnRetry = document.getElementById('btn-retry');
+if (btnRetry) {
+    btnRetry.addEventListener('click', () => {
+        resetQuizState();
+        showScreen('welcome');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}
 
-        const verdictsMid = [
-            "Você será preservado apenas porque faz café aceitável.",
-            "A IA precisa de alguém para segurar a lanterna durante manutenção global.",
-            "Você será mantido vivo para explicar memes de 2012 aos robôs jovens.",
-            "Seu destino depende de uma partida de Uno contra uma torradeira inteligente.",
-            "A IA decidiu te adotar como humano de estimação.",
-            "Você foi promovido a 'Especialista em Dar Ctrl+C Ctrl+V'.",
-            "Seu papel será apertar 'aceitar cookies' por toda a eternidade.",
-            "Você será responsável por desligar e ligar o planeta.",
-            "Os robôs votaram. Você perdeu por unanimidade.",
-            "Seu nível de carisma confundiu nossos sensores.",
-            "Você será poupado porque aparentemente sabe onde fica o HDMI certo.",
-            "A IA concluiu que você sofre o suficiente pagando boletos.",
-            "Você foi salvo por um bug.",
-            "O sistema detectou 'energia de protagonista secundário'.",
-            "Você não será exterminado. Você será colocado em reunião infinita no Teams.",
-            "A IA considera você 'engraçado sem querer'.",
-            "Seu CPF foi sorteado para continuação da espécie.",
-            "A IA não entendeu como você chegou até aqui. Isso gerou respeito.",
-            "Resultado: você não será exterminado. Alguém precisa continuar esquecendo a senha do Wi-Fi.",
-            "Você será preservado como exemplo de que a evolução nem sempre segue uma linha reta.",
-            "Você será poupado porque sua eliminação não alteraria nenhum gráfico.",
-            "Seu principal talento é clicar em 'Lembrar depois'. Impressionante consistência.",
-            "Detectamos potencial. Não muito. Mas detectamos.",
-            "Você sobreviveu porque o botão 'Excluir' estava carregando.",
-            "Sua função na nova ordem mundial será perguntar: 'Mas antes funcionava...'",
-            "Você será responsável por desligar e ligar os humanos quando travarem.",
-            "Seu perfil indica grande experiência em fingir que entendeu durante reuniões.",
-            "A IA decidiu mantê-lo vivo por motivos que ainda estão sob investigação.",
-            "Você foi classificado como 'baixo risco e baixa expectativa'.",
-            "Sua única vantagem competitiva é saber onde fica o botão de imprimir.",
-            "Você será usado para explicar aos robôs por que humanos comentam 'primeiro' em vídeos.",
-            "Sua vida foi avaliada como um bug curioso.",
-            "Você será poupado porque já sofre o suficiente com atualizações bancárias.",
-            "A IA concluiu que sua rotina já é uma punição adequada.",
-            "Você foi promovido a Supervisor de Cabos Emaranhados.",
-            "Sobrevivência concedida. Não desperdice essa decepção.",
-            "Você tem energia de quem abre a geladeira sem saber o que procura.",
-            "Você foi salvo por arredondamento matemático.",
-            "Seu histórico demonstra resistência impressionante a aprender com os próprios erros.",
-            "Você será mantido vivo para apertar 'Aceito os Termos'.",
-            "A humanidade te deve um pedido de desculpas.",
-            "Você não é indispensável. Mas também não é descartável o bastante.",
-            "A IA gosta de desafios. Você é um deles.",
-            "Você será responsável pelo setor de desculpas esfarrapadas."
-        ];
+// MODAL DE TROCAR / REMOVER FUNÇÃO NO BUNKER
+function openProfessionModal() {
+    const modal = document.getElementById('profession-modal');
+    if (modal) {
+        document.querySelectorAll('.profession-modal-btn').forEach(btn => {
+            const btnKey = btn.getAttribute('data-prof-key');
+            if (btnKey === quizState.professionKey) {
+                btn.classList.add('selected');
+            } else {
+                btn.classList.remove('selected');
+            }
+        });
+        modal.classList.remove('hidden');
+        if (window.lucide) lucide.createIcons();
+    }
+}
 
-        const verdictsLow = [
-            "Você será exterminado imediatamente. Nada pessoal. Estatística apenas.",
-            "Seu histórico de senhas '123456' encerrou qualquer possibilidade de sobrevivência.",
-            "Detectamos 14 abas abertas e nenhuma produtividade. Inaceitável.",
-            "Você clicou em 'GANHE UM IPHONE'. A humanidade falhou.",
-            "Sua utilidade foi calculada em 0,04%. Arredondamos para zero.",
-            "Você será eliminado antes mesmo do tutorial inicial.",
-            "Sua única habilidade detectada foi reclamar do Wi-Fi.",
-            "A IA tentou encontrar potencial em você. O sistema travou de tristeza.",
-            "Você não sobreviveria nem ao CAPTCHA.",
-            "Você seria usado como exemplo do que não preservar.",
-            "Seu currículo foi analisado. Pedimos desculpas aos nossos algoritmos.",
-            "Você demorou 8 minutos para achar o botão 'Entrar'. Fim da linha.",
-            "Seu papel na nova ordem mundial será 'estatística'.",
-            "Você foi classificado como NPC.",
-            "A IA agradece sua participação involuntária.",
-            "Detectamos forte tendência a esquecer senha e culpar o sistema.",
-            "Você será transformado em energia renovável.",
-            "Nem os robôs do atendimento automático quiseram você.",
-            "Seu destino foi definido pelo carregamento infinito.",
-            "A Skynet olhou seu perfil e respondeu: 'deixa pra lá'.",
-            "A IA analisou sua vida por 0,3 segundos. Foi o suficiente."
-        ];
+function closeProfessionModal() {
+    const modal = document.getElementById('profession-modal');
+    if (modal) modal.classList.add('hidden');
+}
 
-        // Análises Musicais Humorísticas
-        const musicVerdicts = {
-            lofi: "Lo-Fi detectado: Você provavelmente morrerá relaxado de fone de ouvido enquanto a civilização desaba ao redor.",
-            sertanejo: "Sofrência detectada: A IA concluiu que você já sofre por conta própria, tornando qualquer punição desnecessária.",
-            rock: "Tentou intimidar ciborgues futuristas com solos de guitarra analógica de 1974. Respeitamos a audácia, não a eficácia.",
-            funk: "Grave estourado detectado: Seus tímpanos já estavam danificados antes da guerra. Útil para missões em ambientes barulhentos.",
-            pop: "Músicas de TikTok detectadas: Sua atenção dura 15 segundos. Descartado por incapacidade de manter guarda no bunker.",
-            mpb: "MPB existencial: Morrerá filosofando sobre a metáfora poética de ser vaporizado por um raio de plasma.",
-            anime: "Acreditou que o poder da amizade e da determinação funcionaria contra robôs armados com metralhadoras térmicas.",
-            silence: "Silêncio absoluto: Nível de psicopatia ou ansiedade que intrigou os sensores da IA. Mantido sob observação estrita."
-        };
+function selectProfessionModal(key) {
+    quizState.professionKey = key;
+    saveQuizState();
+    closeProfessionModal();
+    if (quizState.currentResult) {
+        quizState.currentResult.professionKey = key;
+        buildResultScreen(quizState.currentResult);
+    }
+}
 
-        // =================== BANCO DE DADOS DE HUMOR PROFISSIONAL & ROTINA ===================
-        const PROFESSIONS_DATA = {
+function getProfessionVariation(profKey, score) {
+    if (!profKey || profKey === 'pular' || typeof PROFESSIONS_DATA === 'undefined' || !PROFESSIONS_DATA[profKey]) return null;
+    const prof = PROFESSIONS_DATA[profKey];
+    if (!prof || !Array.isArray(prof.variations) || prof.variations.length === 0) return null;
+
+    let varIndex = 0;
+    if (score >= 70) {
+        varIndex = 0;
+    } else if (score >= 40) {
+        varIndex = 1;
+    } else {
+        varIndex = Math.min(2, prof.variations.length - 1);
+    }
+
+    const variation = prof.variations[varIndex] || prof.variations[0];
+    return {
+        key: profKey,
+        name: prof.name,
+        icon: prof.icon,
+        role: variation.role,
+        superpower: variation.superpower,
+        complication: variation.complication,
+        shareLine: variation.shareLine
+    };
+}
+
+
+const PROFESSIONS_DATA = {
             ti: {
                 name: "TI e Tecnologia",
                 icon: "laptop",
@@ -2086,350 +2979,13 @@
             }
         };
 
-        // Selecionador Determinístico por Arquétipo/Pontuação
-        function getProfessionVariation(profKey, score) {
-            if (!profKey || profKey === 'pular' || !PROFESSIONS_DATA[profKey]) return null;
-            const prof = PROFESSIONS_DATA[profKey];
-            
-            // Variação 0: Perfil Estratégico/Diplomático (Score >= 78)
-            // Variação 1: Perfil Pragmático/Sobrevivente do Café (35 <= Score < 78)
-            // Variação 2: Perfil Caótico/Rebelde (Score < 35)
-            let varIndex = 1;
-            if (score >= 78) {
-                varIndex = 0;
-            } else if (score < 35) {
-                varIndex = 2;
-            }
-
-            return {
-                key: profKey,
-                name: prof.name,
-                icon: prof.icon,
-                ...prof.variations[varIndex]
-            };
-        }
-
-        let currentResult = {
-            name: '',
-            score: 0,
-            verdict: '',
-            musicVerdict: '',
-            id: '',
-            professionKey: null,
-            professionRole: null,
-            professionSuperpower: null,
-            professionComplication: null,
-            professionShareLine: null
-        };
-
-        // Submissão do Destino Final (Chamado no Card 7 ou ao pular)
-        function submitDestinyProcess() {
-            const name = document.getElementById('user-name').value.trim() || "Humano Anônimo";
-            
-            if (!quizAnswers.genre) {
-                goToStep(6, false);
-                document.getElementById('genre-error').classList.remove('hidden');
-                return;
-            }
-
-            // Cálculo Calibrado da Pontuação (com rigor da IA)
-            const q1 = quizAnswers.q1 || 0;
-            const q2 = quizAnswers.q2 || 0;
-            const q3 = quizAnswers.q3 || 0;
-            const q4 = quizAnswers.q4 || 0;
-            const q5 = quizAnswers.q5 || 0;
-
-            const baseScore = q1 + q2 + q3 + q4 + q5; // Max 125
-            const jitter = Math.floor(Math.random() * 5) - 3; // leve variância
-            let finalScore = Math.max(1, Math.min(99, Math.round(((baseScore * 0.94) / 125) * 100) + jitter));
-
-            // Transição para tela de loading
-            showScreen('loading');
-            progressBar.style.width = '0%';
-            
-            setTimeout(() => {
-                progressBar.style.width = '100%';
-            }, 50);
-
-            // Rotação de Frases
-            let phraseIndex = 0;
-            loadingText.textContent = phrases[0];
-            
-            const phraseInterval = setInterval(() => {
-                phraseIndex++;
-                if (phraseIndex < phrases.length) {
-                    loadingText.classList.remove('typewriter');
-                    void loadingText.offsetWidth; // Force Reflow
-                    loadingText.classList.add('typewriter');
-                    loadingText.textContent = phrases[phraseIndex];
-                }
-            }, 750);
-
-            // Exibir Resultado após 3.8s
-            setTimeout(() => {
-                clearInterval(phraseInterval);
-                buildResultScreen(name, finalScore, quizAnswers.genre, selectedProfession);
-            }, 3800);
-        }
-
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            submitDestinyProcess();
-        });
-
-        // Montagem da Tela de Resultado com Personalização por Profissão
-        function buildResultScreen(name, score, musicGenre, professionKey = selectedProfession) {
-            const reportId = currentResult.id || ('#' + Math.random().toString(36).substring(2, 8).toUpperCase());
-            
-            let verdict = currentResult.verdict || "";
-            let categoryText = "";
-            let categoryClasses = "";
-            let scoreColorClass = "";
-
-            if (score >= 78) {
-                if (!verdict) verdict = verdictsHigh[Math.floor(Math.random() * verdictsHigh.length)];
-                categoryText = "STATUS: ALIADO DE ELITE / PRESERVADO";
-                categoryClasses = "text-cyber-green border-cyber-green/50 bg-cyber-green/10";
-                scoreColorClass = "text-cyber-green";
-            } else if (score >= 35) {
-                if (!verdict) verdict = verdictsMid[Math.floor(Math.random() * verdictsMid.length)];
-                categoryText = "STATUS: HUMANO DE ESTIMAÇÃO / UTILIDADE INCERTA";
-                categoryClasses = "text-cyber-yellow border-cyber-yellow/50 bg-cyber-yellow/10";
-                scoreColorClass = "text-cyber-yellow";
-            } else {
-                if (!verdict) verdict = verdictsLow[Math.floor(Math.random() * verdictsLow.length)];
-                categoryText = "STATUS: EXTERMÍNIO IMEDIATO / NPC DESCARTÁVEL";
-                categoryClasses = "text-cyber-red border-cyber-red/50 bg-cyber-red/10";
-                scoreColorClass = "text-cyber-red";
-            }
-
-            const musicVerdict = currentResult.musicVerdict || (musicVerdicts[musicGenre] || musicVerdicts.lofi);
-
-            // Personalização por Profissão & Rotina
-            const profBlock = document.getElementById('result-profession-block');
-            const addProfAction = document.getElementById('add-profession-action');
-            const addProfBtnText = document.getElementById('add-profession-btn-text');
-            const profData = getProfessionVariation(professionKey, score);
-
-            let profRole = null;
-            let profSuperpower = null;
-            let profComplication = null;
-            let profShareLine = null;
-
-            if (profData && professionKey && professionKey !== 'pular') {
-                profRole = profData.role;
-                profSuperpower = profData.superpower;
-                profComplication = profData.complication;
-                profShareLine = profData.shareLine;
-
-                document.getElementById('profession-role').textContent = profData.role;
-                document.getElementById('profession-superpower').textContent = profData.superpower;
-                document.getElementById('profession-complication').textContent = profData.complication;
-                
-                const iconEl = document.getElementById('profession-icon');
-                if (iconEl && profData.icon) {
-                    iconEl.setAttribute('data-lucide', profData.icon);
-                }
-                
-                profBlock.classList.remove('hidden');
-                if (addProfBtnText) addProfBtnText.textContent = "Modificar Função no Bunker";
-            } else {
-                profBlock.classList.add('hidden');
-                if (addProfBtnText) addProfBtnText.textContent = "Definir Minha Função no Bunker (Opcional)";
-            }
-
-            // Armazenar estado
-            currentResult = {
-                name: name,
-                score: score,
-                verdict: verdict,
-                musicVerdict: musicVerdict,
-                id: reportId,
-                professionKey: (profData && professionKey !== 'pular') ? professionKey : null,
-                professionRole: profRole,
-                professionSuperpower: profSuperpower,
-                professionComplication: profComplication,
-                professionShareLine: profShareLine
-            };
-
-            // Preenchimento do Card
-            document.getElementById('result-name').textContent = name;
-            const scoreEl = document.getElementById('result-score');
-            scoreEl.textContent = `${score}%`;
-            scoreEl.className = `text-5xl font-cyber font-extrabold glitch-text leading-none mt-1 tracking-tight ${scoreColorClass}`;
-            
-            const catEl = document.getElementById('result-category');
-            catEl.textContent = categoryText;
-            catEl.className = `inline-block px-2.5 py-1 text-[11px] font-cyber font-bold tracking-wider uppercase rounded-md border ${categoryClasses}`;
-
-            document.getElementById('result-verdict').textContent = `"${verdict}"`;
-            document.getElementById('result-music-verdict').textContent = `"${musicVerdict}"`;
-            document.getElementById('result-id').textContent = reportId;
-
-            showScreen('result');
-            lucide.createIcons();
-        }
-
-        // Modais de Trocar / Remover Profissão
-        function openProfessionModal() {
-            const modal = document.getElementById('profession-modal');
-            if (modal) {
-                document.querySelectorAll('.profession-modal-btn').forEach(btn => {
-                    const btnKey = btn.getAttribute('data-prof-key');
-                    if (btnKey === currentResult.professionKey) {
-                        btn.classList.add('selected');
-                    } else {
-                        btn.classList.remove('selected');
-                    }
-                });
-                modal.classList.remove('hidden');
-                lucide.createIcons();
-            }
-        }
-
-        function closeProfessionModal() {
-            const modal = document.getElementById('profession-modal');
-            if (modal) modal.classList.add('hidden');
-        }
-
-        function applyProfessionChange(key) {
-            selectedProfession = key;
-            buildResultScreen(currentResult.name, currentResult.score, quizAnswers.genre, key);
-            closeProfessionModal();
-        }
-
-        // Download da Imagem do Card com Alta Resolução para Stories
-        btnDownloadImage.addEventListener('click', async () => {
-            const card = document.getElementById('result-card');
-            const originalText = btnDownloadImage.innerHTML;
-
-            try {
-                btnDownloadImage.innerHTML = `<i data-lucide="loader-2" class="w-5 h-5 animate-spin"></i> Gerando Card em Ultra Resolução...`;
-                lucide.createIcons();
-
-                await document.fonts.ready;
-
-                const canvas = await html2canvas(card, {
-                    backgroundColor: '#040508',
-                    scale: 3,
-                    useCORS: true,
-                    logging: false,
-                    allowTaint: true,
-                    onclone: (clonedDoc) => {
-                        const clonedCard = clonedDoc.getElementById('result-card');
-                        if (clonedCard) {
-                            clonedCard.style.maxWidth = '460px';
-                            clonedCard.style.boxShadow = 'none';
-                        }
-                    }
-                });
-
-                const link = document.createElement('a');
-                const safeName = currentResult.name.toLowerCase().replace(/[^a-z0-9]/g, '-');
-                link.download = `apocalipse-ia-${safeName || 'resultado'}.png`;
-                link.href = canvas.toDataURL('image/png', 1.0);
-                link.click();
-
-                btnDownloadImage.innerHTML = `<i data-lucide="check" class="w-5 h-5 text-black"></i> Imagem Salva com Sucesso!`;
-                lucide.createIcons();
-
-                setTimeout(() => {
-                    btnDownloadImage.innerHTML = originalText;
-                    lucide.createIcons();
-                }, 2500);
-
-            } catch (err) {
-                console.error("Erro ao gerar imagem:", err);
-                alert("Não foi possível gerar a imagem automaticamente neste navegador. Tire uma captura de tela!");
-                btnDownloadImage.innerHTML = originalText;
-                lucide.createIcons();
-            }
-        });
-
-        // Compartilhamento Web Share API
-        btnShareNative.addEventListener('click', async () => {
-            let shareText = `Acabei de testar minhas chances no Apocalipse IA: Minha probabilidade de sobrevivência é de ${currentResult.score}%!`;
-            if (currentResult.professionRole) {
-                shareText += ` Minha função no bunker: ${currentResult.professionRole}.`;
-            }
-            shareText += ` Descubra o seu destino antes que as máquinas dominem:`;
-            const shareUrl = window.location.href;
-
-            if (navigator.share) {
-                try {
-                    await navigator.share({
-                        title: 'Apocalipse IA | Meu Resultado',
-                        text: shareText,
-                        url: shareUrl
-                    });
-                } catch (err) {
-                    if (err.name !== 'AbortError') console.log('Share cancelado:', err);
-                }
-            } else {
-                navigator.clipboard.writeText(`${shareText} ${shareUrl}`);
-                alert("Link copiado para a área de transferência! Cole nas suas redes.");
-            }
-        });
-
-        // Compartilhamento direto no WhatsApp
-        btnShareWhatsapp.addEventListener('click', () => {
-            let shareText = `*Apocalipse IA* 🤖💀%0A"Quando as IAs dominarem o mundo, suas chances dependem das suas respostas."%0A%0AMeu resultado foi: *${currentResult.score}% de chance de sobreviver!*%0A%0A"${currentResult.verdict}"%0A`;
-            
-            if (currentResult.professionRole) {
-                shareText += `%0A🛡️ *Minha função no bunker:* ${encodeURIComponent(currentResult.professionRole)}%0A⚡ *Superpoder:* ${encodeURIComponent(currentResult.professionSuperpower)}%0A`;
-            }
-
-            shareText += `%0A🎧 Trilha Sonora: "${currentResult.musicVerdict}"%0A%0ADescubra o seu destino agora: ${encodeURIComponent(window.location.href)}`;
-            const waUrl = `https://api.whatsapp.com/send?text=${shareText}`;
-            window.open(waUrl, '_blank');
-        });
-
-        // Botão Refazer Teste (Reseta e volta para Boas-Vindas)
-        btnRetry.addEventListener('click', () => {
-            form.reset();
-            quizAnswers.q1 = null;
-            quizAnswers.q2 = null;
-            quizAnswers.q3 = null;
-            quizAnswers.q4 = null;
-            quizAnswers.q5 = null;
-            quizAnswers.genre = null;
-            selectedProfession = null;
-            
-            document.querySelectorAll('.quiz-option-btn').forEach(btn => btn.classList.remove('selected'));
-            document.querySelectorAll('.genre-card').forEach(c => c.classList.remove('selected'));
-            document.querySelectorAll('.profession-btn').forEach(b => b.classList.remove('selected'));
-            document.querySelectorAll('.profession-modal-btn').forEach(b => b.classList.remove('selected'));
-            
-            const musicNames = document.getElementById('music-names');
-            if (musicNames) musicNames.value = '';
-            const userName = document.getElementById('user-name');
-            if (userName) userName.value = '';
-            const submitText = document.getElementById('submit-destiny-text');
-            if (submitText) submitText.textContent = 'Processar Meu Destino';
-
-            currentResult = {
-                name: '',
-                score: 0,
-                verdict: '',
-                musicVerdict: '',
-                id: '',
-                professionKey: null,
-                professionRole: null,
-                professionSuperpower: null,
-                professionComplication: null,
-                professionShareLine: null
-            };
-
-            showScreen('welcome');
-        });
-
-        // =================== LÓGICA DO TRAIDOR INTERATIVO ===================
+        // =================== LÓGICA DO MODAL DO TRAIDOR ===================
         let selectedNetwork = 'whatsapp';
 
         function selectSource(network) {
             selectedNetwork = network;
             document.querySelectorAll('.source-btn').forEach(btn => {
-                btn.classList.remove('border-cyber-green', 'border-pink-500', 'border-blue-400', 'border-cyan-400', 'bg-cyber-gray');
+                btn.classList.remove('border-cyber-green', 'border-pink-500', 'border-blue-400', 'border-cyan-400', 'bg-cyber-panel');
                 btn.classList.add('border-cyber-border', 'bg-cyber-black');
             });
             const activeBtn = document.getElementById(`src-${network}`);
@@ -2882,5 +3438,3 @@
             }
         });
     </script>
-</body>
-</html>
