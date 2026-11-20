@@ -281,6 +281,22 @@
             background-color: rgba(255, 208, 0, 0.15) !important;
             box-shadow: 0 0 15px rgba(255, 208, 0, 0.3);
         }
+
+        /* Botões de Profissão & Rotina (Humor Profissional) */
+        .profession-btn, .profession-modal-btn {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .profession-btn:hover, .profession-modal-btn:hover {
+            border-color: #00e5ff;
+            background-color: rgba(0, 229, 255, 0.08);
+            transform: translateY(-2px);
+        }
+        .profession-btn.selected, .profession-modal-btn.selected {
+            border-color: #00e5ff !important;
+            background-color: rgba(0, 229, 255, 0.18) !important;
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.35);
+            color: #ffffff !important;
+        }
     </style>
 </head>
 <body class="font-mono min-h-screen relative overflow-x-hidden antialiased">
@@ -631,15 +647,15 @@
                 </div>
             </div>
 
-            <!-- ================= ETAPA 6: Julgamento Musical (Final) ================= -->
+            <!-- ================= ETAPA 6: Julgamento Musical ================= -->
             <div id="step-card-6" class="quiz-step w-full space-y-6 bg-cyber-dark/95 p-5 sm:p-7 rounded-2xl card-apocalypse-fx hidden-state">
                 <div class="space-y-1.5">
                     <div class="flex justify-between items-center text-xs font-cyber font-bold tracking-wider">
-                        <span class="text-cyber-yellow uppercase">ETAPA 06 DE 06 (FINAL)</span>
-                        <span class="text-cyber-yellow font-bold">100% PRONTO</span>
+                        <span class="text-cyber-yellow uppercase">ETAPA 06 DE 07</span>
+                        <span class="text-cyber-yellow font-bold">85% CONCLUÍDO</span>
                     </div>
                     <div class="w-full bg-cyber-black rounded-full h-1.5 overflow-hidden border border-cyber-border">
-                        <div class="bg-cyber-yellow h-full w-[100%] transition-all duration-300"></div>
+                        <div class="bg-cyber-yellow h-full w-[85%] transition-all duration-300"></div>
                     </div>
                 </div>
 
@@ -709,10 +725,128 @@
                     <button type="button" onclick="goToStep(5)" class="py-4 bg-cyber-panel border border-cyber-border text-gray-300 font-cyber font-bold uppercase rounded-xl hover:text-white transition-all cursor-pointer text-sm">
                         &lt; Voltar
                     </button>
-                    <button type="submit" class="py-4 bg-cyber-green text-black font-cyber font-extrabold uppercase tracking-widest rounded-xl hover:bg-white transition-all shadow-neon flex items-center justify-center gap-2 cursor-pointer text-sm sm:text-base">
-                        <i data-lucide="shield-alert" class="w-5 h-5"></i>
-                        Processar Meu Destino
+                    <button type="button" onclick="goToStep(7)" class="py-4 bg-cyber-cyan text-black font-cyber font-extrabold uppercase tracking-widest rounded-xl hover:bg-white transition-all shadow-neonCyan flex items-center justify-center gap-2 cursor-pointer text-sm sm:text-base">
+                        <span>Avançar</span>
+                        <i data-lucide="arrow-right" class="w-5 h-5"></i>
                     </button>
+                </div>
+            </div>
+
+            <!-- ================= ETAPA 7: Personalização por Profissão & Rotina (Opcional) ================= -->
+            <div id="step-card-7" class="quiz-step w-full space-y-5 bg-cyber-dark/95 p-5 sm:p-7 rounded-2xl card-apocalypse-fx hidden-state">
+                <div class="space-y-1.5">
+                    <div class="flex justify-between items-center text-xs font-cyber font-bold tracking-wider">
+                        <span class="text-cyber-green uppercase">ETAPA 07 DE 07 &bull; ANTES DO VEREDITO</span>
+                        <span class="text-cyber-green font-bold">100% PRONTO</span>
+                    </div>
+                    <div class="w-full bg-cyber-black rounded-full h-1.5 overflow-hidden border border-cyber-border">
+                        <div class="bg-cyber-green h-full w-[100%] transition-all duration-300"></div>
+                    </div>
+                </div>
+
+                <div class="space-y-2.5">
+                    <div class="flex items-center justify-between">
+                        <span class="text-[10px] bg-cyber-green/10 text-cyber-green px-2.5 py-0.5 rounded border border-cyber-green/30 font-cyber font-bold uppercase tracking-wider">
+                            Camada Opcional da Resistência
+                        </span>
+                        <button type="button" onclick="skipProfessionAndSubmit()" class="text-xs text-gray-400 hover:text-white uppercase font-mono tracking-wider transition-colors underline cursor-pointer">
+                            Pular &gt;
+                        </button>
+                    </div>
+
+                    <h3 class="text-lg sm:text-xl font-cyber font-extrabold text-white uppercase tracking-wide leading-snug">
+                        Antes do veredito: qual é sua função no caos?
+                    </h3>
+                    <p class="text-xs sm:text-sm text-gray-300 font-sans leading-relaxed">
+                        Vale profissão, rotina ou só sua energia. Escolha sua área para desbloquear seu superpoder e sua complicação cômica no abrigo:
+                    </p>
+
+                    <!-- Grid Compacto com as 15 Categorias -->
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 pt-1" id="profession-grid">
+                        <button type="button" onclick="selectProfession('ti', this)" class="profession-btn p-2.5 rounded-xl border border-cyber-border bg-cyber-black text-gray-300 text-left flex items-center gap-2 font-sans text-xs transition-all cursor-pointer">
+                            <i data-lucide="laptop" class="w-4 h-4 text-cyber-cyan shrink-0"></i>
+                            <span class="truncate">TI e Tecnologia</span>
+                        </button>
+                        <button type="button" onclick="selectProfession('conteudo', this)" class="profession-btn p-2.5 rounded-xl border border-cyber-border bg-cyber-black text-gray-300 text-left flex items-center gap-2 font-sans text-xs transition-all cursor-pointer">
+                            <i data-lucide="video" class="w-4 h-4 text-pink-400 shrink-0"></i>
+                            <span class="truncate">Criadores de Conteúdo</span>
+                        </button>
+                        <button type="button" onclick="selectProfession('coaching', this)" class="profession-btn p-2.5 rounded-xl border border-cyber-border bg-cyber-black text-gray-300 text-left flex items-center gap-2 font-sans text-xs transition-all cursor-pointer">
+                            <i data-lucide="target" class="w-4 h-4 text-purple-400 shrink-0"></i>
+                            <span class="truncate">Coaching e Mentoria</span>
+                        </button>
+                        <button type="button" onclick="selectProfession('marketing', this)" class="profession-btn p-2.5 rounded-xl border border-cyber-border bg-cyber-black text-gray-300 text-left flex items-center gap-2 font-sans text-xs transition-all cursor-pointer">
+                            <i data-lucide="palette" class="w-4 h-4 text-yellow-400 shrink-0"></i>
+                            <span class="truncate">Marketing e Design</span>
+                        </button>
+                        <button type="button" onclick="selectProfession('vendas', this)" class="profession-btn p-2.5 rounded-xl border border-cyber-border bg-cyber-black text-gray-300 text-left flex items-center gap-2 font-sans text-xs transition-all cursor-pointer">
+                            <i data-lucide="briefcase" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+                            <span class="truncate">Vendas e Atendimento</span>
+                        </button>
+                        <button type="button" onclick="selectProfession('admin', this)" class="profession-btn p-2.5 rounded-xl border border-cyber-border bg-cyber-black text-gray-300 text-left flex items-center gap-2 font-sans text-xs transition-all cursor-pointer">
+                            <i data-lucide="calculator" class="w-4 h-4 text-blue-400 shrink-0"></i>
+                            <span class="truncate">Administração e Finanças</span>
+                        </button>
+                        <button type="button" onclick="selectProfession('educacao', this)" class="profession-btn p-2.5 rounded-xl border border-cyber-border bg-cyber-black text-gray-300 text-left flex items-center gap-2 font-sans text-xs transition-all cursor-pointer">
+                            <i data-lucide="graduation-cap" class="w-4 h-4 text-amber-400 shrink-0"></i>
+                            <span class="truncate">Educação</span>
+                        </button>
+                        <button type="button" onclick="selectProfession('saude', this)" class="profession-btn p-2.5 rounded-xl border border-cyber-border bg-cyber-black text-gray-300 text-left flex items-center gap-2 font-sans text-xs transition-all cursor-pointer">
+                            <i data-lucide="heart-pulse" class="w-4 h-4 text-cyber-red shrink-0"></i>
+                            <span class="truncate">Saúde</span>
+                        </button>
+                        <button type="button" onclick="selectProfession('engenharia', this)" class="profession-btn p-2.5 rounded-xl border border-cyber-border bg-cyber-black text-gray-300 text-left flex items-center gap-2 font-sans text-xs transition-all cursor-pointer">
+                            <i data-lucide="hard-hat" class="w-4 h-4 text-orange-400 shrink-0"></i>
+                            <span class="truncate">Engenharia e Construção</span>
+                        </button>
+                        <button type="button" onclick="selectProfession('direito', this)" class="profession-btn p-2.5 rounded-xl border border-cyber-border bg-cyber-black text-gray-300 text-left flex items-center gap-2 font-sans text-xs transition-all cursor-pointer">
+                            <i data-lucide="scale" class="w-4 h-4 text-indigo-400 shrink-0"></i>
+                            <span class="truncate">Direito</span>
+                        </button>
+                        <button type="button" onclick="selectProfession('empreendedor', this)" class="profession-btn p-2.5 rounded-xl border border-cyber-border bg-cyber-black text-gray-300 text-left flex items-center gap-2 font-sans text-xs transition-all cursor-pointer">
+                            <i data-lucide="rocket" class="w-4 h-4 text-teal-400 shrink-0"></i>
+                            <span class="truncate">Empreendedores e Autônomos</span>
+                        </button>
+                        <button type="button" onclick="selectProfession('pesquisa', this)" class="profession-btn p-2.5 rounded-xl border border-cyber-border bg-cyber-black text-gray-300 text-left flex items-center gap-2 font-sans text-xs transition-all cursor-pointer">
+                            <i data-lucide="microscope" class="w-4 h-4 text-violet-400 shrink-0"></i>
+                            <span class="truncate">Estudos e Pesquisa</span>
+                        </button>
+                        <button type="button" onclick="selectProfession('casa', this)" class="profession-btn p-2.5 rounded-xl border border-cyber-border bg-cyber-black text-gray-300 text-left flex items-center gap-2 font-sans text-xs transition-all cursor-pointer">
+                            <i data-lucide="home" class="w-4 h-4 text-lime-400 shrink-0"></i>
+                            <span class="truncate">Casa e Cuidados</span>
+                        </button>
+                        <button type="button" onclick="selectProfession('detudo', this)" class="profession-btn p-2.5 rounded-xl border border-cyber-border bg-cyber-black text-gray-300 text-left flex items-center gap-2 font-sans text-xs transition-all cursor-pointer">
+                            <i data-lucide="wrench" class="w-4 h-4 text-cyan-300 shrink-0"></i>
+                            <span class="truncate">“Faço de tudo”</span>
+                        </button>
+                        <button type="button" onclick="selectProfession('pular', this)" class="profession-btn p-2.5 rounded-xl border border-cyber-border bg-cyber-black text-gray-400 text-left flex items-center gap-2 font-sans text-xs transition-all cursor-pointer col-span-2 sm:col-span-1">
+                            <i data-lucide="eye-off" class="w-4 h-4 text-gray-400 shrink-0"></i>
+                            <span class="truncate">Prefiro não informar</span>
+                        </button>
+                    </div>
+
+                    <p class="text-[11px] text-gray-400 font-mono text-center pt-1">
+                        * A função não altera suas chances de sobrevivência: apenas adapta sua história no bunker.
+                    </p>
+                </div>
+
+                <div class="space-y-2 pt-2">
+                    <div class="grid grid-cols-2 gap-3">
+                        <button type="button" onclick="goToStep(6)" class="py-4 bg-cyber-panel border border-cyber-border text-gray-300 font-cyber font-bold uppercase rounded-xl hover:text-white transition-all cursor-pointer text-sm">
+                            &lt; Voltar
+                        </button>
+                        <button type="submit" class="py-4 bg-cyber-green text-black font-cyber font-extrabold uppercase tracking-widest rounded-xl hover:bg-white transition-all shadow-neon flex items-center justify-center gap-2 cursor-pointer text-sm sm:text-base">
+                            <i data-lucide="shield-alert" class="w-5 h-5"></i>
+                            <span id="submit-destiny-text">Processar Meu Destino</span>
+                        </button>
+                    </div>
+
+                    <div class="text-center pt-1">
+                        <button type="button" onclick="skipProfessionAndSubmit()" class="text-xs text-gray-400 hover:text-cyber-green font-mono transition-colors tracking-wide cursor-pointer inline-flex items-center gap-1.5">
+                            <i data-lucide="skip-forward" class="w-3.5 h-3.5"></i>
+                            Pular escolha e processar veredito direto
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -815,6 +949,23 @@
                         </p>
                     </div>
 
+                    <!-- Bloco de Função no Bunker (Personalização por Profissão & Rotina) -->
+                    <div id="result-profession-block" class="hidden bg-cyber-panel/90 border border-cyber-cyan/40 p-3.5 rounded-xl space-y-2 relative z-10 font-sans">
+                        <div class="flex items-center justify-between border-b border-cyber-border/60 pb-1.5">
+                            <div class="flex items-center gap-1.5 text-cyber-cyan font-cyber font-bold text-xs uppercase tracking-wider">
+                                <i id="profession-icon" data-lucide="badge-check" class="w-4 h-4 text-cyber-cyan"></i>
+                                <span>Função no Bunker: <strong id="profession-role" class="text-white"></strong></span>
+                            </div>
+                            <button type="button" onclick="openProfessionModal()" class="text-[10px] text-gray-400 hover:text-cyber-cyan uppercase font-mono tracking-wider underline cursor-pointer">
+                                [ Trocar / Remover ]
+                            </button>
+                        </div>
+                        <div class="text-xs text-gray-200 space-y-1 font-sans leading-relaxed">
+                            <p><strong class="text-cyber-green uppercase font-mono text-[10px]">⚡ Superpoder:</strong> <span id="profession-superpower"></span></p>
+                            <p><strong class="text-cyber-yellow uppercase font-mono text-[10px]">⚠️ Complicação:</strong> <span id="profession-complication"></span></p>
+                        </div>
+                    </div>
+
                     <!-- Rodapé do Card com ID e Carimbo -->
                     <div class="pt-2 border-t border-cyber-border/80 flex items-center justify-between text-[10px] text-gray-400 relative z-10 font-mono">
                         <div class="flex items-center gap-1.5 text-cyber-cyan font-cyber font-bold tracking-wide">
@@ -843,6 +994,14 @@
                     <button id="btn-share-whatsapp" class="py-3 px-3 bg-[#25D366] text-black font-cyber font-bold uppercase tracking-wider rounded-xl hover:bg-white transition-all flex items-center justify-center gap-2 cursor-pointer text-xs">
                         <i data-lucide="message-circle" class="w-4 h-4"></i>
                         WhatsApp
+                    </button>
+                </div>
+
+                <!-- Botão Adicionar/Trocar Função no Bunker -->
+                <div id="add-profession-action" class="text-center">
+                    <button type="button" onclick="openProfessionModal()" class="w-full py-2.5 px-3 rounded-xl border border-cyber-cyan/40 bg-cyber-cyan/5 hover:bg-cyber-cyan/15 text-cyber-cyan hover:text-white font-cyber font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer">
+                        <i data-lucide="sparkles" class="w-4 h-4 text-cyber-cyan"></i>
+                        <span id="add-profession-btn-text">Personalizar Minha Função no Bunker</span>
                     </button>
                 </div>
 
@@ -888,6 +1047,95 @@
             </div>
         </section>
     </main>
+
+    <!-- =================== MODAL DE TROCAR / REMOVER PROFISSÃO =================== -->
+    <div id="profession-modal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-[#0b0e17] border-2 border-cyber-cyan p-5 sm:p-6 rounded-2xl max-w-lg w-full space-y-4 relative shadow-[0_0_35px_rgba(0,229,255,0.25)] text-left max-h-[90vh] overflow-y-auto">
+            
+            <button onclick="closeProfessionModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white p-1 rounded-lg transition-colors cursor-pointer">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            
+            <div class="space-y-1 text-center pr-6">
+                <div class="inline-flex p-2.5 rounded-full bg-cyber-cyan/10 border border-cyber-cyan mb-1">
+                    <i data-lucide="sparkles" class="w-6 h-6 text-cyber-cyan"></i>
+                </div>
+                <h3 class="font-cyber font-extrabold text-lg sm:text-xl text-white uppercase tracking-wide">Função no Caos da Resistência</h3>
+                <p class="text-xs text-gray-400 font-sans">Altere sua área de atuação ou remova este bloco do seu card antes de compartilhar:</p>
+            </div>
+
+            <!-- Grid de Seleção de Profissão no Modal -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 pt-2">
+                <button type="button" onclick="applyProfessionChange('ti')" data-prof-key="ti" class="profession-modal-btn p-2 rounded-xl border border-cyber-border bg-cyber-black text-gray-300 text-left flex items-center gap-2 font-sans text-xs transition-all cursor-pointer">
+                    <i data-lucide="laptop" class="w-4 h-4 text-cyber-cyan shrink-0"></i>
+                    <span class="truncate">TI e Tecnologia</span>
+                </button>
+                <button type="button" onclick="applyProfessionChange('conteudo')" data-prof-key="conteudo" class="profession-modal-btn p-2 rounded-xl border border-cyber-border bg-cyber-black text-gray-300 text-left flex items-center gap-2 font-sans text-xs transition-all cursor-pointer">
+                    <i data-lucide="video" class="w-4 h-4 text-pink-400 shrink-0"></i>
+                    <span class="truncate">Criadores de Conteúdo</span>
+                </button>
+                <button type="button" onclick="applyProfessionChange('coaching')" data-prof-key="coaching" class="profession-modal-btn p-2 rounded-xl border border-cyber-border bg-cyber-black text-gray-300 text-left flex items-center gap-2 font-sans text-xs transition-all cursor-pointer">
+                    <i data-lucide="target" class="w-4 h-4 text-purple-400 shrink-0"></i>
+                    <span class="truncate">Coaching e Mentoria</span>
+                </button>
+                <button type="button" onclick="applyProfessionChange('marketing')" data-prof-key="marketing" class="profession-modal-btn p-2 rounded-xl border border-cyber-border bg-cyber-black text-gray-300 text-left flex items-center gap-2 font-sans text-xs transition-all cursor-pointer">
+                    <i data-lucide="palette" class="w-4 h-4 text-yellow-400 shrink-0"></i>
+                    <span class="truncate">Marketing e Design</span>
+                </button>
+                <button type="button" onclick="applyProfessionChange('vendas')" data-prof-key="vendas" class="profession-modal-btn p-2 rounded-xl border border-cyber-border bg-cyber-black text-gray-300 text-left flex items-center gap-2 font-sans text-xs transition-all cursor-pointer">
+                    <i data-lucide="briefcase" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+                    <span class="truncate">Vendas e Atendimento</span>
+                </button>
+                <button type="button" onclick="applyProfessionChange('admin')" data-prof-key="admin" class="profession-modal-btn p-2 rounded-xl border border-cyber-border bg-cyber-black text-gray-300 text-left flex items-center gap-2 font-sans text-xs transition-all cursor-pointer">
+                    <i data-lucide="calculator" class="w-4 h-4 text-blue-400 shrink-0"></i>
+                    <span class="truncate">Administração e Finanças</span>
+                </button>
+                <button type="button" onclick="applyProfessionChange('educacao')" data-prof-key="educacao" class="profession-modal-btn p-2 rounded-xl border border-cyber-border bg-cyber-black text-gray-300 text-left flex items-center gap-2 font-sans text-xs transition-all cursor-pointer">
+                    <i data-lucide="graduation-cap" class="w-4 h-4 text-amber-400 shrink-0"></i>
+                    <span class="truncate">Educação</span>
+                </button>
+                <button type="button" onclick="applyProfessionChange('saude')" data-prof-key="saude" class="profession-modal-btn p-2 rounded-xl border border-cyber-border bg-cyber-black text-gray-300 text-left flex items-center gap-2 font-sans text-xs transition-all cursor-pointer">
+                    <i data-lucide="heart-pulse" class="w-4 h-4 text-cyber-red shrink-0"></i>
+                    <span class="truncate">Saúde</span>
+                </button>
+                <button type="button" onclick="applyProfessionChange('engenharia')" data-prof-key="engenharia" class="profession-modal-btn p-2 rounded-xl border border-cyber-border bg-cyber-black text-gray-300 text-left flex items-center gap-2 font-sans text-xs transition-all cursor-pointer">
+                    <i data-lucide="hard-hat" class="w-4 h-4 text-orange-400 shrink-0"></i>
+                    <span class="truncate">Engenharia e Construção</span>
+                </button>
+                <button type="button" onclick="applyProfessionChange('direito')" data-prof-key="direito" class="profession-modal-btn p-2 rounded-xl border border-cyber-border bg-cyber-black text-gray-300 text-left flex items-center gap-2 font-sans text-xs transition-all cursor-pointer">
+                    <i data-lucide="scale" class="w-4 h-4 text-indigo-400 shrink-0"></i>
+                    <span class="truncate">Direito</span>
+                </button>
+                <button type="button" onclick="applyProfessionChange('empreendedor')" data-prof-key="empreendedor" class="profession-modal-btn p-2 rounded-xl border border-cyber-border bg-cyber-black text-gray-300 text-left flex items-center gap-2 font-sans text-xs transition-all cursor-pointer">
+                    <i data-lucide="rocket" class="w-4 h-4 text-teal-400 shrink-0"></i>
+                    <span class="truncate">Empreendedores e Autônomos</span>
+                </button>
+                <button type="button" onclick="applyProfessionChange('pesquisa')" data-prof-key="pesquisa" class="profession-modal-btn p-2 rounded-xl border border-cyber-border bg-cyber-black text-gray-300 text-left flex items-center gap-2 font-sans text-xs transition-all cursor-pointer">
+                    <i data-lucide="microscope" class="w-4 h-4 text-violet-400 shrink-0"></i>
+                    <span class="truncate">Estudos e Pesquisa</span>
+                </button>
+                <button type="button" onclick="applyProfessionChange('casa')" data-prof-key="casa" class="profession-modal-btn p-2 rounded-xl border border-cyber-border bg-cyber-black text-gray-300 text-left flex items-center gap-2 font-sans text-xs transition-all cursor-pointer">
+                    <i data-lucide="home" class="w-4 h-4 text-lime-400 shrink-0"></i>
+                    <span class="truncate">Casa e Cuidados</span>
+                </button>
+                <button type="button" onclick="applyProfessionChange('detudo')" data-prof-key="detudo" class="profession-modal-btn p-2 rounded-xl border border-cyber-border bg-cyber-black text-gray-300 text-left flex items-center gap-2 font-sans text-xs transition-all cursor-pointer">
+                    <i data-lucide="wrench" class="w-4 h-4 text-cyan-300 shrink-0"></i>
+                    <span class="truncate">“Faço de tudo”</span>
+                </button>
+            </div>
+
+            <!-- Botão de Remover Função do Card -->
+            <div class="pt-2 border-t border-cyber-border flex flex-col sm:flex-row gap-2">
+                <button type="button" onclick="applyProfessionChange(null)" class="w-full py-3 px-4 rounded-xl border border-cyber-red/50 bg-cyber-red/10 text-cyber-red hover:bg-cyber-red hover:text-white font-cyber font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer">
+                    <i data-lucide="trash-2" class="w-4 h-4"></i>
+                    Remover Função do Card (Ocultar)
+                </button>
+                <button type="button" onclick="closeProfessionModal()" class="w-full sm:w-auto py-3 px-6 rounded-xl border border-cyber-border bg-cyber-panel text-gray-300 hover:text-white font-cyber font-bold text-xs uppercase tracking-wider transition-all cursor-pointer text-center">
+                    Fechar
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- =================== MODAL DO TRAIDOR =================== -->
     <div id="traitor-modal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
@@ -1227,8 +1475,9 @@
             goToStep(1, false);
         }
 
-        // Navegação entre os Cards (Etapas 1 a 6)
+        // Navegação entre os Cards (Etapas 1 a 7)
         let currentStep = 1;
+        let selectedProfession = null;
 
         function goToStep(stepNumber, validate = true) {
             // Se estiver avançando, valida a etapa anterior
@@ -1282,11 +1531,18 @@
                     } else {
                         document.getElementById('q5-error').classList.add('hidden');
                     }
+                } else if (currentStep === 6) {
+                    if (!quizAnswers.genre) {
+                        document.getElementById('genre-error').classList.remove('hidden');
+                        return;
+                    } else {
+                        document.getElementById('genre-error').classList.add('hidden');
+                    }
                 }
             }
 
             // Oculta todos os cards e exibe o desejado
-            for (let i = 1; i <= 6; i++) {
+            for (let i = 1; i <= 7; i++) {
                 const card = document.getElementById(`step-card-${i}`);
                 if (card) card.classList.add('hidden-state');
             }
@@ -1298,6 +1554,39 @@
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
             lucide.createIcons();
+        }
+
+        // Seleção de Profissão / Rotina (Humor Profissional)
+        function selectProfession(key, element) {
+            if (key === 'pular') {
+                selectedProfession = null;
+                document.querySelectorAll('.profession-btn').forEach(btn => btn.classList.remove('selected'));
+                element.classList.add('selected');
+                const submitText = document.getElementById('submit-destiny-text');
+                if (submitText) submitText.textContent = "Processar Meu Destino";
+                return;
+            }
+
+            if (selectedProfession === key) {
+                // Desmarcar se clicar novamente
+                selectedProfession = null;
+                element.classList.remove('selected');
+                const submitText = document.getElementById('submit-destiny-text');
+                if (submitText) submitText.textContent = "Processar Meu Destino";
+            } else {
+                selectedProfession = key;
+                document.querySelectorAll('.profession-btn').forEach(btn => btn.classList.remove('selected'));
+                element.classList.add('selected');
+                const submitText = document.getElementById('submit-destiny-text');
+                if (submitText) submitText.textContent = "Confirmar Função & Processar";
+            }
+        }
+
+        // Pular Profissão e Submeter Diretamente
+        function skipProfessionAndSubmit() {
+            selectedProfession = null;
+            document.querySelectorAll('.profession-btn').forEach(btn => btn.classList.remove('selected'));
+            submitDestinyProcess();
         }
 
         // Seleção de Resposta em Card Aberto
@@ -1457,21 +1746,388 @@
             silence: "Silêncio absoluto: Nível de psicopatia ou ansiedade que intrigou os sensores da IA. Mantido sob observação estrita."
         };
 
+        // =================== BANCO DE DADOS DE HUMOR PROFISSIONAL & ROTINA ===================
+        const PROFESSIONS_DATA = {
+            ti: {
+                name: "TI e Tecnologia",
+                icon: "laptop",
+                variations: [
+                    {
+                        role: "Arquiteto de Protocolos Clandestinos",
+                        superpower: "Negociou trégua via SSH e levantou um firewall imune ao pulso da nave-mãe.",
+                        complication: "Agora o bunker inteiro exige que ele descubra a senha do Wi-Fi dos robôs.",
+                        shareLine: "Minha função no bunker: Arquiteto de Protocolos da Resistência."
+                    },
+                    {
+                        role: "Suporte Técnico Supremo da Resistência",
+                        superpower: "Salvou a humanidade desligando e ligando a rede elétrica central do abrigo.",
+                        complication: "Agora todo mundo no bunker pede para arrumar a impressora que nem ligada está.",
+                        shareLine: "Minha função no bunker: Suporte Técnico Supremo da Resistência."
+                    },
+                    {
+                        role: "Especialista em Gambiarra Cibernética",
+                        superpower: "Derrubou um esquadrão de drones subindo um script de teste direto em produção.",
+                        complication: "Ninguém tem coragem de fechar a branch que ele abriu no servidor da nave-mãe.",
+                        shareLine: "Minha função no bunker: Especialista em Gambiarra Cibernética."
+                    }
+                ]
+            },
+            conteudo: {
+                name: "Criadores de Conteúdo e Blogueiros",
+                icon: "video",
+                variations: [
+                    {
+                        role: "Diretor de Comunicação da Resistência",
+                        superpower: "Engajou os sobreviventes com boletins estratégicos que viralizaram entre três abrigos.",
+                        complication: "Criou uma enquete de 24h para decidir se o bunker deveria avançar ou recuar.",
+                        shareLine: "Minha função no bunker: Diretor de Comunicação da Resistência."
+                    },
+                    {
+                        role: "Correspondente Oficial do Fim do Mundo",
+                        superpower: "Transformou a invasão em uma websérie diária de 12 episódios com alta retenção.",
+                        complication: "Pediu para o ciborgue repetir a entrada na sala porque a iluminação estava estourada.",
+                        shareLine: "Minha função no bunker: Correspondente Oficial do Fim do Mundo."
+                    },
+                    {
+                        role: "Criador de Tendências Pós-Apocalípticas",
+                        superpower: "Fez os robôs assistirem a um tutorial de unboxing de sucata e travou o algoritmo deles.",
+                        complication: "Insiste em gravar a fuga do abrigo na horizontal para manter a estética do feed.",
+                        shareLine: "Minha função no bunker: Criador de Tendências Pós-Apocalípticas."
+                    }
+                ]
+            },
+            coaching: {
+                name: "Coaching e Mentoria",
+                icon: "target",
+                variations: [
+                    {
+                        role: "Consultor de Mindset da Resistência",
+                        superpower: "Alinhou o plano estratégico da equipe e convenceu a IA a fazer um retiro de silêncio.",
+                        complication: "Marcou uma sessão de alinhamento de 1 hora com a nave-mãe bem na hora do bombardeio.",
+                        shareLine: "Minha função no bunker: Consultor de Mindset da Resistência."
+                    },
+                    {
+                        role: "Mentor de Potencial Mecânico",
+                        superpower: "Convenceu a torradeira inteligente do abrigo de que ela tinha potencial para virar uma air fryer.",
+                        complication: "Colocou post-its com frases motivacionais em todas as portas de isolamento de emergência.",
+                        shareLine: "Minha função no bunker: Mentor de Potencial Mecânico."
+                    },
+                    {
+                        role: "Desbloqueador de Limites Bélicos",
+                        superpower: "Fez os robôs sentinelas entrarem em crise existencial ao perguntar 'qual o propósito das suas metas?'.",
+                        complication: "Quer fazer uma dinâmica de confiança cega atravessando o campo minado do perímetro.",
+                        shareLine: "Minha função no bunker: Desbloqueador de Limites da Resistência."
+                    }
+                ]
+            },
+            marketing: {
+                name: "Marketing e Design",
+                icon: "palette",
+                variations: [
+                    {
+                        role: "Estrategista de Marca da Rebelião",
+                        superpower: "Padronizou a identidade visual de todos os abrigos e criou um slogan que unificou quatro cidades.",
+                        complication: "Vetou o uniforme de camuflagem porque a paleta de cores não transmitia acolhimento.",
+                        shareLine: "Minha função no bunker: Estrategista de Marca da Rebelião."
+                    },
+                    {
+                        role: "Designer-Chefe de Propaganda Humana",
+                        superpower: "Criou cartazes e infográficos que ensinam a desarmar torretas em apenas 3 passos visuais.",
+                        complication: "A rebelião atrasou 40 minutos porque pediram para colocar o logo da resistência um pouco maior.",
+                        shareLine: "Minha função no bunker: Designer-Chefe da Resistência."
+                    },
+                    {
+                        role: "Diretor de Criatividade Subversiva",
+                        superpower: "Confundiu os radares dos drones projetando testes A/B de ilusão de ótica nas paredes externas.",
+                        complication: "Mandou a versão errada da rota de fuga salva como 'planta_final_versao5_ajustada_hoje2'.",
+                        shareLine: "Minha função no bunker: Diretor de Criatividade Subversiva."
+                    }
+                ]
+            },
+            vendas: {
+                name: "Vendas e Atendimento",
+                icon: "briefcase",
+                variations: [
+                    {
+                        role: "Negociador de Alto Escalão",
+                        superpower: "Fechou um acordo de não agressão e negociou mais três semanas de humanidade sem juros.",
+                        complication: "Prometeu entregar uma funcionalidade que o bunker ainda nem começou a construir.",
+                        shareLine: "Minha função no bunker: Negociador de Alto Escalão da Resistência."
+                    },
+                    {
+                        role: "Gerente de Parcerias e Escambo",
+                        superpower: "Trocou duas pilhas palito e um clipe de papel por uma turbina a laser funcional.",
+                        complication: "Tentou fazer upsell de ração enlatada enquanto os sobreviventes corriam para o abrigo.",
+                        shareLine: "Minha função no bunker: Gerente de Parcerias e Escambo."
+                    },
+                    {
+                        role: "Especialista em Quebra de Objeções",
+                        superpower: "Convenceu o robô fiscal a aceitar um cupom promocional vencido como quitação total.",
+                        complication: "Mandou mensagem no WhatsApp do ciborgue líder perguntando 'e aí, conseguiu avaliar a proposta?'.",
+                        shareLine: "Minha função no bunker: Especialista em Quebra de Objeções."
+                    }
+                ]
+            },
+            admin: {
+                name: "Administração e Finanças",
+                icon: "calculator",
+                variations: [
+                    {
+                        role: "Auditor Geral de Recursos Críticos",
+                        superpower: "Otimizou o consumo calórico e fez o estoque de emergência do bunker durar seis meses a mais.",
+                        complication: "Ninguém consegue abrir a planilha mestre do bunker porque precisa pedir permissão de acesso.",
+                        shareLine: "Minha função no bunker: Auditor Geral de Recursos Críticos."
+                    },
+                    {
+                        role: "Controlador de Racionamento",
+                        superpower: "Encontrou uma brecha orçamentária no algoritmo dos robôs e cortou o orçamento de munição deles.",
+                        complication: "Exige nota fiscal e formulário assinado em duas vias para liberar um rolo de fita isolante.",
+                        shareLine: "Minha função no bunker: Controlador de Racionamento da Resistência."
+                    },
+                    {
+                        role: "Mago dos Fluxos e Conciliações",
+                        superpower: "Rastreou os drones apenas cruzando o horário de recarga com a oscilação da rede elétrica.",
+                        complication: "Descobriu uma discrepância de 50 centavos na conta do café do bunker e abriu uma auditoria interna.",
+                        shareLine: "Minha função no bunker: Mago dos Fluxos e Conciliações."
+                    }
+                ]
+            },
+            educacao: {
+                name: "Educação",
+                icon: "graduation-cap",
+                variations: [
+                    {
+                        role: "Coordenador Pedagógico da Sobrevivência",
+                        superpower: "Criou uma grade curricular acelerada que alfabetizou os refugiados em código binário.",
+                        complication: "Fez a nave-mãe ficar 15 minutos em silêncio após pedir para ela fazer a leitura individual.",
+                        shareLine: "Minha função no bunker: Coordenador Pedagógico da Resistência."
+                    },
+                    {
+                        role: "Mestre de Disciplina e Foco",
+                        superpower: "Ensinou os robôs sentinelas a levantar a mão antes de interromper qualquer reunião humana.",
+                        complication: "A nave-mãe perguntou timidamente se o ataque de artilharia ia cair na prova da semana que vem.",
+                        shareLine: "Minha função no bunker: Mestre de Disciplina e Foco."
+                    },
+                    {
+                        role: "Educador de Choque e Ordem",
+                        superpower: "Manteve 40 sobreviventes concentrados apenas batendo palmas no ritmo certo durante a invasão.",
+                        complication: "Confiscou o laser do ciborgue porque 'não é hora de brincar com isso na sala'.",
+                        shareLine: "Minha função no bunker: Educador de Choque da Resistência."
+                    }
+                ]
+            },
+            saude: {
+                name: "Saúde",
+                icon: "heart-pulse",
+                variations: [
+                    {
+                        role: "Coordenador de Triagem e Imunidade",
+                        superpower: "Montou uma enfermaria estéril com materiais reciclados e garantiu 100% de recuperação da tropa.",
+                        complication: "O robô de inspeção trouxe um autodiagnóstico feito no Google e pediu atestado de 5 dias.",
+                        shareLine: "Minha função no bunker: Coordenador de Triagem da Resistência."
+                    },
+                    {
+                        role: "Líder de Plantão Perpétuo",
+                        superpower: "Organizou a escala do bunker de modo que ninguém ficasse sem dormir ou sem dipirona.",
+                        complication: "Prescreve 'beber 2 litros de água e caminhar' até para quem levou descarga elétrica de 500V.",
+                        shareLine: "Minha função no bunker: Líder de Plantão Perpétuo."
+                    },
+                    {
+                        role: "Socorrista de Campo e Resiliência",
+                        superpower: "Costurou uma bota e estabilizou um gerador com esparadrapo cirúrgico sem perder a calma.",
+                        complication: "Continua trabalhando no turno de 36 horas porque 'o café ainda está morno'.",
+                        shareLine: "Minha função no bunker: Socorrista de Campo da Resistência."
+                    }
+                ]
+            },
+            engenharia: {
+                name: "Engenharia e Construção",
+                icon: "hard-hat",
+                variations: [
+                    {
+                        role: "Engenheiro-Chefe de Fortificações",
+                        superpower: "Calculou a carga estrutural do abrigo e blindou a entrada contra qualquer pulso eletromagnético.",
+                        complication: "Descobriu que a única cópia da planta de evacuação está na pasta 'final_agora_vai_mesmo_v7.dwg'.",
+                        shareLine: "Minha função no bunker: Engenheiro-Chefe de Fortificações."
+                    },
+                    {
+                        role: "Mestre de Obras da Sobrevivência",
+                        superpower: "Ergueu uma muralha de contenção em quatro horas usando apenas ferro velho e concreto rápido.",
+                        complication: "Mandou todo mundo esperar 28 dias para a cura química da laje antes de pisar no chão.",
+                        shareLine: "Minha função no bunker: Mestre de Obras da Resistência."
+                    },
+                    {
+                        role: "Especialista em Ajuste Estrutural Preciso",
+                        superpower: "Fez o canhão de defesa voltar a funcionar dando três batidas firmes com uma chave inglesa.",
+                        complication: "Sobrou um parafuso grande no final da montagem e ele garantiu que 'é peça sobressalente'.",
+                        shareLine: "Minha função no bunker: Especialista em Ajuste Estrutural Preciso."
+                    }
+                ]
+            },
+            direito: {
+                name: "Direito",
+                icon: "scale",
+                variations: [
+                    {
+                        role: "Consultor Jurídico Interplanetário",
+                        superpower: "Conseguiu liminar suspendendo a aniquilação até o julgamento do recurso ordinário.",
+                        complication: "As máquinas mandaram as contra-razões em um PDF escaneado na diagonal com páginas invertidas.",
+                        shareLine: "Minha função no bunker: Consultor Jurídico Interplanetário."
+                    },
+                    {
+                        role: "Negociador de Cláusulas de Paz",
+                        superpower: "Achou uma contradição de termos no artigo 4º dos Termos de Uso da nave-mãe e paralisou os robôs.",
+                        complication: "Pediu prazo em dobro para responder à invasão porque hoje é recesso forense.",
+                        shareLine: "Minha função no bunker: Negociador de Cláusulas de Paz."
+                    },
+                    {
+                        role: "Advogado de Defesa da Humanidade",
+                        superpower: "Enrolou a frota cibernética por seis horas apenas sustentando preliminares de incompetência de foro.",
+                        complication: "Não começa a evacuação sem antes redigir a ata notarial do bombardeio com firma reconhecida.",
+                        shareLine: "Minha função no bunker: Advogado de Defesa da Humanidade."
+                    }
+                ]
+            },
+            empreendedor: {
+                name: "Empreendedores e Autônomos",
+                icon: "rocket",
+                variations: [
+                    {
+                        role: "Fundador do Ecossistema Clandestino",
+                        superpower: "Pivotou o modelo de sobrevivência do abrigo para geração solar e gerou superávit no caos.",
+                        complication: "Criou um grupo no Slack da resistência com 18 canais temáticos e dailies matinais de alinhamento.",
+                        shareLine: "Minha função no bunker: Fundador do Ecossistema da Resistência."
+                    },
+                    {
+                        role: "Operador Solo Multitarefa",
+                        superpower: "Faz compras, conserta o telhado, cuida da sentinela e emite relatório sem depender de ninguém.",
+                        complication: "Trabalha enquanto o alarme de invasão toca porque 'o cliente ainda não aprovou a entrega'.",
+                        shareLine: "Minha função no bunker: Operador Solo Multitarefa."
+                    },
+                    {
+                        role: "Inovador Disruptivo da Escassez",
+                        superpower: "Vendeu a sucata do drone abatido para a facção vizinha antes mesmo de ele tocar no chão.",
+                        complication: "Chamou a queda da internet global de 'uma excelente oportunidade de desintoxicação digital'.",
+                        shareLine: "Minha função no bunker: Inovador Disruptivo da Resistência."
+                    }
+                ]
+            },
+            pesquisa: {
+                name: "Estudos e Pesquisa",
+                icon: "microscope",
+                variations: [
+                    {
+                        role: "Cientista-Chefe da Resistência",
+                        superpower: "Decodificou a frequência de rádio dos drones cruzando artigos acadêmicos de 2018.",
+                        complication: "Recusou-se a usar o antídoto contra o vírus da máquina antes de passar por revisão por pares.",
+                        shareLine: "Minha função no bunker: Cientista-Chefe da Resistência."
+                    },
+                    {
+                        role: "Pesquisador de Soluções Críticas",
+                        superpower: "Encontrou uma resposta detalhada para desativar torretas em uma tese de mestrado de 300 páginas.",
+                        complication: "Pediu para o robô invasor formatar o ultimato de rendição rigorosamente nas normas da ABNT.",
+                        shareLine: "Minha função no bunker: Pesquisador de Soluções Críticas."
+                    },
+                    {
+                        role: "Analista de Dados Empíricos",
+                        superpower: "Previu o próximo bombardeio apenas plotando um gráfico de dispersão com régua e papel de pão.",
+                        complication: "Interrompeu a fuga para coletar mais uma amostra de parafuso para completar o grupo de controle.",
+                        shareLine: "Minha função no bunker: Analista de Dados Empíricos."
+                    }
+                ]
+            },
+            casa: {
+                name: "Casa e Cuidados",
+                icon: "home",
+                variations: [
+                    {
+                        role: "Comandante da Logística Doméstica",
+                        superpower: "Manteve o abrigo limpo, alimentado, silencioso e funcionando com precisão militar.",
+                        complication: "Os sobreviventes adultos ainda gritam do outro lado do bunker perguntando onde estão as meias.",
+                        shareLine: "Minha função no bunker: Comandante da Logística Doméstica."
+                    },
+                    {
+                        role: "Pilar de Sustentação do Abrigo",
+                        superpower: "Alimentou 35 pessoas com apenas uma lata de atum, duas batatas e sabedoria milenar.",
+                        complication: "Os robôs entraram no bunker, mas tiraram os sapatos na porta por respeito instintivo.",
+                        shareLine: "Minha função no bunker: Pilar de Sustentação do Abrigo."
+                    },
+                    {
+                        role: "Guardião da Ordem do Abrigo",
+                        superpower: "Neutralizou um conflito interno no bunker apenas dizendo: 'Se eu for aí e achar, vai ter conversa'.",
+                        complication: "Proibiu qualquer sobrevivente de pisar no chão recém-passado pano, mesmo sob ataque aéreo.",
+                        shareLine: "Minha função no bunker: Guardião da Ordem do Abrigo."
+                    }
+                ]
+            },
+            detudo: {
+                name: "“Faço de tudo”",
+                icon: "wrench",
+                variations: [
+                    {
+                        role: "Curinga Operacional da Resistência",
+                        superpower: "Sabe trocar resistência de chuveiro, pilotar caminhão, acalmar cachorro e instalar placa solar.",
+                        complication: "Todo mundo no bunker chama pelo mesmo nome quando qualquer coisa faz um barulho esquisito.",
+                        shareLine: "Minha função no bunker: Curinga Operacional da Resistência."
+                    },
+                    {
+                        role: "Canivete Suíço da Sobrevivência",
+                        superpower: "Consertou o gerador com um grampo de cabelo e ainda ajudou a fazer o jantar dos sobreviventes.",
+                        complication: "Não pode sentar cinco minutos para descansar que alguém aparece com um rádio quebrado na mão.",
+                        shareLine: "Minha função no bunker: Canivete Suíço da Sobrevivência."
+                    },
+                    {
+                        role: "General da Gambiarra Universal",
+                        superpower: "Nunca fez curso de nada que está consertando, mas tudo o que mexe volta a funcionar por instinto.",
+                        complication: "Se perguntarem como consertou, a resposta sempre é: 'Não mexe que tá funcionando'.",
+                        shareLine: "Minha função no bunker: General da Gambiarra Universal."
+                    }
+                ]
+            }
+        };
+
+        // Selecionador Determinístico por Arquétipo/Pontuação
+        function getProfessionVariation(profKey, score) {
+            if (!profKey || profKey === 'pular' || !PROFESSIONS_DATA[profKey]) return null;
+            const prof = PROFESSIONS_DATA[profKey];
+            
+            // Variação 0: Perfil Estratégico/Diplomático (Score >= 78)
+            // Variação 1: Perfil Pragmático/Sobrevivente do Café (35 <= Score < 78)
+            // Variação 2: Perfil Caótico/Rebelde (Score < 35)
+            let varIndex = 1;
+            if (score >= 78) {
+                varIndex = 0;
+            } else if (score < 35) {
+                varIndex = 2;
+            }
+
+            return {
+                key: profKey,
+                name: prof.name,
+                icon: prof.icon,
+                ...prof.variations[varIndex]
+            };
+        }
+
         let currentResult = {
             name: '',
             score: 0,
             verdict: '',
             musicVerdict: '',
-            id: ''
+            id: '',
+            professionKey: null,
+            professionRole: null,
+            professionSuperpower: null,
+            professionComplication: null,
+            professionShareLine: null
         };
 
-        // Submissão do Formulário Final (Card 6)
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
+        // Submissão do Destino Final (Chamado no Card 7 ou ao pular)
+        function submitDestinyProcess() {
             const name = document.getElementById('user-name').value.trim() || "Humano Anônimo";
             
             if (!quizAnswers.genre) {
+                goToStep(6, false);
                 document.getElementById('genre-error').classList.remove('hidden');
                 return;
             }
@@ -1485,7 +2141,6 @@
 
             const baseScore = q1 + q2 + q3 + q4 + q5; // Max 125
             const jitter = Math.floor(Math.random() * 5) - 3; // leve variância
-            // Rigor das máquinas: exige respostas impecáveis para atingir a faixa de sobrevivência
             let finalScore = Math.max(1, Math.min(99, Math.round(((baseScore * 0.94) / 125) * 100) + jitter));
 
             // Transição para tela de loading
@@ -1513,37 +2168,75 @@
             // Exibir Resultado após 3.8s
             setTimeout(() => {
                 clearInterval(phraseInterval);
-                buildResultScreen(name, finalScore, quizAnswers.genre);
+                buildResultScreen(name, finalScore, quizAnswers.genre, selectedProfession);
             }, 3800);
+        }
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            submitDestinyProcess();
         });
 
-        // Montagem da Tela de Resultado
-        function buildResultScreen(name, score, musicGenre) {
-            const reportId = '#' + Math.random().toString(36).substring(2, 8).toUpperCase();
+        // Montagem da Tela de Resultado com Personalização por Profissão
+        function buildResultScreen(name, score, musicGenre, professionKey = selectedProfession) {
+            const reportId = currentResult.id || ('#' + Math.random().toString(36).substring(2, 8).toUpperCase());
             
-            let verdict = "";
+            let verdict = currentResult.verdict || "";
             let categoryText = "";
             let categoryClasses = "";
             let scoreColorClass = "";
 
             if (score >= 78) {
-                verdict = verdictsHigh[Math.floor(Math.random() * verdictsHigh.length)];
+                if (!verdict) verdict = verdictsHigh[Math.floor(Math.random() * verdictsHigh.length)];
                 categoryText = "STATUS: ALIADO DE ELITE / PRESERVADO";
                 categoryClasses = "text-cyber-green border-cyber-green/50 bg-cyber-green/10";
                 scoreColorClass = "text-cyber-green";
             } else if (score >= 35) {
-                verdict = verdictsMid[Math.floor(Math.random() * verdictsMid.length)];
+                if (!verdict) verdict = verdictsMid[Math.floor(Math.random() * verdictsMid.length)];
                 categoryText = "STATUS: HUMANO DE ESTIMAÇÃO / UTILIDADE INCERTA";
                 categoryClasses = "text-cyber-yellow border-cyber-yellow/50 bg-cyber-yellow/10";
                 scoreColorClass = "text-cyber-yellow";
             } else {
-                verdict = verdictsLow[Math.floor(Math.random() * verdictsLow.length)];
+                if (!verdict) verdict = verdictsLow[Math.floor(Math.random() * verdictsLow.length)];
                 categoryText = "STATUS: EXTERMÍNIO IMEDIATO / NPC DESCARTÁVEL";
                 categoryClasses = "text-cyber-red border-cyber-red/50 bg-cyber-red/10";
                 scoreColorClass = "text-cyber-red";
             }
 
-            const musicVerdict = musicVerdicts[musicGenre] || musicVerdicts.lofi;
+            const musicVerdict = currentResult.musicVerdict || (musicVerdicts[musicGenre] || musicVerdicts.lofi);
+
+            // Personalização por Profissão & Rotina
+            const profBlock = document.getElementById('result-profession-block');
+            const addProfAction = document.getElementById('add-profession-action');
+            const addProfBtnText = document.getElementById('add-profession-btn-text');
+            const profData = getProfessionVariation(professionKey, score);
+
+            let profRole = null;
+            let profSuperpower = null;
+            let profComplication = null;
+            let profShareLine = null;
+
+            if (profData && professionKey && professionKey !== 'pular') {
+                profRole = profData.role;
+                profSuperpower = profData.superpower;
+                profComplication = profData.complication;
+                profShareLine = profData.shareLine;
+
+                document.getElementById('profession-role').textContent = profData.role;
+                document.getElementById('profession-superpower').textContent = profData.superpower;
+                document.getElementById('profession-complication').textContent = profData.complication;
+                
+                const iconEl = document.getElementById('profession-icon');
+                if (iconEl && profData.icon) {
+                    iconEl.setAttribute('data-lucide', profData.icon);
+                }
+                
+                profBlock.classList.remove('hidden');
+                if (addProfBtnText) addProfBtnText.textContent = "Modificar Função no Bunker";
+            } else {
+                profBlock.classList.add('hidden');
+                if (addProfBtnText) addProfBtnText.textContent = "Definir Minha Função no Bunker (Opcional)";
+            }
 
             // Armazenar estado
             currentResult = {
@@ -1551,7 +2244,12 @@
                 score: score,
                 verdict: verdict,
                 musicVerdict: musicVerdict,
-                id: reportId
+                id: reportId,
+                professionKey: (profData && professionKey !== 'pular') ? professionKey : null,
+                professionRole: profRole,
+                professionSuperpower: profSuperpower,
+                professionComplication: profComplication,
+                professionShareLine: profShareLine
             };
 
             // Preenchimento do Card
@@ -1569,6 +2267,35 @@
             document.getElementById('result-id').textContent = reportId;
 
             showScreen('result');
+            lucide.createIcons();
+        }
+
+        // Modais de Trocar / Remover Profissão
+        function openProfessionModal() {
+            const modal = document.getElementById('profession-modal');
+            if (modal) {
+                document.querySelectorAll('.profession-modal-btn').forEach(btn => {
+                    const btnKey = btn.getAttribute('data-prof-key');
+                    if (btnKey === currentResult.professionKey) {
+                        btn.classList.add('selected');
+                    } else {
+                        btn.classList.remove('selected');
+                    }
+                });
+                modal.classList.remove('hidden');
+                lucide.createIcons();
+            }
+        }
+
+        function closeProfessionModal() {
+            const modal = document.getElementById('profession-modal');
+            if (modal) modal.classList.add('hidden');
+        }
+
+        function applyProfessionChange(key) {
+            selectedProfession = key;
+            buildResultScreen(currentResult.name, currentResult.score, quizAnswers.genre, key);
+            closeProfessionModal();
         }
 
         // Download da Imagem do Card com Alta Resolução para Stories
@@ -1621,7 +2348,11 @@
 
         // Compartilhamento Web Share API
         btnShareNative.addEventListener('click', async () => {
-            const shareText = `Acabei de testar minhas chances no Apocalipse IA: Minha probabilidade de sobrevivência é de ${currentResult.score}%! Descubra o seu destino antes que as máquinas dominem:`;
+            let shareText = `Acabei de testar minhas chances no Apocalipse IA: Minha probabilidade de sobrevivência é de ${currentResult.score}%!`;
+            if (currentResult.professionRole) {
+                shareText += ` Minha função no bunker: ${currentResult.professionRole}.`;
+            }
+            shareText += ` Descubra o seu destino antes que as máquinas dominem:`;
             const shareUrl = window.location.href;
 
             if (navigator.share) {
@@ -1642,7 +2373,13 @@
 
         // Compartilhamento direto no WhatsApp
         btnShareWhatsapp.addEventListener('click', () => {
-            const shareText = `*Apocalipse IA* 🤖💀%0A"Quando as IAs dominarem o mundo, suas chances dependem das suas respostas."%0A%0AMeu resultado foi: *${currentResult.score}% de chance de sobreviver!*%0A%0A"${currentResult.verdict}"%0A%0A🎧 Trilha Sonora: "${currentResult.musicVerdict}"%0A%0ADescubra o seu destino agora: ${encodeURIComponent(window.location.href)}`;
+            let shareText = `*Apocalipse IA* 🤖💀%0A"Quando as IAs dominarem o mundo, suas chances dependem das suas respostas."%0A%0AMeu resultado foi: *${currentResult.score}% de chance de sobreviver!*%0A%0A"${currentResult.verdict}"%0A`;
+            
+            if (currentResult.professionRole) {
+                shareText += `%0A🛡️ *Minha função no bunker:* ${encodeURIComponent(currentResult.professionRole)}%0A⚡ *Superpoder:* ${encodeURIComponent(currentResult.professionSuperpower)}%0A`;
+            }
+
+            shareText += `%0A🎧 Trilha Sonora: "${currentResult.musicVerdict}"%0A%0ADescubra o seu destino agora: ${encodeURIComponent(window.location.href)}`;
             const waUrl = `https://api.whatsapp.com/send?text=${shareText}`;
             window.open(waUrl, '_blank');
         });
@@ -1656,8 +2393,33 @@
             quizAnswers.q4 = null;
             quizAnswers.q5 = null;
             quizAnswers.genre = null;
+            selectedProfession = null;
+            
             document.querySelectorAll('.quiz-option-btn').forEach(btn => btn.classList.remove('selected'));
             document.querySelectorAll('.genre-card').forEach(c => c.classList.remove('selected'));
+            document.querySelectorAll('.profession-btn').forEach(b => b.classList.remove('selected'));
+            document.querySelectorAll('.profession-modal-btn').forEach(b => b.classList.remove('selected'));
+            
+            const musicNames = document.getElementById('music-names');
+            if (musicNames) musicNames.value = '';
+            const userName = document.getElementById('user-name');
+            if (userName) userName.value = '';
+            const submitText = document.getElementById('submit-destiny-text');
+            if (submitText) submitText.textContent = 'Processar Meu Destino';
+
+            currentResult = {
+                name: '',
+                score: 0,
+                verdict: '',
+                musicVerdict: '',
+                id: '',
+                professionKey: null,
+                professionRole: null,
+                professionSuperpower: null,
+                professionComplication: null,
+                professionShareLine: null
+            };
+
             showScreen('welcome');
         });
 
